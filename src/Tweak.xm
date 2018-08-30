@@ -2,6 +2,7 @@
 #import "headers/WAChatSessionCell.h"
 #import "headers/WASharedAppData.h"
 #import "headers/WAProfilePictureDynamicThumbnailView.h"
+#import "headers/WAChatViewController.h"
 
 
 %group GROUP_NO_READ_RECEIPT
@@ -45,6 +46,49 @@
 %end
 
 
+%group GROUP_CONFIRM_CALL
+
+	%hook WAChatViewController
+
+		-(void)callButtonTapped:(id)arg1 {
+
+			UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Confirmation" message:@"Are you sure you want to call?" preferredStyle:UIAlertControllerStyleAlert];
+	
+			UIAlertAction* yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+				return %orig;
+			}];
+
+			UIAlertAction* noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+				return;
+			}];
+			
+			[alert addAction:yesAction];
+			[alert addAction:noAction];
+			[self presentViewController:alert animated:YES completion:nil];
+		}
+
+    	-(void)videoCallButtonTapped:(id)arg1 {
+
+			UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Confirmation" message:@"Are you sure you want to call?" preferredStyle:UIAlertControllerStyleAlert];
+	
+			UIAlertAction* yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+				return %orig;
+			}];
+
+			UIAlertAction* noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+				return;
+			}];
+			
+			[alert addAction:yesAction];
+			[alert addAction:noAction];
+			[self presentViewController:alert animated:YES completion:nil];
+		}
+
+	%end
+
+%end
+
+
 #define prefGetBool(key) [[[NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/me.pr0crustes.betterw_prefs.plist"] valueForKey:key] boolValue]
 
 %ctor {
@@ -57,6 +101,11 @@
 	if (prefGetBool(@"pref_online")) {
 		NSLog(@"[BetterW] -> Enabling: -Who Is Online-");
 		%init(GROUP_WHO_IS_ONLINE);
+	}
+
+	if (prefGetBool(@"pref_confirm_call")) {
+		NSLog(@"[BetterW] -> Enabling: -Confirm Call-");
+		%init(GROUP_CONFIRM_CALL);
 	}
 
 }

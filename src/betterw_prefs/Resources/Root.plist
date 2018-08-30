@@ -48,6 +48,23 @@
 
 		<dict>
 			<key>cell</key>
+			<string>PSSwitchCell</string>
+
+			<key>default</key>
+			<true/>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>label</key>
+			<string>Confirm Calls</string>
+			
+			<key>key</key>
+			<string>pref_confirm_call</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>Others</string>

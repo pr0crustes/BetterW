@@ -6,6 +6,7 @@ BetterW is a Mobile Substrate Tweak made with Theos (see https://github.com/theo
 Currently, BetterW provides 2 (two) options of additional features to use:  
 1 - No Read Receipt, that prevents others from seeing when you read a message, but still allowing you to see when others read yours.  
 2 - Who Is Online, that allows you to see who is online, drawing a green or red circle around their profile picture.  
+3 - Confirm Call, that asks you to confirm your desire to call another user, preventing accidental voice / video calls.  
 
 ### License
 BetterW is under Apache 2.0, see LICENSE.
