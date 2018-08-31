@@ -6,4 +6,6 @@
     }
 
     -(void)layoutSubviews;
+    // New
+    -(void)pr0crustes_applyColorMask:(_Bool)isOnline;
 @end

@@ -3,6 +3,9 @@
 #import "headers/WASharedAppData.h"
 #import "headers/WAProfilePictureDynamicThumbnailView.h"
 #import "headers/WAChatViewController.h"
+#import "headers/WAChatStorage.h"
+#import "headers/WAMessage.h"
+#import "Pr0_Macros.h"
 
 
 %group GROUP_NO_READ_RECEIPT
@@ -22,21 +25,23 @@
 
 	%hook WAChatSessionCell
 
-		-(void)layoutSubviews {
+		%new
+		-(void)pr0crustes_applyColorMask:(_Bool)isOnline {
+			CGFloat green = isOnline ? 1 : 0;
+			CGFloat red = 1 - green;  // 0 if green is 1, 1 if green is 0
 
+			UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContactPicture");
+			imageView.layer.borderColor = [UIColor colorWithRed:red green:green blue:0 alpha:1.0].CGColor;
+			imageView.layer.borderWidth = 2.0f;
+		}
+
+		-(void)layoutSubviews {
 			NSString* contactJID = MSHookIvar<NSString *>(self, "_jid");
 			
 			// This will only run if it is not a group
 			if([contactJID rangeOfString:@"-"].location == NSNotFound) {
-
 				_Bool isOnline = [[%c(WASharedAppData) xmppConnection] isOnline:contactJID];
-
-				CGFloat green = isOnline ? 1 : 0;
-				CGFloat red = 1 - green;  // 0 if green is 1, 1 if green is 0
-
-				UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContactPicture");
-				imageView.layer.borderColor = [UIColor colorWithRed:red green:green blue:0 alpha:1.0].CGColor;
-				imageView.layer.borderWidth = 2.0f;
+				[self pr0crustes_applyColorMask:isOnline];
 			}
 			return %orig;
 		}
@@ -51,37 +56,25 @@
 	%hook WAChatViewController
 
 		-(void)callButtonTapped:(id)arg1 {
-
-			UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Confirmation" message:@"Are you sure you want to call?" preferredStyle:UIAlertControllerStyleAlert];
-	
-			UIAlertAction* yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-				return %orig;
-			}];
-
-			UIAlertAction* noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-				return;
-			}];
-			
-			[alert addAction:yesAction];
-			[alert addAction:noAction];
-			[self presentViewController:alert animated:YES completion:nil];
+			MACRO_present_alert_with(%orig, return);
 		}
 
     	-(void)videoCallButtonTapped:(id)arg1 {
+			MACRO_present_alert_with(%orig, return);
+		}
 
-			UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Confirmation" message:@"Are you sure you want to call?" preferredStyle:UIAlertControllerStyleAlert];
-	
-			UIAlertAction* yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-				return %orig;
-			}];
+	%end
 
-			UIAlertAction* noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-				return;
-			}];
-			
-			[alert addAction:yesAction];
-			[alert addAction:noAction];
-			[self presentViewController:alert animated:YES completion:nil];
+%end
+
+%group NO_DELETE
+
+	%hook WAChatStorage
+
+		-(void)revokeIncomingMessage:(WAMessage *)message updatedStanzaID:(id)arg2 outOfOrder:(_Bool)arg3 revokeDate:(NSString *)date {
+			NSString* newText = [NSString stringWithFormat:@"#| Deleted Message |# \n\n %@", [message text]];
+			[message setText:newText];
+			return;
 		}
 
 	%end
@@ -106,6 +99,11 @@
 	if (prefGetBool(@"pref_confirm_call")) {
 		NSLog(@"[BetterW] -> Enabling: -Confirm Call-");
 		%init(GROUP_CONFIRM_CALL);
+	}
+
+	if (prefGetBool(@"pref_no_delete")) {
+		NSLog(@"[BetterW] -> Enabling: -No Delete-");
+		%init(NO_DELETE);
 	}
 
 }
