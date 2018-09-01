@@ -5,13 +5,16 @@
 #import "headers/WAChatViewController.h"
 #import "headers/WAChatStorage.h"
 #import "headers/WAMessage.h"
+
 #import "Pr0_Macros.h"
 
 
+// Feature "No Read Receipt"
 %group GROUP_NO_READ_RECEIPT
 
 	%hook XMPPConnection
 
+		// This method is what send read receipts to others, we just return.
 		-(void)sendReadReceiptsForMessagesIfNeeded:(id)arg1 {
 			return;
 		}
@@ -21,10 +24,12 @@
 %end
 
 
+// Feature "Who Is Online"
 %group GROUP_WHO_IS_ONLINE
 
 	%hook WAChatSessionCell
 
+		// Adding a new method, that will apply the border with color to the profile image.
 		%new
 		-(void)pr0crustes_applyColorMask:(_Bool)isOnline {
 			CGFloat green = isOnline ? 1 : 0;
@@ -35,6 +40,7 @@
 			imageView.layer.borderWidth = 2.0f;
 		}
 
+		// Check if the user is online or not inside layoutSubviews, maybe there is a better place?
 		-(void)layoutSubviews {
 			NSString* contactJID = MSHookIvar<NSString *>(self, "_jid");
 			
@@ -51,27 +57,33 @@
 %end
 
 
+// Feature "Confirm Call"
 %group GROUP_CONFIRM_CALL
 
 	%hook WAChatViewController
 
+		// Called when the voice call button is pressed.
 		-(void)callButtonTapped:(id)arg1 {
-			MACRO_present_alert_with(%orig, return);
+			MACRO_present_alert_with(self, %orig;, return;);
 		}
 
+		// Called when the video call button is pressed.
     	-(void)videoCallButtonTapped:(id)arg1 {
-			MACRO_present_alert_with(%orig, return);
+			MACRO_present_alert_with(self, %orig;, return;);
 		}
 
 	%end
 
 %end
 
+
+// Feature "No Delete"
 %group NO_DELETE
 
 	%hook WAChatStorage
 
-		-(void)revokeIncomingMessage:(WAMessage *)message updatedStanzaID:(id)arg2 outOfOrder:(_Bool)arg3 revokeDate:(NSString *)date {
+		// Called when someone revokes a message, replacing it with deleted. We append new text to the message, returning.
+		-(void)revokeIncomingMessage:(WAMessage *)message updatedStanzaID:(id)arg2 outOfOrder:(_Bool)arg3 revokeDate:(id)arg4 {
 			NSString* newText = [NSString stringWithFormat:@"#| Deleted Message |# \n\n %@", [message text]];
 			[message setText:newText];
 			return;
@@ -82,27 +94,26 @@
 %end
 
 
-#define prefGetBool(key) [[[NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/me.pr0crustes.betterw_prefs.plist"] valueForKey:key] boolValue]
-
+// Constructor to enable desired features.
 %ctor {
 
-	if (prefGetBool(@"pref_receipt")) {
-		NSLog(@"[BetterW] -> Enabling: -No Read Receipt-");
+	if (MACRO_pref_get_bool(@"pref_receipt")) {
+		MACRO_log_enabling(@"No Read Receipt");
 		%init(GROUP_NO_READ_RECEIPT);
 	} 
 
-	if (prefGetBool(@"pref_online")) {
-		NSLog(@"[BetterW] -> Enabling: -Who Is Online-");
+	if (MACRO_pref_get_bool(@"pref_online")) {
+		MACRO_log_enabling(@"Who Is Online");
 		%init(GROUP_WHO_IS_ONLINE);
 	}
 
-	if (prefGetBool(@"pref_confirm_call")) {
-		NSLog(@"[BetterW] -> Enabling: -Confirm Call-");
+	if (MACRO_pref_get_bool(@"pref_confirm_call")) {
+		MACRO_log_enabling(@"Confirm Call");
 		%init(GROUP_CONFIRM_CALL);
 	}
 
-	if (prefGetBool(@"pref_no_delete")) {
-		NSLog(@"[BetterW] -> Enabling: -No Delete-");
+	if (MACRO_pref_get_bool(@"pref_no_delete")) {
+		MACRO_log_enabling(@"No Delete");
 		%init(NO_DELETE);
 	}
 

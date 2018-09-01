@@ -17,7 +17,7 @@
 			<string>PSSwitchCell</string>
 
 			<key>default</key>
-			<true/>
+			<false/>
 
 			<key>defaults</key>
 			<string>me.pr0crustes.betterw_prefs</string>
@@ -34,7 +34,7 @@
 			<string>PSSwitchCell</string>
 
 			<key>default</key>
-			<true/>
+			<false/>
 
 			<key>defaults</key>
 			<string>me.pr0crustes.betterw_prefs</string>
@@ -51,7 +51,7 @@
 			<string>PSSwitchCell</string>
 
 			<key>default</key>
-			<true/>
+			<false/>
 
 			<key>defaults</key>
 			<string>me.pr0crustes.betterw_prefs</string>
@@ -68,7 +68,7 @@
 			<string>PSSwitchCell</string>
 
 			<key>default</key>
-			<true/>
+			<false/>
 
 			<key>defaults</key>
 			<string>me.pr0crustes.betterw_prefs</string>

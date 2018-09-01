@@ -10,9 +10,9 @@
 		return _specifiers;
 	}
 
+	// Just a button that opens the project on github.
 	-(void)onClickSourceCode:(id)arg1 {
-		NSURL *url = [NSURL URLWithString:@"https://github.com/pr0crustes/BetterW"];
-		[[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/pr0crustes/BetterW"] options:@{} completionHandler:nil];
 	}
 
 @end
