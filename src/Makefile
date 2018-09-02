@@ -19,3 +19,9 @@ betterW_FILES = $(wildcard tweak/*.xm)
 include $(THEOS_MAKE_PATH)/tweak.mk
 SUBPROJECTS += betterw_prefs
 include $(THEOS_MAKE_PATH)/aggregate.mk
+
+# Just to quick delete files
+remove::
+	@rm -r .theos
+	@rm -r obj
+	@rm -r packages
