@@ -101,6 +101,34 @@
 			<string>onClickSourceCode:</string>
 		</dict>
 
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Credits:</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSStaticTextCell</string>
+			<key>label</key>
+			<string>Made By: pr0crustes</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSStaticTextCell</string>
+			<key>label</key>
+			<string>Official cydia repo: </string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSStaticTextCell</string>
+			<key>label</key>
+			<string>pr0crustes.github.io/repo/</string>
+		</dict>
+
 	</array>
 	<key>title</key>
 	<string>BetterW</string>
