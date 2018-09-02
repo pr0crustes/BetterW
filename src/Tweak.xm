@@ -113,7 +113,7 @@
 // Constructor to enable desired features.
 %ctor {
 
-	// Global Support should be the first enabled.
+	// Global Support should be enabled first.
 	if (MACRO_pref_get_bool(@"pref_global_support")) {
 		MACRO_log_enabling(@"Global Support");
 		%init(GLOBAL_SUPPORT);
