@@ -5,6 +5,7 @@
 #import "headers/WAChatViewController.h"
 #import "headers/WAChatStorage.h"
 #import "headers/WAMessage.h"
+#import "headers/UIDeviceWhatsapp.h"
 
 #import "Pr0_Macros.h"
 
@@ -94,8 +95,29 @@
 %end
 
 
+// Global Support (Adds whatsapp support to ipad, ipod)
+%group GLOBAL_SUPPORT
+
+	%hook UIDevice
+
+		// Called to see if whatsapp shoud run on device.
+		-(_Bool)wa_isDeviceSupported {
+			return true;
+		}
+
+	%end
+
+%end
+
+
 // Constructor to enable desired features.
 %ctor {
+
+	// Global Support should be the first enabled.
+	if (MACRO_pref_get_bool(@"pref_global_support")) {
+		MACRO_log_enabling(@"Global Support");
+		%init(GLOBAL_SUPPORT);
+	}
 
 	if (MACRO_pref_get_bool(@"pref_receipt")) {
 		MACRO_log_enabling(@"No Read Receipt");
