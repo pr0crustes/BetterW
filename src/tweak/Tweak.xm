@@ -2,10 +2,11 @@
 #import "headers/WAChatSessionCell.h"
 #import "headers/WASharedAppData.h"
 #import "headers/WAProfilePictureDynamicThumbnailView.h"
-#import "headers/WAChatViewController.h"
 #import "headers/WAChatStorage.h"
 #import "headers/WAMessage.h"
 #import "headers/UIDeviceWhatsapp.h"
+#import "headers/WAChatMessagesViewController.h"
+#import "headers/WAContactViewController.h"
 
 #import "Pr0_Macros.h"
 
@@ -61,20 +62,22 @@
 // Feature "Confirm Call"
 %group GROUP_CONFIRM_CALL
 
-	%hook WAChatViewController
+	%hook WAChatMessagesViewController
 
-		// Called when the voice call button is pressed.
-		-(void)callButtonTapped:(id)arg1 {
-			MACRO_present_alert_with(self, %orig;, return;);
-		}
-
-		// Called when the video call button is pressed.
-    	-(void)videoCallButtonTapped:(id)arg1 {
-			MACRO_present_alert_with(self, %orig;, return;);
+		-(void)callContactWithJID:(id)arg1 withVideo:(_Bool)arg2 {
+			MACRO_present_alert_with(self, %orig;, nil;);
 		}
 
 	%end
 
+	%hook WAContactViewController
+
+		-(void)callContactWithJID:(id)arg1 withVideo:(_Bool)arg2 {
+			MACRO_present_alert_with(self, %orig;, nil;);
+		}
+
+	%end
+	
 %end
 
 

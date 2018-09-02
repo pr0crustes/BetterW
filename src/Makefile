@@ -14,7 +14,7 @@ THEOS_DEVICE_IP = 192.168.1.4
 include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = betterW
-betterW_FILES = Tweak.xm
+betterW_FILES = $(wildcard tweak/*.xm)
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 SUBPROJECTS += betterw_prefs
