@@ -1,6 +1,6 @@
 @interface WAContactTableViewCell : UITableViewCell {
         NSString *_jid;
-        WAProfilePictureDynamicThumbnailView *_imageViewContactPicture;
+        WAProfilePictureDynamicThumbnailView *_imageViewContact;
     }
 
     -(void)layoutSubviews;

@@ -14,8 +14,12 @@ void pr0crustes_applyOnlineMask(UIImageView* imageView, NSString* contactJID) {
 		_Bool isOnline = [[%c(WASharedAppData) xmppConnection] isOnline:contactJID];
 		CGFloat green = isOnline ? 1 : 0;
 		CGFloat red = 1 - green;  // 0 if green is 1, 1 if green is 0
-		imageView.layer.borderColor = [UIColor colorWithRed:red green:green blue:0 alpha:1.0].CGColor;
-		imageView.layer.borderWidth = 2.0f;
+		if (GLOBAL_as_dot) {
+			
+		} else {  // Border
+			imageView.layer.borderColor = [UIColor colorWithRed:red green:green blue:0 alpha:1.0].CGColor;
+			imageView.layer.borderWidth = 2.0f;
+		}
 	}
 }
 
@@ -27,7 +31,7 @@ void pr0crustes_applyOnlineMask(UIImageView* imageView, NSString* contactJID) {
 		-(void)layoutSubviews {
 			NSString* contactJID = MSHookIvar<NSString *>(self, "_jid");
 			UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContactPicture");
-			pr0crustes_applyColorMask(imageView, contactJID);
+			pr0crustes_applyOnlineMask(imageView, contactJID);
 			return %orig;
 		}
 
@@ -38,8 +42,8 @@ void pr0crustes_applyOnlineMask(UIImageView* imageView, NSString* contactJID) {
 
 		-(void)layoutSubviews {
 			NSString* contactJID = MSHookIvar<NSString *>(self, "_jid");
-			UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContactPicture");
-			pr0crustes_applyColorMask(imageView, contactJID);
+			UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContact");
+			pr0crustes_applyOnlineMask(imageView, contactJID);
 			return %orig;
 		}
 
