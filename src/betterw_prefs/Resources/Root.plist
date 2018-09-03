@@ -135,6 +135,24 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
+			<string></string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+
+			<key>label</key>
+			<string>Respring</string>
+
+			<key>action</key>
+			<string>respring:</string>
+		</dict>		
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
 			<string>Others</string>
 		</dict>
 
