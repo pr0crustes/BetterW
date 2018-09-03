@@ -57,6 +57,23 @@
 			<string>me.pr0crustes.betterw_prefs</string>
 
 			<key>label</key>
+			<string>Online As Dot</string>
+			
+			<key>key</key>
+			<string>pref_as_dot</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+
+			<key>default</key>
+			<false/>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>label</key>
 			<string>Confirm Calls</string>
 			
 			<key>key</key>
