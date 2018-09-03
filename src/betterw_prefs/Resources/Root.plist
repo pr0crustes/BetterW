@@ -45,7 +45,7 @@
 			<key>key</key>
 			<string>pref_online</string>
 		</dict>
-
+		<!--
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
@@ -62,7 +62,7 @@
 			<key>key</key>
 			<string>pref_as_dot</string>
 		</dict>
-
+		-->
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>

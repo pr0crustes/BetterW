@@ -9,11 +9,37 @@
 
 bool GLOBAL_as_dot = false;
 
-void pr0crustes_applyOnlineBorder(UIImageView* imageView, NSString* contactJID) {
-	if(!MACRO_is_contactJID_group(contactJID)) {
-		_Bool isOnline = [[%c(WASharedAppData) xmppConnection] isOnline:contactJID];
-		imageView.layer.borderColor = (isOnline ? [UIColor greenColor] : [UIColor redColor]).CGColor;
-		imageView.layer.borderWidth = 2.0f;
+
+void pr0crustes_drawBorder(UIImageView* imageView, UIColor* color) {
+	imageView.layer.borderColor = color.CGColor;
+	imageView.layer.borderWidth = 2.0f;
+}
+
+
+void pr0crustes_drawDot(UIImageView* imageView, UIColor* color) {
+	UIGraphicsBeginImageContextWithOptions(imageView.image.size, NO, 0);
+
+	[imageView.image drawAtPoint:CGPointZero];
+
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	CGContextSetFillColorWithColor(context, color.CGColor);
+
+	CGContextBeginPath(context);
+	CGContextAddEllipseInRect(context, CGRectMake(120, 120, 25, 25));
+	CGContextDrawPath(context, kCGPathFill);
+
+	imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+
+	UIGraphicsEndImageContext();
+}
+
+
+void pr0crustes_drawOnlineIndicator(UIImageView* imageView, _Bool isOnline) {
+	UIColor* color = isOnline ? [UIColor greenColor] : [UIColor redColor];
+	if (GLOBAL_as_dot) {
+		pr0crustes_drawDot(imageView, color);
+	} else {
+		pr0crustes_drawBorder(imageView, color);
 	}
 }
 
@@ -22,34 +48,47 @@ void pr0crustes_applyOnlineBorder(UIImageView* imageView, NSString* contactJID) 
 
 	%hook WAChatSessionCell
 
-		-(void)layoutSubviews {
-			NSString* contactJID = MSHookIvar<NSString *>(self, "_jid");
-			if (GLOBAL_as_dot) {
+		%property (nonatomic, assign) BOOL pr0crustes_previousState;
+		%property (nonatomic, assign) BOOL pr0crustes_alreadyRunned;
 
-			} else {
+		-(void)layoutSubviews {
+					
+			NSString* contactJID = MSHookIvar<NSString *>(self, "_jid");
+			_Bool isOnline = [[%c(WASharedAppData) xmppConnection] isOnline:contactJID];
+
+			if (!MACRO_is_contactJID_group(contactJID) && (isOnline != self.pr0crustes_previousState || !self.pr0crustes_alreadyRunned)) {
 				UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContactPicture");
-				pr0crustes_applyOnlineBorder(imageView, contactJID);
+				pr0crustes_drawOnlineIndicator(imageView, isOnline);
+				self.pr0crustes_previousState = isOnline;
+				self.pr0crustes_alreadyRunned = true;
 			}
+
 			return %orig;
 		}
 
 	%end
+	
 
+	// %hook WAContactTableViewCell
 
-	%hook WAContactTableViewCell
+	// 	%property (nonatomic, assign) BOOL pr0crustes_previousState;
+	// 	%property (nonatomic, assign) BOOL pr0crustes_alreadyRunned;
 
-		-(void)layoutSubviews {
-			NSString* contactJID = MSHookIvar<NSString *>(self, "_jid");
-			if (GLOBAL_as_dot) {
+	// 	-(void)layoutSubviews {
 
-			} else {
-				UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContact");
-				pr0crustes_applyOnlineBorder(imageView, contactJID);
-			}
-			return %orig;
-		}
+	// 		NSString* contactJID = MSHookIvar<NSString *>(self, "_jid");
+	// 		_Bool isOnline = [[%c(WASharedAppData) xmppConnection] isOnline:contactJID];
 
-	%end
+	// 		if (!MACRO_is_contactJID_group(contactJID) && (isOnline != self.pr0crustes_previousState || !self.pr0crustes_alreadyRunned)) {
+	// 			UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContact");				pr0crustes_drawOnlineIndicator(imageView, isOnline);
+	// 			self.pr0crustes_previousState = isOnline;
+	// 			self.pr0crustes_alreadyRunned = true;
+	// 		}
+
+	// 		return %orig;
+	// 	}
+
+	// %end
 
 %end
 
@@ -59,10 +98,10 @@ void pr0crustes_applyOnlineBorder(UIImageView* imageView, NSString* contactJID) 
 	if (MACRO_pref_get_bool(@"pref_online")) {
 		MACRO_log_enabling(@"Who Is Online");
 
-		if (MACRO_pref_get_bool(@"pref_as_dot")) {
-			MACRO_log_enabling(@"... As Dot");
-			GLOBAL_as_dot = true;
-		}
+		// if (MACRO_pref_get_bool(@"pref_as_dot")) {
+		// 	MACRO_log_enabling(@"... As Dot");
+		// 	GLOBAL_as_dot = true;
+		// }
 
 		%init(GROUP_WHO_IS_ONLINE);
 	}
