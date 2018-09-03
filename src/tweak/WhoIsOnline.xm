@@ -7,14 +7,12 @@
 #import "Pr0_Macros.h"
 
 
-// Function that does the hard work, checking if is not a group 
-// checking if the contact is online and setting the color.
-void pr0crustes_applyOnlineMask(UIImageView* imageView, NSString* contactJID) {
-	if([contactJID rangeOfString:@"-"].location == NSNotFound) {  // False if is a group
+bool GLOBAL_as_dot = false;
+
+void pr0crustes_applyOnlineBorder(UIImageView* imageView, NSString* contactJID) {
+	if(!MACRO_is_contactJID_group(contactJID)) {
 		_Bool isOnline = [[%c(WASharedAppData) xmppConnection] isOnline:contactJID];
-		CGFloat green = isOnline ? 1 : 0;
-		CGFloat red = 1 - green;  // 0 if green is 1, 1 if green is 0
-		imageView.layer.borderColor = [UIColor colorWithRed:red green:green blue:0 alpha:1.0].CGColor;
+		imageView.layer.borderColor = (isOnline ? [UIColor greenColor] : [UIColor redColor]).CGColor;
 		imageView.layer.borderWidth = 2.0f;
 	}
 }
@@ -26,8 +24,12 @@ void pr0crustes_applyOnlineMask(UIImageView* imageView, NSString* contactJID) {
 
 		-(void)layoutSubviews {
 			NSString* contactJID = MSHookIvar<NSString *>(self, "_jid");
-			UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContactPicture");
-			pr0crustes_applyOnlineMask(imageView, contactJID);
+			if (GLOBAL_as_dot) {
+
+			} else {
+				UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContactPicture");
+				pr0crustes_applyOnlineBorder(imageView, contactJID);
+			}
 			return %orig;
 		}
 
@@ -38,8 +40,12 @@ void pr0crustes_applyOnlineMask(UIImageView* imageView, NSString* contactJID) {
 
 		-(void)layoutSubviews {
 			NSString* contactJID = MSHookIvar<NSString *>(self, "_jid");
-			UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContact");
-			pr0crustes_applyOnlineMask(imageView, contactJID);
+			if (GLOBAL_as_dot) {
+
+			} else {
+				UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContact");
+				pr0crustes_applyOnlineBorder(imageView, contactJID);
+			}
 			return %orig;
 		}
 
@@ -52,6 +58,12 @@ void pr0crustes_applyOnlineMask(UIImageView* imageView, NSString* contactJID) {
 
 	if (MACRO_pref_get_bool(@"pref_online")) {
 		MACRO_log_enabling(@"Who Is Online");
+
+		if (MACRO_pref_get_bool(@"pref_as_dot")) {
+			MACRO_log_enabling(@"... As Dot");
+			GLOBAL_as_dot = true;
+		}
+
 		%init(GROUP_WHO_IS_ONLINE);
 	}
 
