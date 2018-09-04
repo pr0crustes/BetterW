@@ -7,40 +7,28 @@
 #import "Pr0_Macros.h"
 
 
+#define MACRO_onlineColor(isOnline) (isOnline ? [UIColor greenColor] : [UIColor redColor]).CGColor
+
+
 bool GLOBAL_as_dot = false;
 
 
-void pr0crustes_drawBorder(UIImageView* imageView, UIColor* color) {
-	imageView.layer.borderColor = color.CGColor;
+CAShapeLayer* pr0crustes_createDotIndicator(UIView* view, CGFloat pos) {
+	CAShapeLayer* circle = [CAShapeLayer layer];
+	circle.path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(pos, pos, 10, 10)].CGPath;
+	[view.layer addSublayer:circle];
+	return circle;
+}
+
+
+void pr0crustes_colorBorder(UIImageView* imageView, _Bool isOnline) {
+	imageView.layer.borderColor = MACRO_onlineColor(isOnline);
 	imageView.layer.borderWidth = 2.0f;
 }
 
 
-void pr0crustes_drawDot(UIImageView* imageView, UIColor* color) {
-	UIGraphicsBeginImageContextWithOptions(imageView.image.size, NO, 0);
-
-	[imageView.image drawAtPoint:CGPointZero];
-
-	CGContextRef context = UIGraphicsGetCurrentContext();
-	CGContextSetFillColorWithColor(context, color.CGColor);
-
-	CGContextBeginPath(context);
-	CGContextAddEllipseInRect(context, CGRectMake(120, 120, 25, 25));
-	CGContextDrawPath(context, kCGPathFill);
-
-	imageView.image = UIGraphicsGetImageFromCurrentImageContext();
-
-	UIGraphicsEndImageContext();
-}
-
-
-void pr0crustes_drawOnlineIndicator(UIImageView* imageView, _Bool isOnline) {
-	UIColor* color = isOnline ? [UIColor greenColor] : [UIColor redColor];
-	if (GLOBAL_as_dot) {
-		pr0crustes_drawDot(imageView, color);
-	} else {
-		pr0crustes_drawBorder(imageView, color);
-	}
+void pr0crustes_colorDot(CAShapeLayer* circle, _Bool isOnline) {
+	circle.fillColor = MACRO_onlineColor(isOnline);
 }
 
 
@@ -48,19 +36,24 @@ void pr0crustes_drawOnlineIndicator(UIImageView* imageView, _Bool isOnline) {
 
 	%hook WAChatSessionCell
 
-		%property (nonatomic, assign) BOOL pr0crustes_previousState;
-		%property (nonatomic, assign) BOOL pr0crustes_alreadyRunned;
+		%property (nonatomic, retain) CAShapeLayer* pr0crustes_circleLayer;
 
 		-(void)layoutSubviews {
 					
 			NSString* contactJID = MSHookIvar<NSString *>(self, "_jid");
 			_Bool isOnline = [[%c(WASharedAppData) xmppConnection] isOnline:contactJID];
 
-			if (!MACRO_is_contactJID_group(contactJID) && (isOnline != self.pr0crustes_previousState || !self.pr0crustes_alreadyRunned)) {
+			if (!MACRO_is_contactJID_group(contactJID)) {
 				UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContactPicture");
-				pr0crustes_drawOnlineIndicator(imageView, isOnline);
-				self.pr0crustes_previousState = isOnline;
-				self.pr0crustes_alreadyRunned = true;
+				
+				if (GLOBAL_as_dot) {
+					if (self.pr0crustes_circleLayer == nil) {
+						self.pr0crustes_circleLayer = pr0crustes_createDotIndicator(imageView, 35);
+					}
+					pr0crustes_colorDot(self.pr0crustes_circleLayer, isOnline);
+				} else {
+					pr0crustes_colorBorder(imageView, isOnline);
+				}
 			}
 
 			return %orig;
@@ -69,26 +62,32 @@ void pr0crustes_drawOnlineIndicator(UIImageView* imageView, _Bool isOnline) {
 	%end
 	
 
-	// %hook WAContactTableViewCell
+	%hook WAContactTableViewCell
 
-	// 	%property (nonatomic, assign) BOOL pr0crustes_previousState;
-	// 	%property (nonatomic, assign) BOOL pr0crustes_alreadyRunned;
+		%property (nonatomic, retain) CAShapeLayer* pr0crustes_circleLayer;
 
-	// 	-(void)layoutSubviews {
+		-(void)layoutSubviews {
 
-	// 		NSString* contactJID = MSHookIvar<NSString *>(self, "_jid");
-	// 		_Bool isOnline = [[%c(WASharedAppData) xmppConnection] isOnline:contactJID];
+			NSString* contactJID = MSHookIvar<NSString *>(self, "_jid");
+			_Bool isOnline = [[%c(WASharedAppData) xmppConnection] isOnline:contactJID];
 
-	// 		if (!MACRO_is_contactJID_group(contactJID) && (isOnline != self.pr0crustes_previousState || !self.pr0crustes_alreadyRunned)) {
-	// 			UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContact");				pr0crustes_drawOnlineIndicator(imageView, isOnline);
-	// 			self.pr0crustes_previousState = isOnline;
-	// 			self.pr0crustes_alreadyRunned = true;
-	// 		}
+			if (!MACRO_is_contactJID_group(contactJID)) {
+				UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContact");  // Not the same ivar
 
-	// 		return %orig;
-	// 	}
+				if (GLOBAL_as_dot) {
+					if (self.pr0crustes_circleLayer == nil) {
+						self.pr0crustes_circleLayer = pr0crustes_createDotIndicator(imageView, 25);
+					}
+					pr0crustes_colorDot(self.pr0crustes_circleLayer, isOnline);
+				} else {
+					pr0crustes_colorBorder(imageView, isOnline);
+				}
+			}
 
-	// %end
+			return %orig;
+		}
+
+	%end
 
 %end
 
@@ -98,10 +97,10 @@ void pr0crustes_drawOnlineIndicator(UIImageView* imageView, _Bool isOnline) {
 	if (MACRO_pref_get_bool(@"pref_online")) {
 		MACRO_log_enabling(@"Who Is Online");
 
-		// if (MACRO_pref_get_bool(@"pref_as_dot")) {
-		// 	MACRO_log_enabling(@"... As Dot");
-		// 	GLOBAL_as_dot = true;
-		// }
+		if (MACRO_pref_get_bool(@"pref_as_dot")) {
+			MACRO_log_enabling(@"... As Dot");
+			GLOBAL_as_dot = true;
+		}
 
 		%init(GROUP_WHO_IS_ONLINE);
 	}

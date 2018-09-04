@@ -23,5 +23,6 @@
     [presentView presentViewController:alert animated:YES completion:nil]; \
 }
 
+
 // A simple macro to check if a contactJID is from a group
 #define MACRO_is_contactJID_group(contactJID) ([contactJID rangeOfString:@"-"].location != NSNotFound)
