@@ -1,6 +1,7 @@
 # For deploy
 # TARGET = iphone:clang
 TARGET = iphone:11.2:10.0
+FINALPACKAGE = 1
 # end deploy
 
 # For simulator

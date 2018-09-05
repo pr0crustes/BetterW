@@ -1,7 +1,7 @@
 Package: me.pr0crustes.betterw
 Name: betterW
 Depends: mobilesubstrate
-Version: 0.0.1
+Version: 1.0.3
 Architecture: iphoneos-arm
 Description: Make Whatsapp better!
 Maintainer: pr0crustes
