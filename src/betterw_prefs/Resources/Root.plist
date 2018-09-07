@@ -125,6 +125,23 @@
 			<string>me.pr0crustes.betterw_prefs</string>
 
 			<key>label</key>
+			<string>Never Online</string>
+			
+			<key>key</key>
+			<string>pref_no_online</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+
+			<key>default</key>
+			<false/>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>label</key>
 			<string>Global Support</string>
 			
 			<key>key</key>
