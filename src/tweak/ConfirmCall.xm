@@ -1,7 +1,7 @@
 #import "headers/WAChatMessagesViewController.h"
 #import "headers/WAContactViewController.h"
 
-#import "Pr0_Macros.h"
+#import "_Pr0_Macros.h"
 
 
 %group GROUP_CONFIRM_CALL

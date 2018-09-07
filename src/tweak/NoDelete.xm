@@ -1,7 +1,7 @@
 #import "headers/WAChatStorage.h"
 #import "headers/WAMessage.h"
 
-#import "Pr0_Macros.h"
+#import "_Pr0_Macros.h"
 
 
 %group NO_DELETE

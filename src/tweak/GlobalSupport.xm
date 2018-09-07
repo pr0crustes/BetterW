@@ -1,6 +1,6 @@
 #import "headers/UIDeviceWhatsapp.h"
 
-#import "Pr0_Macros.h"
+#import "_Pr0_Macros.h"
 
 
 %group GLOBAL_SUPPORT

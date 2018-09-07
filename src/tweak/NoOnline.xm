@@ -1,6 +1,6 @@
 #import "headers/XMPPPresenceStanza.h"
 
-#import "Pr0_Macros.h"
+#import "_Pr0_Macros.h"
 
 
 %group GROUP_NO_ONLINE

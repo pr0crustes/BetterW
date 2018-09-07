@@ -4,7 +4,7 @@
 #import "headers/WASharedAppData.h"
 #import "headers/WAProfilePictureDynamicThumbnailView.h"
 
-#import "Pr0_Macros.h"
+#import "_Pr0_Macros.h"
 
 
 #define MACRO_onlineColor(isOnline) (isOnline ? [UIColor greenColor] : [UIColor redColor]).CGColor
