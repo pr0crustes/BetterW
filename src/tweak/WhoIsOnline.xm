@@ -92,6 +92,7 @@ void pr0crustes_colorDot(CAShapeLayer* circle, _Bool isOnline) {
 %end
 
 
+
 %ctor {
 
 	if (MACRO_pref_get_bool(@"pref_online")) {

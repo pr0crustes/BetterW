@@ -25,6 +25,7 @@
 %end
 
 
+
 %ctor {
 
 	if (MACRO_pref_get_bool(@"pref_confirm_call")) {
