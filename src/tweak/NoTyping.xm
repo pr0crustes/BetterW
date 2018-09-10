@@ -7,7 +7,9 @@
 
 	%hook WAChatManager
 
-
+		-(void)changeOutgoingChatState:(unsigned long long)arg1 forJID:(id)arg2 {
+			return %orig(0, arg2);
+		}
 
 	%end
 
