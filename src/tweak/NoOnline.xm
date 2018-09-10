@@ -20,7 +20,7 @@
 
 %ctor {
 
-	if (MACRO_pref_get_bool(@"pref_no_online")) {
+	if (MACRO_pref_get_bool(@"pref_no_online") && !MACRO_pref_get_bool(@"pref_no_delete")) {
 		MACRO_log_enabling(@"No Online");
 		%init(GROUP_NO_ONLINE);
 	} 
