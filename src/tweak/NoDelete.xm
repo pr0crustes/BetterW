@@ -4,7 +4,7 @@
 #import "_Pr0_Macros.h"
 
 
-%group NO_DELETE
+%group GROUP_NO_DELETE
 
 	%hook WAChatStorage
 
@@ -26,7 +26,7 @@
 
 	if (MACRO_pref_get_bool(@"pref_no_delete")) {
 		MACRO_log_enabling(@"No Delete");
-		%init(NO_DELETE);
+		%init(GROUP_NO_DELETE);
 	}
 
 }

@@ -3,7 +3,7 @@
 #import "_Pr0_Macros.h"
 
 
-%group GLOBAL_SUPPORT
+%group GROUP_GLOBAL_SUPPORT
 
 	%hook UIDevice
 
@@ -22,7 +22,7 @@
 
 	if (MACRO_pref_get_bool(@"pref_global_support")) {
 		MACRO_log_enabling(@"Global Support");
-		%init(GLOBAL_SUPPORT);
+		%init(GROUP_GLOBAL_SUPPORT);
 	}
 
 }
