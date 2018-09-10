@@ -6,13 +6,13 @@
 
 #import "_Pr0_Macros.h"
 
-
+// A simple macro to find the correct color, based on a boolean isOnline,
 #define MACRO_onlineColor(isOnline) (isOnline ? [UIColor greenColor] : [UIColor redColor]).CGColor
 
 
 bool GLOBAL_as_dot = false;
 
-
+// Function that creates a circular CAShapeLayer at desired pos.
 CAShapeLayer* pr0crustes_createDotIndicator(UIView* view, CGFloat pos) {
 	CAShapeLayer* circle = [CAShapeLayer layer];
 	circle.path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(pos, pos, 10, 10)].CGPath;
@@ -20,13 +20,13 @@ CAShapeLayer* pr0crustes_createDotIndicator(UIView* view, CGFloat pos) {
 	return circle;
 }
 
-
+// Function that adds a border to an ImageView, coloring based in isOnline.
 void pr0crustes_colorBorder(UIImageView* imageView, _Bool isOnline) {
 	imageView.layer.borderColor = MACRO_onlineColor(isOnline);
 	imageView.layer.borderWidth = 2.0f;
 }
 
-
+// Function that changes the color of a CAShapeLayer, based in isOnline.
 void pr0crustes_colorDot(CAShapeLayer* circle, _Bool isOnline) {
 	circle.fillColor = MACRO_onlineColor(isOnline);
 }

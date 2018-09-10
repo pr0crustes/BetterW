@@ -7,6 +7,7 @@
 
     %hook WAMessage
 
+        // Called to see if this message can be deleted
         -(_Bool)canBeRevoked {
             return true;
         }
