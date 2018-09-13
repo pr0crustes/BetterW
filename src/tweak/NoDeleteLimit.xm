@@ -1,6 +1,6 @@
 #import "headers/WAMessage.h"
 
-#import "_Pr0_Macros.h"
+#import "_Pr0_Utils.h"
 
 
 %group GROUP_NO_DELETE_LIMIT
@@ -20,7 +20,7 @@
 
 %ctor {
 
-	if (MACRO_pref_get_bool(@"pref_no_delete_limit")) {
+	if (FUNCTION_prefGetBool(@"pref_no_delete_limit")) {
 		MACRO_log_enabling(@"No Delete Limit");
 		%init(GROUP_NO_DELETE_LIMIT);
 	} 

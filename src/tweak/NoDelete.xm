@@ -1,7 +1,7 @@
 #import "headers/WAChatStorage.h"
 #import "headers/WAMessage.h"
 
-#import "_Pr0_Macros.h"
+#import "_Pr0_Utils.h"
 
 
 %group GROUP_NO_DELETE
@@ -24,7 +24,7 @@
 
 %ctor {
 
-	if (MACRO_pref_get_bool(@"pref_no_delete")) {
+	if (FUNCTION_prefGetBool(@"pref_no_delete")) {
 		MACRO_log_enabling(@"No Delete");
 		%init(GROUP_NO_DELETE);
 	}

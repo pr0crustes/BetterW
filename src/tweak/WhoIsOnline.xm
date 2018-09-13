@@ -4,7 +4,7 @@
 #import "headers/WASharedAppData.h"
 #import "headers/WAProfilePictureDynamicThumbnailView.h"
 
-#import "_Pr0_Macros.h"
+#import "_Pr0_Utils.h"
 
 // A simple macro to find the correct color, based on a boolean isOnline,
 #define MACRO_onlineColor(isOnline) (isOnline ? [UIColor greenColor] : [UIColor redColor]).CGColor
@@ -95,10 +95,10 @@ void pr0crustes_colorDot(CAShapeLayer* circle, _Bool isOnline) {
 
 %ctor {
 
-	if (MACRO_pref_get_bool(@"pref_online")) {
+	if (FUNCTION_prefGetBool(@"pref_online")) {
 		MACRO_log_enabling(@"Who Is Online");
 
-		if (MACRO_pref_get_bool(@"pref_as_dot")) {
+		if (FUNCTION_prefGetBool(@"pref_as_dot")) {
 			MACRO_log_enabling(@"... As Dot");
 			GLOBAL_as_dot = true;
 		}

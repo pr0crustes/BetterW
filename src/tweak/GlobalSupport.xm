@@ -1,6 +1,6 @@
 #import "headers/UIDeviceWhatsapp.h"
 
-#import "_Pr0_Macros.h"
+#import "_Pr0_Utils.h"
 
 
 %group GROUP_GLOBAL_SUPPORT
@@ -20,7 +20,7 @@
 
 %ctor {
 
-	if (MACRO_pref_get_bool(@"pref_global_support")) {
+	if (FUNCTION_prefGetBool(@"pref_global_support")) {
 		MACRO_log_enabling(@"Global Support");
 		%init(GROUP_GLOBAL_SUPPORT);
 	}

@@ -1,6 +1,6 @@
 #import "headers/XMPPConnection.h"
 
-#import "_Pr0_Macros.h"
+#import "_Pr0_Utils.h"
 
 
 %group GROUP_NO_READ_RECEIPT
@@ -20,7 +20,7 @@
 
 %ctor {
 
-	if (MACRO_pref_get_bool(@"pref_receipt")) {
+	if (FUNCTION_prefGetBool(@"pref_receipt")) {
 		MACRO_log_enabling(@"No Read Receipt");
 		%init(GROUP_NO_READ_RECEIPT);
 	} 

@@ -1,7 +1,7 @@
 #import "headers/WAChatMessagesViewController.h"
 #import "headers/WAContactViewController.h"
 
-#import "_Pr0_Macros.h"
+#import "_Pr0_Utils.h"
 
 
 %group GROUP_CONFIRM_CALL
@@ -30,7 +30,7 @@
 
 %ctor {
 
-	if (MACRO_pref_get_bool(@"pref_confirm_call")) {
+	if (FUNCTION_prefGetBool(@"pref_confirm_call")) {
 		MACRO_log_enabling(@"Confirm Call");
 		%init(GROUP_CONFIRM_CALL);
 	}
