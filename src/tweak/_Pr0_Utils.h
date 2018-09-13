@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
 /**
-    File that aggregate macros.
+    File that aggregate macros and functions.
     Macros are your friend, no need to hate them, but never overuse.
 */
 
