@@ -4,6 +4,9 @@
     Macros are your friend, no need to hate them, but never overuse.
 */
 
+// Quick way to get the plist
+#define MACRO_PLIST @"/var/mobile/Library/Preferences/me.pr0crustes.betterw_prefs.plist"
+
 // Macro to Log enabling
 #define MACRO_log_enabling(message) NSLog(@"[BetterW] -> Enabling:  -%@-", message)
 

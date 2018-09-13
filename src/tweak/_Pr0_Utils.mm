@@ -2,7 +2,7 @@
 
 
 NSString* FUNCTION_prefGet(NSString *key) {
-    return [[NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/me.pr0crustes.betterw_prefs.plist"] valueForKey:key];
+    return [[NSDictionary dictionaryWithContentsOfFile:MACRO_PLIST] valueForKey:key];
 }
 
 bool FUNCTION_prefGetBool(NSString *key) {
