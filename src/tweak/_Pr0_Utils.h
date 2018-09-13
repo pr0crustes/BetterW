@@ -7,6 +7,7 @@
 // Quick way to get the plist
 #define MACRO_PLIST @"/var/mobile/Library/Preferences/me.pr0crustes.betterw_prefs.plist"
 
+
 // Macro to Log enabling
 #define MACRO_log_enabling(message) NSLog(@"[BetterW] -> Enabling:  -%@-", message)
 
