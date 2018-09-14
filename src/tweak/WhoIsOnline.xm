@@ -32,6 +32,24 @@ void pr0crustes_colorDot(CAShapeLayer* circle, _Bool isOnline) {
 }
 
 
+#define MACRO_Who_Is_Online(stringImageIvar, floatSize) \
+{ \
+	NSString* contactJID = MSHookIvar<NSString *>(self, "_jid"); \
+	_Bool isOnline = [[%c(WASharedAppData) xmppConnection] isOnline:contactJID]; \
+	if (!MACRO_is_contactJID_group(contactJID)) { \
+		UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, stringImageIvar); \
+		if (GLOBAL_as_dot) { \
+			if (self.pr0crustes_circleLayer == nil) { \
+				self.pr0crustes_circleLayer = pr0crustes_createDotIndicator(imageView, floatSize); \
+			} \
+			pr0crustes_colorDot(self.pr0crustes_circleLayer, isOnline); \
+		} else { \
+			pr0crustes_colorBorder(imageView, isOnline); \
+		} \
+	} \
+}
+
+
 %group GROUP_WHO_IS_ONLINE
 
 	%hook WAChatSessionCell
@@ -39,23 +57,7 @@ void pr0crustes_colorDot(CAShapeLayer* circle, _Bool isOnline) {
 		%property (nonatomic, retain) CAShapeLayer* pr0crustes_circleLayer;
 
 		-(void)layoutSubviews {
-					
-			NSString* contactJID = MSHookIvar<NSString *>(self, "_jid");
-			_Bool isOnline = [[%c(WASharedAppData) xmppConnection] isOnline:contactJID];
-
-			if (!MACRO_is_contactJID_group(contactJID)) {
-				UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContactPicture");
-				
-				if (GLOBAL_as_dot) {
-					if (self.pr0crustes_circleLayer == nil) {
-						self.pr0crustes_circleLayer = pr0crustes_createDotIndicator(imageView, 35);
-					}
-					pr0crustes_colorDot(self.pr0crustes_circleLayer, isOnline);
-				} else {
-					pr0crustes_colorBorder(imageView, isOnline);
-				}
-			}
-
+			MACRO_Who_Is_Online("_imageViewContactPicture", 35);
 			return %orig;
 		}
 
@@ -67,23 +69,7 @@ void pr0crustes_colorDot(CAShapeLayer* circle, _Bool isOnline) {
 		%property (nonatomic, retain) CAShapeLayer* pr0crustes_circleLayer;
 
 		-(void)layoutSubviews {
-
-			NSString* contactJID = MSHookIvar<NSString *>(self, "_jid");
-			_Bool isOnline = [[%c(WASharedAppData) xmppConnection] isOnline:contactJID];
-
-			if (!MACRO_is_contactJID_group(contactJID)) {
-				UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContact");  // Not the same ivar
-
-				if (GLOBAL_as_dot) {
-					if (self.pr0crustes_circleLayer == nil) {
-						self.pr0crustes_circleLayer = pr0crustes_createDotIndicator(imageView, 25);
-					}
-					pr0crustes_colorDot(self.pr0crustes_circleLayer, isOnline);
-				} else {
-					pr0crustes_colorBorder(imageView, isOnline);
-				}
-			}
-
+			MACRO_Who_Is_Online("_imageViewContact", 25);
 			return %orig;
 		}
 
