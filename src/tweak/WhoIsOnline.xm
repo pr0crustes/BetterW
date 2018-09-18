@@ -1,7 +1,7 @@
-#import "headers/XMPPConnection.h"
+#import "headers/WAContextMain.h"
+#import "headers/XMPPConnectionMain.h"
 #import "headers/WAChatSessionCell.h"
 #import "headers/WAContactTableViewCell.h"
-#import "headers/WASharedAppData.h"
 #import "headers/WAProfilePictureDynamicThumbnailView.h"
 
 #import "_Pr0_Utils.h"
@@ -35,7 +35,7 @@ void pr0crustes_colorDot(CAShapeLayer* circle, _Bool isOnline) {
 #define MACRO_Who_Is_Online(stringImageIvar, floatSize) \
 { \
 	NSString* contactJID = MSHookIvar<NSString *>(self, "_jid"); \
-	_Bool isOnline = [[%c(WASharedAppData) xmppConnection] isOnline:contactJID]; \
+	_Bool isOnline = [[[%c(WAContextMain) sharedContext] xmppConnectionMain] isOnline:contactJID]; \
 	if (!MACRO_is_contactJID_group(contactJID)) { \
 		UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, stringImageIvar); \
 		if (GLOBAL_as_dot) { \

@@ -1,11 +1,11 @@
-#import "headers/XMPPConnection.h"
+#import "headers/XMPPConnectionMain.h"
 
 #import "_Pr0_Utils.h"
 
 
 %group GROUP_NO_READ_RECEIPT
 
-	%hook XMPPConnection
+	%hook XMPPConnectionMain
 
 		// This method is what send read receipts to others, we just return.
 		-(void)sendReadReceiptsForMessagesIfNeeded:(id)arg1 {
