@@ -7,7 +7,6 @@
 
 	%hook UIDevice
 
-		// Called to see if whatsapp shoud run on device.
 		-(_Bool)wa_isDeviceSupported {
 			return true;
 		}

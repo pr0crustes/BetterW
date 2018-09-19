@@ -7,7 +7,6 @@
 
 	%hook XMPPPresenceStanza
 
-		// Called when creating a PresenceStanza
 		+(id)stanzaWithPresence:(unsigned long long)arg1 nickname:(id)arg2 {
 			return %orig(3, arg2);
 		}

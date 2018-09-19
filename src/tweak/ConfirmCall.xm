@@ -30,7 +30,6 @@
 
 	%hook WAChatMessagesViewController
 
-		// Called when the user clicks to call
 		-(void)callContactWithJID:(NSString*)contactJID withVideo:(_Bool)arg2 {
 			MACRO_Confirm_Call(%orig);
 		}
@@ -39,7 +38,6 @@
 
 	%hook WAContactViewController
 
-		// Called when the user clicks to call
 		-(void)callContactWithJID:(NSString*)contactJID withVideo:(_Bool)arg2 {
 			MACRO_Confirm_Call(%orig);
 		}

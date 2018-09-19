@@ -7,7 +7,6 @@
 
 	%hook XMPPConnectionMain
 
-		// This method is what send read receipts to others, we just return.
 		-(void)sendReadReceiptsForMessagesIfNeeded:(id)arg1 {
 			return;
 		}
