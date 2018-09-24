@@ -12,7 +12,7 @@ bool FUNCTION_prefGetBool(NSString *key) {
 
 
 void FUNCTION_presentAlert(UIAlertController* alert, BOOL animated) {
-    __block UIWindow* topWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    UIWindow* topWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     topWindow.rootViewController = [UIViewController new];
     topWindow.windowLevel = UIWindowLevelAlert + 1;
     [topWindow makeKeyAndVisible];
