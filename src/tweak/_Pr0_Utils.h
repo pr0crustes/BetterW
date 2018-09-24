@@ -31,3 +31,6 @@
 // Functions to load preferences
 NSString* FUNCTION_prefGet(NSString *key);
 bool FUNCTION_prefGetBool(NSString *key);
+
+// Function to present an alert from anywhere
+void FUNCTION_presentAlert(UIAlertController* alert, BOOL animated);

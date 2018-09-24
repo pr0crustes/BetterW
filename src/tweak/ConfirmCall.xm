@@ -1,45 +1,36 @@
-#import "headers/WAChatMessagesViewController.h"
-#import "headers/WAContactViewController.h"
+#import "headers/WACallManager.h"
 
 #import "_Pr0_Utils.h"
 
 
-#define MACRO_Confirm_Call(origHandler) \
-{ \
-	NSString* message = arg2 ? @"Confirm Video Call?" : @"What Type Of Call?"; \
-	UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Confirmation" message:message preferredStyle:UIAlertControllerStyleAlert]; \
-	if (arg2) { \
-		UIAlertAction* yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) { origHandler; }]; \
-		[alert addAction:yesAction]; \
-	} else { \
-		UIAlertAction* wcallAction = [UIAlertAction actionWithTitle:@"Whatsapp Call" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) { origHandler; }]; \
-		[alert addAction:wcallAction]; \
-		UIAlertAction* phoneCallAction = [UIAlertAction actionWithTitle:@"Phone Call" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) { \
-			NSString *phoneNumber = [contactJID componentsSeparatedByString:@"@"][0]; \
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"telprompt://+" stringByAppendingString:phoneNumber]] options:@{} completionHandler:nil]; \
-		}]; \
-		[alert addAction:phoneCallAction]; \
-	} \
-	UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil]; \
-	[alert addAction:cancelAction]; \
-	[self presentViewController:alert animated:YES completion:nil]; \
-}
-
-
 %group GROUP_CONFIRM_CALL
 
-	%hook WAChatMessagesViewController
+	%hook WACallManager
 
-		-(void)callContactWithJID:(NSString*)contactJID withVideo:(_Bool)arg2 {
-			MACRO_Confirm_Call(%orig);
-		}
+		-(void)internalAttemptOutgoingVoiceCallWithJID:(NSString*)contactJID callUISource:(int)arg2 withVideo:(_Bool)isVideo {
 
-	%end
+			NSString* alertMessage = isVideo ? @"Confirm Video Call?" : @"What Type Of Call?";
+			UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Confirmation" message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
 
-	%hook WAContactViewController
+			NSString* yesMessage = isVideo ? @"Yes" : @"WhatsApp Call";
+			UIAlertAction* yesAction = [UIAlertAction actionWithTitle:yesMessage style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) { 
+				%orig;
+			}];
+			[alert addAction:yesAction];
+			
+			if (!isVideo) { 
+				UIAlertAction* phoneCallAction = [UIAlertAction actionWithTitle:@"Phone Call" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) { 
+					NSString *phoneNumber = [contactJID componentsSeparatedByString:@"@"][0];
+					NSURL* url = [NSURL URLWithString:[@"telprompt://+" stringByAppendingString:phoneNumber]];
+					[[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+				}];
+				[alert addAction:phoneCallAction];
+			} 
 
-		-(void)callContactWithJID:(NSString*)contactJID withVideo:(_Bool)arg2 {
-			MACRO_Confirm_Call(%orig);
+			UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil];
+			[alert addAction:cancelAction];
+
+			FUNCTION_presentAlert(alert, true);
 		}
 
 	%end
