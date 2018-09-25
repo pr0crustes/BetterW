@@ -20,7 +20,7 @@
 %ctor {
 
 	if (FUNCTION_prefGetBool(@"pref_no_typing")) {
-		MACRO_log_enabling(@"No Typing");
+		FUNCTION_logEnabling(@"No Typing");
 		%init(GROUP_NO_TYPING);
 	}
 

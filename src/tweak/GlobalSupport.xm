@@ -20,7 +20,7 @@
 %ctor {
 
 	if (FUNCTION_prefGetBool(@"pref_global_support")) {
-		MACRO_log_enabling(@"Global Support");
+		FUNCTION_logEnabling(@"Global Support");
 		%init(GROUP_GLOBAL_SUPPORT);
 	}
 

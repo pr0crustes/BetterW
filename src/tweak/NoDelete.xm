@@ -22,7 +22,7 @@
 %ctor {
 
 	if (FUNCTION_prefGetBool(@"pref_no_delete")) {
-		MACRO_log_enabling(@"No Delete");
+		FUNCTION_logEnabling(@"No Delete");
 		%init(GROUP_NO_DELETE);
 	}
 

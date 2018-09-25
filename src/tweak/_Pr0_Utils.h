@@ -8,17 +8,16 @@
 #define MACRO_PLIST @"/var/mobile/Library/Preferences/me.pr0crustes.betterw_prefs.plist"
 
 
-// Macro to Log enabling
-#define MACRO_log_enabling(message) NSLog(@"[BetterW] -> Enabling:  -%@-", message)
-
-
-// A simple macro to check if a contactJID is from a group
-#define MACRO_is_contactJID_group(contactJID) ([contactJID rangeOfString:@"-"].location != NSNotFound)
-
-
 // Functions to load preferences
 NSString* FUNCTION_prefGet(NSString *key);
 bool FUNCTION_prefGetBool(NSString *key);
 
 // Function to present an alert from anywhere
 void FUNCTION_presentAlert(UIAlertController* alert, BOOL animated);
+
+// Function to log the hooks
+void FUNCTION_logEnabling(NSString* message);
+
+// Function to check if given contactJID is a group
+bool FUNCTION_contactIsGroup(NSString* contactJID);
+
