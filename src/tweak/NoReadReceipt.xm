@@ -20,7 +20,7 @@
 %ctor {
 
 	if (FUNCTION_prefGetBool(@"pref_receipt")) {
-		MACRO_log_enabling(@"No Read Receipt");
+		FUNCTION_logEnabling(@"No Read Receipt");
 		%init(GROUP_NO_READ_RECEIPT);
 	} 
 

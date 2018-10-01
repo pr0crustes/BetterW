@@ -20,3 +20,13 @@ void FUNCTION_presentAlert(UIAlertController* alert, BOOL animated) {
         [topWindow release]; 
     }];
 }
+
+
+void FUNCTION_logEnabling(NSString* message) {
+    NSLog(@"[BetterW] -> Enabling:  -%@-", message);
+}
+
+
+bool FUNCTION_contactIsGroup(NSString* contactJID) {
+    return [contactJID rangeOfString:@"-"].location != NSNotFound;
+}

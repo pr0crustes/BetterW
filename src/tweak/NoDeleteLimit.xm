@@ -20,7 +20,7 @@
 %ctor {
 
 	if (FUNCTION_prefGetBool(@"pref_no_delete_limit")) {
-		MACRO_log_enabling(@"No Delete Limit");
+		FUNCTION_logEnabling(@"No Delete Limit");
 		%init(GROUP_NO_DELETE_LIMIT);
 	} 
 

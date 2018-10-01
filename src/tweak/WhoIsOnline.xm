@@ -36,7 +36,7 @@ void pr0crustes_colorDot(CAShapeLayer* circle, _Bool isOnline) {
 { \
 	NSString* contactJID = MSHookIvar<NSString *>(self, "_jid"); \
 	_Bool isOnline = [[[%c(WAContextMain) sharedContext] xmppConnectionMain] isOnline:contactJID]; \
-	if (!MACRO_is_contactJID_group(contactJID)) { \
+	if (!FUNCTION_contactIsGroup(contactJID)) { \
 		UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, stringImageIvar); \
 		if (GLOBAL_as_dot) { \
 			if (self.pr0crustes_circleLayer == nil) { \
@@ -82,10 +82,10 @@ void pr0crustes_colorDot(CAShapeLayer* circle, _Bool isOnline) {
 %ctor {
 
 	if (FUNCTION_prefGetBool(@"pref_online")) {
-		MACRO_log_enabling(@"Who Is Online");
+		FUNCTION_logEnabling(@"Who Is Online");
 
 		if (FUNCTION_prefGetBool(@"pref_as_dot")) {
-			MACRO_log_enabling(@"... As Dot");
+			FUNCTION_logEnabling(@"... As Dot");
 			GLOBAL_as_dot = true;
 		}
 

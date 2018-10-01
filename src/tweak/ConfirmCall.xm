@@ -42,7 +42,7 @@
 %ctor {
 
 	if (FUNCTION_prefGetBool(@"pref_confirm_call")) {
-		MACRO_log_enabling(@"Confirm Call");
+		FUNCTION_logEnabling(@"Confirm Call");
 		%init(GROUP_CONFIRM_CALL);
 	}
 
