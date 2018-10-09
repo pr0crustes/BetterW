@@ -18,14 +18,10 @@
 		%new
 		-(void)pr0crustes_saveStatus {
 			NSString* mediaPath = [[[self currentStatusItem] message] mediaPath];
-			NSLog(@"Path -> %@", mediaPath);
 			if (mediaPath) {
-				@try {
-					UIImage *image = [UIImage imageNamed:mediaPath];
+				UIImage *image = [UIImage imageNamed:mediaPath];
+				if (image) {
 					UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-				} @catch (NSException* exception) {
-					// Unable to save image. Mabe it is not an image?
-					return;
 				}
 			}
 		}
