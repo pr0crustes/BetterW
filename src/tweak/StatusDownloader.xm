@@ -4,7 +4,7 @@
 #import "_Pr0_Utils.h"
 
 
-%group GROUP_DOWNLOAD_STATUS
+%group GROUP_STATUS_DOWNLOADER
 
 	%hook WAStatusViewerViewController
 
@@ -35,8 +35,8 @@
 %ctor {
 
 	if (FUNCTION_prefGetBool(@"pref_status_downloader")) {
-		FUNCTION_logEnabling(@"Download Status");
-		%init(GROUP_DOWNLOAD_STATUS);
+		FUNCTION_logEnabling(@"Status Downloader");
+		%init(GROUP_STATUS_DOWNLOADER);
 	}
 
 }
