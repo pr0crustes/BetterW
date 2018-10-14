@@ -176,6 +176,40 @@
 			<string>me.pr0crustes.betterw_prefs</string>
 
 			<key>label</key>
+			<string>Status Downloader</string>
+			
+			<key>key</key>
+			<string>pref_status_downloader</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+
+			<key>default</key>
+			<false/>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>label</key>
+			<string>Dark Mode (ALFA)</string>
+			
+			<key>key</key>
+			<string>pref_dark_mode</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+
+			<key>default</key>
+			<false/>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>label</key>
 			<string>Global Support</string>
 			
 			<key>key</key>

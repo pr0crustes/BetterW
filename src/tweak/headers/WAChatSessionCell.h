@@ -1,8 +1,10 @@
 #import "WAProfilePictureDynamicThumbnailView.h"
 
 @interface WAChatSessionCell : UITableViewCell {
-        NSString *_jid;  // The contact JID.
-        WAProfilePictureDynamicThumbnailView *_imageViewContactPicture;  // The contact imageView. 
+        // The contact JID.
+        NSString *_jid;
+        // The contact imageView. 
+        WAProfilePictureDynamicThumbnailView *_imageViewContactPicture;
     }
 
     // Method from UIView, almost a viewDidLoad.
