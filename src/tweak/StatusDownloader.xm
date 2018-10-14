@@ -20,8 +20,10 @@
 			NSString* mediaPath = [[[self currentStatusItem] message] mediaPath];
 			if (mediaPath) {
 				UIImage *image = [UIImage imageNamed:mediaPath];
-				if (image) {
+				if (image) {  // Try save as image
 					UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+				} else {  // Is video
+					UISaveVideoAtPathToSavedPhotosAlbum(mediaPath, nil, nil, nil);
 				}
 			}
 		}
