@@ -2,12 +2,11 @@
 
 
 /* WARNING
-* The things that start with ///def or ///use ARE NOT comments, but preprocess instructions.
+* The things that start with $def or $use ARE NOT comments, but preprocess instructions.
 * These instructions are used by PreProcessor.py to replace, basically being a macro that is runned before Logos.
 * 
 * Maybe it's too late for my soul.
 */
-
 
 
 

@@ -1,4 +1,5 @@
 import argparse
+import os
 
 #
 # Copyright  pr0crustes @ 2018
@@ -18,8 +19,9 @@ import argparse
 class PreProcessor(object):
 
     def __init__(self):
-        self.k_use = "///use "
-        self.k_def = "///def "
+        self.k_pp = "$"
+        self.k_use = self.k_pp + "use "
+        self.k_def = self.k_pp + "def "
         self.k_deli = " -> "
         self.k_left_deli = "("
         self.k_right_deli = ")"
@@ -72,14 +74,18 @@ class PreProcessor(object):
 
 
 if __name__ == "__main__":
+    
     parser = argparse.ArgumentParser()
     parser.add_argument("file", type=str, help="The input .xm.e file")
     args = parser.parse_args()
     FILE = args.file
 
+    assert os.path.isfile(FILE)
+    
     file_ext = ".e"
 
     assert FILE.endswith(file_ext)
 
     pp = PreProcessor()
     pp.preprocess_file(FILE, FILE.replace(file_ext, ""))
+    print(f"==> PreProcessed processed file `{FILE}`")
