@@ -10,71 +10,55 @@
 
 
 
+
 @interface _UINavigationBarContentView : UIView @end
-@interface _UIStatusBarForegroundView : UIView @end
-@interface _UINavigationBarLargeTitleView : UIView @end
-@interface _WADraggableInputContainerView : UIView @end
-@interface _WACustomBehaviorsTableView : UIView @end
-@interface _UIBarBackground : UIView @end
-@interface WATabBar : UIView @end
-
-@interface WABadgedLabel : UILabel @end
-
-
-@interface WAWallpaperView : UIView {
-    UIImageView *_imageView;
-}
-@end
-
-
-%group GROUP_DARK_MODE
-
 %hook _UINavigationBarContentView -(void)layoutSubviews { %orig; self.backgroundColor = [UIColor blackColor]; } %end
+
+@interface _UIStatusBarForegroundView : UIView @end
 %hook _UIStatusBarForegroundView -(void)layoutSubviews { %orig; self.backgroundColor = [UIColor blackColor]; } %end
+
+@interface _UINavigationBarLargeTitleView : UIView @end
 %hook _UINavigationBarLargeTitleView -(void)layoutSubviews { %orig; self.backgroundColor = [UIColor blackColor]; } %end
-%hook _WADraggableInputContainerView -(void)layoutSubviews { %orig; self.backgroundColor = [UIColor blackColor]; } %end
-%hook _WACustomBehaviorsTableView -(void)layoutSubviews { %orig; self.backgroundColor = [UIColor blackColor]; } %end
+
+@interface _UIBarBackground : UIView @end
 %hook _UIBarBackground -(void)layoutSubviews { %orig; self.backgroundColor = [UIColor blackColor]; } %end
+
+@interface _WADraggableInputContainerView : UIView @end
+%hook _WADraggableInputContainerView -(void)layoutSubviews { %orig; self.backgroundColor = [UIColor blackColor]; } %end
+
+@interface _WACustomBehaviorsTableView : UIView @end
+%hook _WACustomBehaviorsTableView -(void)layoutSubviews { %orig; self.backgroundColor = [UIColor blackColor]; } %end
+
+@interface WATabBar : UIView @end
 %hook WATabBar -(void)layoutSubviews { %orig; self.backgroundColor = [UIColor blackColor]; } %end
+
+@interface _WADividerCellBackground : UIView @end
+%hook _WADividerCellBackground -(void)layoutSubviews { %orig; self.backgroundColor = [UIColor grayColor]; } %end
+
+@interface WAMessageBubbleForwardButton : UIView @end
+%hook WAMessageBubbleForwardButton -(void)layoutSubviews { %orig; self.backgroundColor = [UIColor blackColor]; } %end
+
 %hook UITableViewCell -(void)layoutSubviews { %orig; self.backgroundColor = [UIColor blackColor]; } %end
+
 %hook UITableView -(void)layoutSubviews { %orig; self.backgroundColor = [UIColor blackColor]; } %end
+
 %hook UISearchBar -(void)layoutSubviews { %orig; self.backgroundColor = [UIColor blackColor]; } %end
 
-    %hook UILabel
+@interface WABadgedLabel : UILabel @end
+%hook WABadgedLabel -(void)layoutSubviews { %orig; 
+    self.backgroundColor = [UIColor clearColor];
+} %end
 
-        -(void)layoutSubviews {
-            %orig;
-            self.textColor = [UIColor whiteColor];
-            self.backgroundColor = [UIColor clearColor];
-        }
+%hook UILabel -(void)layoutSubviews { %orig; 
+    self.textColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor clearColor];
+} %end
 
-    %end
-
-    %hook WABadgedLabel
-
-        -(void)layoutSubviews {
-            %orig;
-            self.backgroundColor = [UIColor clearColor];
-        }
-
-    %end
-
-    %hook WAWallpaperView
-
-        -(void)layoutSubviews {
-            %orig;
-            MSHookIvar<UIImageView *>(self, "_imageView").hidden = true;
-            self.backgroundColor = [UIColor blackColor];
-        }
-
-    %end
-
-%end
 
 
 %ctor {
     if (FUNCTION_prefGetBool(@"pref_dark_mode")) {
         FUNCTION_logEnabling(@"Dark Mode");
-        %init(GROUP_DARK_MODE);
+        %init(_ungrouped);
     }
 }

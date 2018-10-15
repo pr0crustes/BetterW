@@ -9,75 +9,62 @@
 */
 
 
-$def prep_class(a, b) -> @interface !a : !b @end
-$def prep_classView(a) -> $use prep_class(!a, UIView)
-$def prep_hookView(a) -> %hook !a -(void)layoutSubviews { %orig; self.backgroundColor = [UIColor blackColor]; } %end
-
-$use prep_classView(_UINavigationBarContentView)
-$use prep_classView(_UIStatusBarForegroundView)
-$use prep_classView(_UINavigationBarLargeTitleView)
-$use prep_classView(_WADraggableInputContainerView)
-$use prep_classView(_WACustomBehaviorsTableView)
-$use prep_classView(_UIBarBackground)
-$use prep_classView(WATabBar)
-
-$use prep_class(WABadgedLabel, UILabel)
+$def pp_class(a, b) -> @interface !a : !b @end
+$def pp_classView(a) -> $use pp_class(!a, UIView)
+$def pp_openHook(a) -> %hook !a -(void)layoutSubviews { %orig; 
+$def pp_closeHook() -> } %end
+$def pp_hookViewColor(a, b) -> %hook !a -(void)layoutSubviews { %orig; self.backgroundColor = [UIColor !b]; } %end
+$def pp_hookView(a) -> $use pp_hookViewColor(!a, blackColor)
 
 
-@interface WAWallpaperView : UIView {
-    UIImageView *_imageView;
-}
-@end
+$use pp_classView(_UINavigationBarContentView)
+$use pp_hookView(_UINavigationBarContentView)
 
+$use pp_classView(_UIStatusBarForegroundView)
+$use pp_hookView(_UIStatusBarForegroundView)
 
-%group GROUP_DARK_MODE
+$use pp_classView(_UINavigationBarLargeTitleView)
+$use pp_hookView(_UINavigationBarLargeTitleView)
 
-    $use prep_hookView(_UINavigationBarContentView)
-    $use prep_hookView(_UIStatusBarForegroundView)
-    $use prep_hookView(_UINavigationBarLargeTitleView)
-    $use prep_hookView(_WADraggableInputContainerView)
-    $use prep_hookView(_WACustomBehaviorsTableView)
-    $use prep_hookView(_UIBarBackground)
-    $use prep_hookView(WATabBar)
-    $use prep_hookView(UITableViewCell)
-    $use prep_hookView(UITableView)
-    $use prep_hookView(UISearchBar)
+$use pp_classView(_UIBarBackground)
+$use pp_hookView(_UIBarBackground)
 
-    %hook UILabel
+$use pp_classView(_WADraggableInputContainerView)
+$use pp_hookView(_WADraggableInputContainerView)
 
-        -(void)layoutSubviews {
-            %orig;
-            self.textColor = [UIColor whiteColor];
-            self.backgroundColor = [UIColor clearColor];
-        }
+$use pp_classView(_WACustomBehaviorsTableView)
+$use pp_hookView(_WACustomBehaviorsTableView)
 
-    %end
+$use pp_classView(WATabBar)
+$use pp_hookView(WATabBar)
 
-    %hook WABadgedLabel
+$use pp_classView(_WADividerCellBackground)
+$use pp_hookViewColor(_WADividerCellBackground, grayColor)
 
-        -(void)layoutSubviews {
-            %orig;
-            self.backgroundColor = [UIColor clearColor];
-        }
+$use pp_classView(WAMessageBubbleForwardButton)
+$use pp_hookView(WAMessageBubbleForwardButton)
 
-    %end
+$use pp_hookView(UITableViewCell)
 
-    %hook WAWallpaperView
+$use pp_hookView(UITableView)
 
-        -(void)layoutSubviews {
-            %orig;
-            MSHookIvar<UIImageView *>(self, "_imageView").hidden = true;
-            self.backgroundColor = [UIColor blackColor];
-        }
+$use pp_hookView(UISearchBar)
 
-    %end
+$use pp_class(WABadgedLabel, UILabel)
+$use pp_openHook(WABadgedLabel)
+    self.backgroundColor = [UIColor clearColor];
+$use pp_closeHook()
 
-%end
+$use pp_openHook(UILabel)
+    self.textColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor clearColor];
+$use pp_closeHook()
+
 
 
 %ctor {
     if (FUNCTION_prefGetBool(@"pref_dark_mode")) {
         FUNCTION_logEnabling(@"Dark Mode");
-        %init(GROUP_DARK_MODE);
+        %init(_ungrouped);
     }
 }
