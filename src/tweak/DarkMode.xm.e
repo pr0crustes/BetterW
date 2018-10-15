@@ -12,7 +12,6 @@
 $def prep_class(a, b) -> @interface !a : !b @end
 $def prep_classView(a) -> $use prep_class(!a, UIView)
 $def prep_hookView(a) -> %hook !a -(void)layoutSubviews { %orig; self.backgroundColor = [UIColor blackColor]; } %end
-$def prep_setBackgroundColor() -> self.background = [UIColor blackColor];
 
 $use prep_classView(_UINavigationBarContentView)
 $use prep_classView(_UIStatusBarForegroundView)
@@ -23,6 +22,12 @@ $use prep_classView(_UIBarBackground)
 $use prep_classView(WATabBar)
 
 $use prep_class(WABadgedLabel, UILabel)
+
+
+@interface WAWallpaperView : UIView {
+    UIImageView *_imageView;
+}
+@end
 
 
 %group GROUP_DARK_MODE
@@ -53,6 +58,16 @@ $use prep_class(WABadgedLabel, UILabel)
         -(void)layoutSubviews {
             %orig;
             self.backgroundColor = [UIColor clearColor];
+        }
+
+    %end
+
+    %hook WAWallpaperView
+
+        -(void)layoutSubviews {
+            %orig;
+            MSHookIvar<UIImageView *>(self, "_imageView").hidden = true;
+            self.backgroundColor = [UIColor blackColor];
         }
 
     %end
