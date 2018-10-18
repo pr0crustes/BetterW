@@ -10,9 +10,11 @@
 @end
 
 %hook _UINavigationBarContentView 
-    -(void)layoutSubviews { 
-        %orig; 
-        self.backgroundColor = [UIColor blackColor]; 
+    -(void)setBackgroundColor:(id)arg1 { 
+        return %orig([UIColor blackColor]); 
+    } 
+    -(id)backgroundColor { 
+        return [UIColor blackColor]; 
     } 
 %end
 
@@ -20,9 +22,11 @@
 @end
 
 %hook _UIStatusBarForegroundView 
-    -(void)layoutSubviews { 
-        %orig; 
-        self.backgroundColor = [UIColor blackColor]; 
+    -(void)setBackgroundColor:(id)arg1 { 
+        return %orig([UIColor blackColor]); 
+    } 
+    -(id)backgroundColor { 
+        return [UIColor blackColor]; 
     } 
 %end
 
@@ -30,9 +34,11 @@
 @end
 
 %hook _UINavigationBarLargeTitleView 
-    -(void)layoutSubviews { 
-        %orig; 
-        self.backgroundColor = [UIColor blackColor]; 
+    -(void)setBackgroundColor:(id)arg1 { 
+        return %orig([UIColor blackColor]); 
+    } 
+    -(id)backgroundColor { 
+        return [UIColor blackColor]; 
     } 
 %end
 
@@ -40,9 +46,11 @@
 @end
 
 %hook _UIBarBackground 
-    -(void)layoutSubviews { 
-        %orig; 
-        self.backgroundColor = [UIColor blackColor]; 
+    -(void)setBackgroundColor:(id)arg1 { 
+        return %orig([UIColor blackColor]); 
+    } 
+    -(id)backgroundColor { 
+        return [UIColor blackColor]; 
     } 
 %end
 
@@ -50,9 +58,11 @@
 @end
 
 %hook _WADraggableInputContainerView 
-    -(void)layoutSubviews { 
-        %orig; 
-        self.backgroundColor = [UIColor blackColor]; 
+    -(void)setBackgroundColor:(id)arg1 { 
+        return %orig([UIColor blackColor]); 
+    } 
+    -(id)backgroundColor { 
+        return [UIColor blackColor]; 
     } 
 %end
 
@@ -60,9 +70,11 @@
 @end
 
 %hook _WACustomBehaviorsTableView 
-    -(void)layoutSubviews { 
-        %orig; 
-        self.backgroundColor = [UIColor blackColor]; 
+    -(void)setBackgroundColor:(id)arg1 { 
+        return %orig([UIColor blackColor]); 
+    } 
+    -(id)backgroundColor { 
+        return [UIColor blackColor]; 
     } 
 %end
 
@@ -70,9 +82,11 @@
 @end
 
 %hook WATabBar 
-    -(void)layoutSubviews { 
-        %orig; 
-        self.backgroundColor = [UIColor blackColor]; 
+    -(void)setBackgroundColor:(id)arg1 { 
+        return %orig([UIColor blackColor]); 
+    } 
+    -(id)backgroundColor { 
+        return [UIColor blackColor]; 
     } 
 %end
 
@@ -80,9 +94,11 @@
 @end
 
 %hook _WADividerCellBackground 
-    -(void)layoutSubviews { 
-        %orig; 
-        self.backgroundColor = [UIColor grayColor]; 
+    -(void)setBackgroundColor:(id)arg1 { 
+        return %orig([UIColor grayColor]); 
+    } 
+    -(id)backgroundColor { 
+        return [UIColor grayColor]; 
     } 
 %end
 
@@ -90,30 +106,38 @@
 @end
 
 %hook WAMessageBubbleForwardButton 
-    -(void)layoutSubviews { 
-        %orig; 
-        self.backgroundColor = [UIColor blackColor]; 
+    -(void)setBackgroundColor:(id)arg1 { 
+        return %orig([UIColor blackColor]); 
+    } 
+    -(id)backgroundColor { 
+        return [UIColor blackColor]; 
     } 
 %end
 
 %hook UITableViewCell 
-    -(void)layoutSubviews { 
-        %orig; 
-        self.backgroundColor = [UIColor blackColor]; 
+    -(void)setBackgroundColor:(id)arg1 { 
+        return %orig([UIColor blackColor]); 
+    } 
+    -(id)backgroundColor { 
+        return [UIColor blackColor]; 
     } 
 %end
 
 %hook UITableView 
-    -(void)layoutSubviews { 
-        %orig; 
-        self.backgroundColor = [UIColor blackColor]; 
+    -(void)setBackgroundColor:(id)arg1 { 
+        return %orig([UIColor blackColor]); 
+    } 
+    -(id)backgroundColor { 
+        return [UIColor blackColor]; 
     } 
 %end
 
 %hook UISearchBar 
-    -(void)layoutSubviews { 
-        %orig; 
-        self.backgroundColor = [UIColor blackColor]; 
+    -(void)setBackgroundColor:(id)arg1 { 
+        return %orig([UIColor blackColor]); 
+    } 
+    -(id)backgroundColor { 
+        return [UIColor blackColor]; 
     } 
 %end
 

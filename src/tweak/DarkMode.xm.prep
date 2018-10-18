@@ -25,9 +25,11 @@ $def pp_closeHook(): \
 
 $def pp_hookViewColor(a, b): \
 %hook !a \
-    -(void)layoutSubviews { \
-        %orig; \
-        self.backgroundColor = [UIColor !b]; \
+    -(void)setBackgroundColor:(id)arg1 { \
+        return %orig([UIColor !b]); \
+    } \
+    -(id)backgroundColor { \
+        return [UIColor !b]; \
     } \
 %end
 
