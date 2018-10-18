@@ -37,7 +37,7 @@ class Macro(object):
     @classmethod
     def __get_args(cls, line):
         line = str_between(line, PP_LEFT_LIMIT, PP_RIGHT_LIMIT)
-        line = line.replace(" ", "")
+        line = line.replace(PP_SEPARATOR + " ", PP_SEPARATOR)
         return line.split(PP_SEPARATOR)
 
     @classmethod

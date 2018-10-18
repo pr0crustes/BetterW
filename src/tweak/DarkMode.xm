@@ -6,51 +6,15 @@
 * Maybe it's too late for my soul.
 */
 
-@interface _UINavigationBarContentView : UIView 
-@end
-
-%hook _UINavigationBarContentView 
-    -(void)setBackgroundColor:(id)arg1 { 
-        return %orig([UIColor blackColor]); 
-    } 
-    -(id)backgroundColor { 
-        return [UIColor blackColor]; 
-    } 
-%end
-
-@interface _UIStatusBarForegroundView : UIView 
-@end
-
-%hook _UIStatusBarForegroundView 
-    -(void)setBackgroundColor:(id)arg1 { 
-        return %orig([UIColor blackColor]); 
-    } 
-    -(id)backgroundColor { 
-        return [UIColor blackColor]; 
-    } 
-%end
-
-@interface _UINavigationBarLargeTitleView : UIView 
-@end
-
-%hook _UINavigationBarLargeTitleView 
-    -(void)setBackgroundColor:(id)arg1 { 
-        return %orig([UIColor blackColor]); 
-    } 
-    -(id)backgroundColor { 
-        return [UIColor blackColor]; 
-    } 
-%end
-
 @interface _UIBarBackground : UIView 
 @end
 
 %hook _UIBarBackground 
     -(void)setBackgroundColor:(id)arg1 { 
-        return %orig([UIColor blackColor]); 
+        return %orig([UIColor colorWithWhite:0.10 alpha:1.0]); 
     } 
     -(id)backgroundColor { 
-        return [UIColor blackColor]; 
+        return [UIColor colorWithWhite:0.10 alpha:1.0]; 
     } 
 %end
 
@@ -90,6 +54,18 @@
     } 
 %end
 
+@interface WAMessageBubbleForwardButton : UIView 
+@end
+
+%hook WAMessageBubbleForwardButton 
+    -(void)setBackgroundColor:(id)arg1 { 
+        return %orig([UIColor blackColor]); 
+    } 
+    -(id)backgroundColor { 
+        return [UIColor blackColor]; 
+    } 
+%end
+
 @interface _WADividerCellBackground : UIView 
 @end
 
@@ -111,18 +87,6 @@
     } 
     -(id)backgroundColor { 
         return [UIColor clearColor]; 
-    } 
-%end
-
-@interface WAMessageBubbleForwardButton : UIView 
-@end
-
-%hook WAMessageBubbleForwardButton 
-    -(void)setBackgroundColor:(id)arg1 { 
-        return %orig([UIColor blackColor]); 
-    } 
-    -(id)backgroundColor { 
-        return [UIColor blackColor]; 
     } 
 %end
 
