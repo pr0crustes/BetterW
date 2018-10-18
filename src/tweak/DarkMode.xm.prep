@@ -14,14 +14,6 @@ $def pp_class(a, b): \
 @end
 
 $def pp_classView(a): $use pp_class(!a, UIView)
-$def pp_openHook(a): \
-%hook !a \
-    -(void)layoutSubviews { \
-        %orig;
-
-$def pp_closeHook(): \
-    } \
-%end
 
 $def pp_hookViewColor(a, b): \
 %hook !a \
@@ -34,6 +26,7 @@ $def pp_hookViewColor(a, b): \
 %end
 
 $def pp_hookView(a): $use pp_hookViewColor(!a, blackColor)
+
 
 
 $use pp_classView(_UINavigationBarContentView)
@@ -72,10 +65,21 @@ $use pp_hookView(UITableView)
 
 $use pp_hookView(UISearchBar)
 
-$use pp_openHook(UILabel)
-        self.textColor = [UIColor whiteColor];
-        self.backgroundColor = [UIColor clearColor];
-$use pp_closeHook()
+
+%hook UILabel
+    -(void)setBackgroundColor:(id)arg1 {
+        return %orig([UIColor clearColor]);
+    }
+    -(id)backgroundColor {
+        return [UIColor clearColor];
+    }
+    -(void)setTextColor:(id)arg1 {
+        return %orig([UIColor whiteColor]);
+    }
+    -(id)textColor {
+        return [UIColor whiteColor];
+    }
+%end
 
 
 

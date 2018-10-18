@@ -102,6 +102,18 @@
     } 
 %end
 
+@interface WABadgedLabel : UIView 
+@end
+
+%hook WABadgedLabel 
+    -(void)setBackgroundColor:(id)arg1 { 
+        return %orig([UIColor clearColor]); 
+    } 
+    -(id)backgroundColor { 
+        return [UIColor clearColor]; 
+    } 
+%end
+
 @interface WAMessageBubbleForwardButton : UIView 
 @end
 
@@ -140,30 +152,19 @@
         return [UIColor blackColor]; 
     } 
 %end
-
-@interface WABadgedLabel : UIView 
-@end
-
-%hook WABadgedLabel 
-    -(void)setBackgroundColor:(id)arg1 { 
-        return %orig([UIColor clearColor]); 
-    } 
-    -(id)backgroundColor { 
-        return [UIColor clearColor]; 
-    } 
-%end
-// $use pp_class(WABadgedLabel, UILabel)
-// $use pp_openHook(WABadgedLabel)
-//         self.backgroundColor = [UIColor clearColor];
-// $use pp_closeHook()
-
-%hook UILabel 
-    -(void)layoutSubviews { 
-        %orig;
-        self.textColor = [UIColor whiteColor];
-        self.backgroundColor = [UIColor clearColor];
-
-    } 
+%hook UILabel
+    -(void)setBackgroundColor:(id)arg1 {
+        return %orig([UIColor clearColor]);
+    }
+    -(id)backgroundColor {
+        return [UIColor clearColor];
+    }
+    -(void)setTextColor:(id)arg1 {
+        return %orig([UIColor whiteColor]);
+    }
+    -(id)textColor {
+        return [UIColor whiteColor];
+    }
 %end
 %ctor {
     if (FUNCTION_prefGetBool(@"pref_dark_mode")) {
