@@ -141,16 +141,21 @@
     } 
 %end
 
-@interface WABadgedLabel : UILabel 
+@interface WABadgedLabel : UIView 
 @end
 
 %hook WABadgedLabel 
-    -(void)layoutSubviews { 
-        %orig;
-        self.backgroundColor = [UIColor clearColor];
-
+    -(void)setBackgroundColor:(id)arg1 { 
+        return %orig([UIColor clearColor]); 
+    } 
+    -(id)backgroundColor { 
+        return [UIColor clearColor]; 
     } 
 %end
+// $use pp_class(WABadgedLabel, UILabel)
+// $use pp_openHook(WABadgedLabel)
+//         self.backgroundColor = [UIColor clearColor];
+// $use pp_closeHook()
 
 %hook UILabel 
     -(void)layoutSubviews { 

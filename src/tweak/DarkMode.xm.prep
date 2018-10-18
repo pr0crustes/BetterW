@@ -60,6 +60,9 @@ $use pp_hookView(WATabBar)
 $use pp_classView(_WADividerCellBackground)
 $use pp_hookViewColor(_WADividerCellBackground, grayColor)
 
+$use pp_classView(WABadgedLabel)
+$use pp_hookViewColor(WABadgedLabel, clearColor)
+
 $use pp_classView(WAMessageBubbleForwardButton)
 $use pp_hookView(WAMessageBubbleForwardButton)
 
@@ -68,11 +71,6 @@ $use pp_hookView(UITableViewCell)
 $use pp_hookView(UITableView)
 
 $use pp_hookView(UISearchBar)
-
-$use pp_class(WABadgedLabel, UILabel)
-$use pp_openHook(WABadgedLabel)
-        self.backgroundColor = [UIColor clearColor];
-$use pp_closeHook()
 
 $use pp_openHook(UILabel)
         self.textColor = [UIColor whiteColor];
