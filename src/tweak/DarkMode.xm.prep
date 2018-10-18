@@ -9,12 +9,29 @@
 */
 
 
-$def pp_class(a, b) -> @interface !a : !b @end
-$def pp_classView(a) -> $use pp_class(!a, UIView)
-$def pp_openHook(a) -> %hook !a -(void)layoutSubviews { %orig; 
-$def pp_closeHook() -> } %end
-$def pp_hookViewColor(a, b) -> %hook !a -(void)layoutSubviews { %orig; self.backgroundColor = [UIColor !b]; } %end
-$def pp_hookView(a) -> $use pp_hookViewColor(!a, blackColor)
+$def pp_class(a, b): \
+@interface !a : !b \
+@end
+
+$def pp_classView(a): $use pp_class(!a, UIView)
+$def pp_openHook(a): \
+%hook !a \
+    -(void)layoutSubviews { \
+        %orig;
+
+$def pp_closeHook(): \
+    } \
+%end
+
+$def pp_hookViewColor(a, b): \
+%hook !a \
+    -(void)layoutSubviews { \
+        %orig; \
+        self.backgroundColor = [UIColor !b]; \
+    } \
+%end
+
+$def pp_hookView(a): $use pp_hookViewColor(!a, blackColor)
 
 
 $use pp_classView(_UINavigationBarContentView)
@@ -52,12 +69,12 @@ $use pp_hookView(UISearchBar)
 
 $use pp_class(WABadgedLabel, UILabel)
 $use pp_openHook(WABadgedLabel)
-    self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor clearColor];
 $use pp_closeHook()
 
 $use pp_openHook(UILabel)
-    self.textColor = [UIColor whiteColor];
-    self.backgroundColor = [UIColor clearColor];
+        self.textColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor clearColor];
 $use pp_closeHook()
 
 
