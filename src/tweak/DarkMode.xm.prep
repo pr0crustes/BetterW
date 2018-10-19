@@ -15,54 +15,44 @@ $def pp_class(a, b): \
 
 $def pp_classView(a): $use pp_class(!a, UIView)
 
+$def pp_hookBackgroundColor(a): \
+-(void)setBackgroundColor:(id)arg1 { \
+    return %orig(!a); \
+} \
+-(id)backgroundColor { \
+    return !a; \
+}
+
 $def pp_hookViewColor(a, b): \
 %hook !a \
-    -(void)setBackgroundColor:(id)arg1 { \
-        return %orig(!b); \
-    } \
-    -(id)backgroundColor { \
-        return !b; \
-    } \
+    $use pp_hookBackgroundColor(!b) \
 %end
 
 $def pp_hookView(a): $use pp_hookViewColor(!a, [UIColor blackColor])
 
+$def pp_defAndHookColor(a, b): \
+$use pp_classView(!a) \
+$use pp_hookViewColor(!a, !b)
 
-$use pp_classView(_UIBarBackground)
-$use pp_hookViewColor(_UIBarBackground, [UIColor colorWithWhite:0.10 alpha:1.0])
+$def pp_defAndHook(a): $use pp_defAndHookColor(!a, [UIColor blackColor])
 
-$use pp_classView(_WADraggableInputContainerView)
-$use pp_hookView(_WADraggableInputContainerView)
 
-$use pp_classView(_WACustomBehaviorsTableView)
-$use pp_hookView(_WACustomBehaviorsTableView)
+$use pp_defAndHookColor(_UIBarBackground, [UIColor colorWithWhite:0.10 alpha:1.0])
+$use pp_defAndHookColor(_WADividerCellBackground, [UIColor grayColor])
+$use pp_defAndHookColor(WABadgedLabel, [UIColor clearColor])
 
-$use pp_classView(WATabBar)
-$use pp_hookView(WATabBar)
-
-$use pp_classView(WAMessageBubbleForwardButton)
-$use pp_hookView(WAMessageBubbleForwardButton)
-
-$use pp_classView(_WADividerCellBackground)
-$use pp_hookViewColor(_WADividerCellBackground, [UIColor grayColor])
-
-$use pp_classView(WABadgedLabel)
-$use pp_hookViewColor(WABadgedLabel, [UIColor clearColor])
-
-$use pp_hookView(UITableViewCell)
-
-$use pp_hookView(UITableView)
+$use pp_defAndHook(_WACustomBehaviorsTableView)
+$use pp_defAndHook(_WADraggableInputContainerView)
+$use pp_defAndHook(WAMessageBubbleForwardButton)
+$use pp_defAndHook(WATabBar)
 
 $use pp_hookView(UISearchBar)
+$use pp_hookView(UITableView)
+$use pp_hookView(UITableViewCell)
 
 
 %hook UILabel
-    -(void)setBackgroundColor:(id)arg1 {
-        return %orig([UIColor clearColor]);
-    }
-    -(id)backgroundColor {
-        return [UIColor clearColor];
-    }
+    $use pp_hookBackgroundColor([UIColor clearColor])
     -(void)setTextColor:(id)arg1 {
         return %orig([UIColor whiteColor]);
     }
