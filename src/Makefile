@@ -10,7 +10,7 @@ FINALPACKAGE = 1
 # end simulator
 
 # Needed to 'make package install'
-THEOS_DEVICE_IP = 192.168.1.5
+THEOS_DEVICE_IP = 192.168.1.7
 
 include $(THEOS)/makefiles/common.mk
 
