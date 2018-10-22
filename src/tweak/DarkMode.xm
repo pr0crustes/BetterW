@@ -115,6 +115,19 @@
 %end
 
 
+
+@interface _UINavigationBarLargeTitleView : UIView 
+@end
+%hook _UINavigationBarLargeTitleView
+    -(void)layoutSubviews {
+        %orig;
+        if (self.subviews.count > 0) {
+            [self.subviews[0] setTextColor:[UIColor whiteColor]];
+        }
+    }
+%end
+
+
 %hook UILabel
 -(void)setBackgroundColor:(id)arg1 { 
     return %orig([UIColor clearColor]); 

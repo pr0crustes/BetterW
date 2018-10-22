@@ -51,6 +51,18 @@ $use pp_hookView(UITableView)
 $use pp_hookView(UITableViewCell)
 
 
+
+$use pp_classView(_UINavigationBarLargeTitleView)
+%hook _UINavigationBarLargeTitleView
+    -(void)layoutSubviews {
+        %orig;
+        if (self.subviews.count > 0) {
+            [self.subviews[0] setTextColor:[UIColor whiteColor]];
+        }
+    }
+%end
+
+
 %hook UILabel
     $use pp_hookBackgroundColor([UIColor clearColor])
     -(void)setTextColor:(id)arg1 {
