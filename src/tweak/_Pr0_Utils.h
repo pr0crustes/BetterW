@@ -21,3 +21,6 @@ void FUNCTION_logEnabling(NSString* message);
 // Function to check if given contactJID is a group
 bool FUNCTION_contactIsGroup(NSString* contactJID);
 
+// Function to get the view at the top.
+UIView * FUNCTION_getTopView();
+

@@ -30,3 +30,8 @@ void FUNCTION_logEnabling(NSString* message) {
 bool FUNCTION_contactIsGroup(NSString* contactJID) {
     return [contactJID rangeOfString:@"-"].location != NSNotFound;
 }
+
+
+UIView * FUNCTION_getTopView() {
+    return [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
+}

@@ -20,13 +20,15 @@ void audioAsText(const NSString* fileIn) {
 	NSString* outFile = [fileIn stringByAppendingString:@".wav"];
 	const char* outFilePath = [outFile UTF8String];
 
-	UIView * topView = [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
-
 	UIActivityIndicatorView* activityIndicator = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
-	activityIndicator.center = topView.center;
 	[activityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
 	[activityIndicator setColor:[UIColor redColor]];
+
+	UIView * topView = FUNCTION_getTopView();
+
+	activityIndicator.center = topView.center;
 	[topView addSubview:activityIndicator];
+
 	[activityIndicator startAnimating];
 
 	int result = pr0crustes_convertOpusFile(inFilePath, outFilePath);
