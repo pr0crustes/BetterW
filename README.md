@@ -17,4 +17,5 @@ Currently, BetterW provides 11 options of additional features to use:
 10 - Global Support, adds whatsapp support to ipad | ipod. Should be enabled in settings.  
 
 ### License
-BetterW's files, unless stated otherwise, are under Apache 2.0, see LICENSE.
+BetterW's files, unless stated otherwise, are under Apache 2.0, see LICENSE.  
+This project may contain code from libOpus, libOgg and libOpusfile, using under their licenses.   
