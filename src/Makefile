@@ -9,13 +9,18 @@ FINALPACKAGE = 1
 # ARCHS = x86_64
 # end simulator
 
+GO_EASY_ON_ME=1
+
 # Needed to 'make package install'
-THEOS_DEVICE_IP = 192.168.1.7
+THEOS_DEVICE_IP = 192.168.100.148
 
 include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = betterW
 betterW_FILES = $(wildcard tweak/*.mm tweak/*.xm)
+
+betterW_OBJ_FILES = libOpusStatic.a
+betterW_LDFLAGS = -lOpusStatic
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 SUBPROJECTS += betterw_prefs

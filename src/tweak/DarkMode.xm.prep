@@ -63,12 +63,54 @@ $use pp_classView(_UINavigationBarLargeTitleView)
 %end
 
 
+@interface UILabel (pr0crustes)
+    // these 2 methods are from https://gist.github.com/snikch/3661188 .
+    - (UIViewController *)pr0crustes_topViewController;
+    - (UIViewController *)pr0crustes_topViewController:(UIViewController *)rootViewController;
+
+    -(bool)pr0crustes_isInAlert;
+@end
+
+
 %hook UILabel
     $use pp_hookBackgroundColor([UIColor clearColor])
+
+    %new   // This method is from https://gist.github.com/snikch/3661188 .
+    - (UIViewController *)pr0crustes_topViewController{
+            return [self pr0crustes_topViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+    }
+
+    %new   // This method is from https://gist.github.com/snikch/3661188 .
+    - (UIViewController *)pr0crustes_topViewController:(UIViewController *)rootViewController {
+        if (rootViewController.presentedViewController == nil) {
+            return rootViewController;
+        }
+        
+        if ([rootViewController.presentedViewController isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *navigationController = (UINavigationController *) rootViewController.presentedViewController;
+            UIViewController *lastViewController = [[navigationController viewControllers] lastObject];
+            return [self pr0crustes_topViewController:lastViewController];
+        }
+        
+        UIViewController *presentedViewController = (UIViewController *) rootViewController.presentedViewController;
+        return [self pr0crustes_topViewController:presentedViewController];
+    }
+
+    %new
+    -(bool)pr0crustes_isInAlert {
+        return [[self pr0crustes_topViewController] isKindOfClass:[UIAlertController class]];
+    }
+
     -(void)setTextColor:(id)arg1 {
+        if ([self pr0crustes_isInAlert]) {
+            return %orig;
+        }
         return %orig([UIColor whiteColor]);
     }
     -(id)textColor {
+        if ([self pr0crustes_isInAlert]) {
+            return %orig;
+        }
         return [UIColor whiteColor];
     }
 %end

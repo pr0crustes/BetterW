@@ -193,10 +193,10 @@
 			<string>me.pr0crustes.betterw_prefs</string>
 
 			<key>label</key>
-			<string>Dark Mode (ALFA)</string>
+			<string>Global Support</string>
 			
 			<key>key</key>
-			<string>pref_dark_mode</string>
+			<string>pref_global_support</string>
 		</dict>
 
 		<dict>
@@ -210,10 +210,50 @@
 			<string>me.pr0crustes.betterw_prefs</string>
 
 			<key>label</key>
-			<string>Global Support</string>
+			<string>Audio To Text</string>
 			
 			<key>key</key>
-			<string>pref_global_support</string>
+			<string>pref_audio_to_text</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>detail</key>
+			<string>PSDetailController</string>
+
+			<key>label</key>
+			<string>Audio To Text Location:</string>
+
+			<key>placeholder</key>
+			<string>en_US</string>
+
+			<key>default</key>
+			<string>en_US</string>
+
+			<key>key</key>
+			<string>pref_audio_to_text_locale</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+
+			<key>default</key>
+			<false/>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>label</key>
+			<string>Dark Mode (ALFA)</string>
+			
+			<key>key</key>
+			<string>pref_dark_mode</string>
 		</dict>
 
 		<dict>
