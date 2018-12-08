@@ -28,7 +28,7 @@ bool GLOBAL_IS_PROCESSING = false;
 			NSString* fileIn = [[data message] mediaPath];
 			NSString* outFile = [fileIn stringByAppendingString:@".wav"];
 
-			UIActivityIndicatorView* activityIndicator = [[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
+			UIActivityIndicatorView* activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
 			[activityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
 			[activityIndicator setColor:[UIColor redColor]];
 
@@ -41,7 +41,7 @@ bool GLOBAL_IS_PROCESSING = false;
 
 			int result = pr0crustes_convertOpusFile([fileIn UTF8String], [outFile UTF8String]);
 
-			if (result == 0) {
+			if (result == PR0CRUSTES_OK) {
 				NSLocale* local = [[NSLocale alloc] initWithLocaleIdentifier:GLOBAL_LOCALE];
 				SFSpeechRecognizer* speechRecognizer = [[SFSpeechRecognizer alloc] initWithLocale:local];
 
@@ -58,17 +58,18 @@ bool GLOBAL_IS_PROCESSING = false;
 
 						NSString *message = error ? [NSString stringWithFormat:@"Error processing text -> \n%@\nMay be your connection.", error] : result.bestTranscription.formattedString;
 						
-						UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"AudioToText Result:\n" message:message preferredStyle:UIAlertControllerStyleAlert];
-
-						UIAlertAction* closeAction = [UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:nil];
-						[alert addAction:closeAction];
-						
 						[[NSFileManager defaultManager] removeItemAtPath:outFile error:nil];  // delete temp .wav file
-						FUNCTION_presentAlert(alert, true);
+						FUNCTION_simpleAlert(@"AudioToText Result:\n", message);
 
 						GLOBAL_IS_PROCESSING = false;
 					}
 				];
+				
+			} else {
+
+				[[NSFileManager defaultManager] removeItemAtPath:outFile error:nil];  // delete temp .wav file
+				FUNCTION_simpleAlert(@"AudioToText Error:\n", [NSString stringWithFormat:@"Code: %i", result]);
+				GLOBAL_IS_PROCESSING = false;
 			}
 		}
 

@@ -22,6 +22,16 @@ void FUNCTION_presentAlert(UIAlertController* alert, BOOL animated) {
 }
 
 
+void FUNCTION_simpleAlert(NSString* title, NSString* message) {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction* closeAction = [UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:closeAction];
+    
+    FUNCTION_presentAlert(alert, true);
+}
+
+
 void FUNCTION_logEnabling(NSString* message) {
     NSLog(@"[BetterW] -> Enabling:  -%@-", message);
 }

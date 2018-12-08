@@ -80,14 +80,14 @@ static int make_wav_header(unsigned char header[44], ogg_int64_t duration) {
 
     if (duration > 0) {
         if (duration > 0x1FFFFFF6) {
-            return -1;
+            return PR0CRUSTES_FAIL;
         } else {
             opus_uint32 audio_size = (opus_uint32) (duration * 4);
             put_le32(header + 4, audio_size + 36);
             put_le32(header + 40, audio_size);
         }
     }
-    return 0;
+    return PR0CRUSTES_OK;
 }
 
 
@@ -99,15 +99,10 @@ int pr0crustes_convertOpusFile(const char * inFilePath, const char * outFilePath
     int return_value;
 
     OggOpusFile *opusFile = op_open_file(inFilePath, &return_value);
-    
-    if (opusFile == NULL) {
-        return -1;
-    }
-
     FILE *outputFile = fopen(outFilePath, "w");
 
-    if (outputFile == NULL) {
-        return -2;
+    if (opusFile == NULL || outputFile == NULL) {
+        return PR0CRUSTES_FILE_ERROR;
     }
 
     ogg_int64_t duration = 0;
@@ -117,7 +112,7 @@ int pr0crustes_convertOpusFile(const char * inFilePath, const char * outFilePath
     make_wav_header(wav_header, duration);
 
     if (!fwrite(wav_header, sizeof(wav_header), 1, outputFile)) {
-        return_value = -3;
+        return_value = PR0CRUSTES_FAIL;
     } else {
         ogg_int64_t nsamples = 0;
         ogg_int64_t pcm_offset = op_pcm_tell(opusFile);
@@ -129,15 +124,15 @@ int pr0crustes_convertOpusFile(const char * inFilePath, const char * outFilePath
             return_value = op_read_stereo(opusFile, pcm, sizeof(pcm) / sizeof(*pcm));
             if (return_value == OP_HOLE) {
                 continue;
-            } else if ( return_value < 0) {
-                return_value = -4;
+            } else if (return_value < 0) {
+                return_value = PR0CRUSTES_FAIL;
                 break;
             }
 
             ogg_int64_t next_pcm_offset = op_pcm_tell(opusFile);
             pcm_offset = next_pcm_offset;
             if (return_value <= 0) {
-                return_value = 0;
+                return_value = PR0CRUSTES_OK;
                 break;
             }
 
@@ -148,7 +143,7 @@ int pr0crustes_convertOpusFile(const char * inFilePath, const char * outFilePath
             }
 
             if (!fwrite(out, sizeof(*out) * 4 * return_value, 1, outputFile)) {
-                return_value = -5;
+                return_value = PR0CRUSTES_FAIL;
                 break;
             }
             nsamples += return_value;
@@ -156,7 +151,7 @@ int pr0crustes_convertOpusFile(const char * inFilePath, const char * outFilePath
         if (output_seekable && nsamples != duration) {
             make_wav_header(wav_header, nsamples);
             if (fseek(outputFile, 0, SEEK_SET) || !fwrite(wav_header, sizeof(wav_header), 1, outputFile)) {
-                return_value = -6;
+                return_value = PR0CRUSTES_FAIL;
             }
         }
     }
