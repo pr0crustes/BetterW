@@ -64,6 +64,11 @@ bool GLOBAL_IS_PROCESSING = false;
 						GLOBAL_IS_PROCESSING = false;
 					}
 				];
+
+				[urlRequest release];
+				[speechRecognizer release];
+				[local release];
+				[url release];
 				
 			} else {
 
