@@ -137,14 +137,18 @@ int pr0crustes_opusToWav(const char * inFilePath, const char * outFilePath) {
             }
             nsamples += return_value;
         }
+        
         if (output_seekable && nsamples != 0) {
             make_wav_header(wav_header, nsamples);
             if (fseek(outputFile, 0, SEEK_SET) || !fwrite(wav_header, sizeof(wav_header), 1, outputFile)) {
                 return_value = PR0CRUSTES_FAIL;
             }
         }
+
     }
+
     fclose(outputFile);
     op_free(opusFile);
+
     return return_value;
 }
