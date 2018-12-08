@@ -9,6 +9,7 @@
     -(void)layoutSubviews;
 
 	// New
+	-(void)pr0crustes_doAudioToText;
 	-(void)pr0crustes_onButtonHold:(UILongPressGestureRecognizer *)recognizer;
     @property (nonatomic, assign) BOOL pr0crustes_didConnectButton; // Make sure the button is only connected once.
 @end
