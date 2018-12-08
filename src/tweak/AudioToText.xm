@@ -39,7 +39,7 @@ bool GLOBAL_IS_PROCESSING = false;
 
 			[activityIndicator startAnimating];
 
-			int result = pr0crustes_convertOpusFile([fileIn UTF8String], [outFile UTF8String]);
+			int result = pr0crustes_opusToWav([fileIn UTF8String], [outFile UTF8String]);
 
 			if (result == PR0CRUSTES_OK) {
 				NSLocale* local = [[NSLocale alloc] initWithLocaleIdentifier:GLOBAL_LOCALE];

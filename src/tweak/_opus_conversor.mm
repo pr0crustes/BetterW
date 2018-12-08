@@ -94,7 +94,7 @@ static int make_wav_header(unsigned char header[44], ogg_int64_t duration) {
 /**
  * 0 in case it goes right, negative values in case of failure.
  */
-int pr0crustes_convertOpusFile(const char * inFilePath, const char * outFilePath) {
+int pr0crustes_opusToWav(const char * inFilePath, const char * outFilePath) {
 
     int return_value;
 
