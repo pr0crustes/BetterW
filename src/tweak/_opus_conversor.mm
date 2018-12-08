@@ -105,32 +105,21 @@ int pr0crustes_opusToWav(const char * inFilePath, const char * outFilePath) {
         return PR0CRUSTES_FILE_ERROR;
     }
 
-    ogg_int64_t duration = 0;
     int output_seekable = fseek(outputFile, 0, SEEK_CUR) != -1;
 
     unsigned char wav_header[44];
-    make_wav_header(wav_header, duration);
+    make_wav_header(wav_header, 0);
 
     if (!fwrite(wav_header, sizeof(wav_header), 1, outputFile)) {
         return_value = PR0CRUSTES_FAIL;
     } else {
         ogg_int64_t nsamples = 0;
-        ogg_int64_t pcm_offset = op_pcm_tell(opusFile);
 
         while(1) {
             opus_int16 pcm[120 * 48 * 2];
             unsigned char out[120 * 48 * 2 * 2];
             
             return_value = op_read_stereo(opusFile, pcm, sizeof(pcm) / sizeof(*pcm));
-            if (return_value == OP_HOLE) {
-                continue;
-            } else if (return_value < 0) {
-                return_value = PR0CRUSTES_FAIL;
-                break;
-            }
-
-            ogg_int64_t next_pcm_offset = op_pcm_tell(opusFile);
-            pcm_offset = next_pcm_offset;
             if (return_value <= 0) {
                 return_value = PR0CRUSTES_OK;
                 break;
@@ -148,7 +137,7 @@ int pr0crustes_opusToWav(const char * inFilePath, const char * outFilePath) {
             }
             nsamples += return_value;
         }
-        if (output_seekable && nsamples != duration) {
+        if (output_seekable && nsamples != 0) {
             make_wav_header(wav_header, nsamples);
             if (fseek(outputFile, 0, SEEK_SET) || !fwrite(wav_header, sizeof(wav_header), 1, outputFile)) {
                 return_value = PR0CRUSTES_FAIL;
