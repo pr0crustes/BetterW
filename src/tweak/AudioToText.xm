@@ -100,6 +100,16 @@ void audioAsText(const NSString* fileIn) {
 
 	%end
 
+	%hook NSBundle
+
+		-(id)infoDictionary {
+			NSMutableDictionary *dictionary = [%orig mutableCopy];
+			dictionary[@"NSSpeechRecognitionUsageDescription"] = @"[BetterW] -> Needed for AudioToText.";
+			return dictionary;
+		}
+
+	%end
+
 %end
 
 
