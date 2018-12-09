@@ -12,7 +12,7 @@ FINALPACKAGE = 1
 # GO_EASY_ON_ME=1
 
 # Needed to 'make package install'
-THEOS_DEVICE_IP = 192.168.1.7
+THEOS_DEVICE_IP = 192.168.100.148
 
 include $(THEOS)/makefiles/common.mk
 

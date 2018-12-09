@@ -105,46 +105,36 @@ int pr0crustes_opusToWav(const char * inFilePath, const char * outFilePath) {
         return PR0CRUSTES_FILE_ERROR;
     }
 
-    int output_seekable = fseek(outputFile, 0, SEEK_CUR) != -1;
 
     unsigned char wav_header[44];
     make_wav_header(wav_header, 0);
 
-    if (!fwrite(wav_header, sizeof(wav_header), 1, outputFile)) {
-        return_value = PR0CRUSTES_FAIL;
-    } else {
-        ogg_int64_t nsamples = 0;
+    if (fwrite(wav_header, sizeof(wav_header), 1, outputFile)) {
 
         while(1) {
             opus_int16 pcm[120 * 48 * 2];
             unsigned char out[120 * 48 * 2 * 2];
             
-            return_value = op_read_stereo(opusFile, pcm, sizeof(pcm) / sizeof(*pcm));
-            if (return_value <= 0) {
+            int read_frames = op_read_stereo(opusFile, pcm, sizeof(pcm) / sizeof(*pcm));
+            if (read_frames <= 0) {
                 return_value = PR0CRUSTES_OK;
                 break;
             }
 
-            /*Ensure the data is little-endian before writing it out.*/
-            for(int i = 0; i < 2 * return_value ; i++) {
+            /* Ensure the data is little-endian before writing it out. */
+            for(int i = 0; i < 2 * read_frames ; i++) {
                 out[2 * i + 0] = (unsigned char) (pcm[i] & 0xFF);
                 out[2 * i + 1] = (unsigned char) (pcm[i] >> 8 & 0xFF);
             }
 
-            if (!fwrite(out, sizeof(*out) * 4 * return_value, 1, outputFile)) {
+            if (!fwrite(out, sizeof(*out) * 4 * read_frames, 1, outputFile)) {
                 return_value = PR0CRUSTES_FAIL;
                 break;
             }
-            nsamples += return_value;
-        }
-        
-        if (output_seekable && nsamples != 0) {
-            make_wav_header(wav_header, nsamples);
-            if (fseek(outputFile, 0, SEEK_SET) || !fwrite(wav_header, sizeof(wav_header), 1, outputFile)) {
-                return_value = PR0CRUSTES_FAIL;
-            }
         }
 
+    } else {
+        return_value = PR0CRUSTES_FAIL;
     }
 
     fclose(outputFile);
