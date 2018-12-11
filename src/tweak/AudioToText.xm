@@ -28,7 +28,7 @@ bool GLOBAL_IS_PROCESSING = false;
 			NSString* fileIn = [[data message] mediaPath];
 			NSString* outFile = [fileIn stringByAppendingString:@".wav"];
 
-			UIActivityIndicatorView* activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+			__block UIActivityIndicatorView* activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
 			[activityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
 			[activityIndicator setColor:[UIColor redColor]];
 
@@ -42,36 +42,47 @@ bool GLOBAL_IS_PROCESSING = false;
 			int result = pr0crustes_opusToWav([fileIn UTF8String], [outFile UTF8String]);
 
 			if (result == PR0CRUSTES_OK) {
-				NSLocale* local = [[NSLocale alloc] initWithLocaleIdentifier:GLOBAL_LOCALE];
+				NSLocale* local = [NSLocale localeWithLocaleIdentifier:GLOBAL_LOCALE];
 				SFSpeechRecognizer* speechRecognizer = [[SFSpeechRecognizer alloc] initWithLocale:local];
+				[speechRecognizer autorelease];
 
-				NSURL* url = [[NSURL alloc] initFileURLWithPath:outFile];
+				NSURL* url = [NSURL fileURLWithPath:outFile];
 				
 				SFSpeechURLRecognitionRequest* urlRequest = [[SFSpeechURLRecognitionRequest alloc] initWithURL:url];
-				urlRequest.shouldReportPartialResults = false;  // Report only when done.
+				[urlRequest autorelease];
+				urlRequest.shouldReportPartialResults = true;  // Report only when done.
 				
+				__block UIAlertController* alert;
+
 				[speechRecognizer recognitionTaskWithRequest:urlRequest resultHandler:
 					^(SFSpeechRecognitionResult* result, NSError* error) {
 						
-						[activityIndicator stopAnimating];
-						[activityIndicator release];
+						if (activityIndicator) {
+							[activityIndicator stopAnimating];
+							[activityIndicator release];
+							activityIndicator = nil;
+						}
+
+						if (alert) {
+							[alert dismissViewControllerAnimated:true completion:nil];
+						}
 
 						NSString *message = error ? [NSString stringWithFormat:@"Error processing text -> \n%@\nMay be your connection.", error] : result.bestTranscription.formattedString;
 						
 						[[NSFileManager defaultManager] removeItemAtPath:outFile error:nil];  // delete temp .wav file
-						FUNCTION_simpleAlert(@"AudioToText Result:\n", message);
 
 						GLOBAL_IS_PROCESSING = false;
+
+						alert = [UIAlertController alertControllerWithTitle:@"AudioToText Result:\n" message:message preferredStyle:UIAlertControllerStyleAlert];
+
+						UIAlertAction* closeAction = [UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:nil];
+						[alert addAction:closeAction];
+
+						FUNCTION_presentAlert(alert, true);
 					}
 				];
-
-				[urlRequest release];
-				[speechRecognizer release];
-				[local release];
-				[url release];
 				
 			} else {
-
 				[[NSFileManager defaultManager] removeItemAtPath:outFile error:nil];  // delete temp .wav file
 				FUNCTION_simpleAlert(@"AudioToText Error:\n", [NSString stringWithFormat:@"Code: %i", result]);
 				GLOBAL_IS_PROCESSING = false;
