@@ -69,7 +69,7 @@ bool GLOBAL_IS_PROCESSING = false;
 
 						NSString *message = error ? [NSString stringWithFormat:@"Error processing text -> \n%@\nMay be your connection.", error] : result.bestTranscription.formattedString;
 						
-						[[NSFileManager defaultManager] removeItemAtPath:outFile error:nil];  // delete temp .wav file
+						FUNCTION_tryDeleteFile(outFile);
 
 						GLOBAL_IS_PROCESSING = false;
 
@@ -83,7 +83,7 @@ bool GLOBAL_IS_PROCESSING = false;
 				];
 				
 			} else {
-				[[NSFileManager defaultManager] removeItemAtPath:outFile error:nil];  // delete temp .wav file
+				FUNCTION_tryDeleteFile(outFile);
 				FUNCTION_simpleAlert(@"AudioToText Error:\n", [NSString stringWithFormat:@"Code: %i", result]);
 				GLOBAL_IS_PROCESSING = false;
 			}

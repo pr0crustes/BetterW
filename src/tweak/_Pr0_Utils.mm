@@ -45,3 +45,8 @@ bool FUNCTION_contactIsGroup(NSString* contactJID) {
 UIView * FUNCTION_getTopView() {
     return [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
 }
+
+
+void FUNCTION_tryDeleteFile(NSString* filePath) {
+    [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+}

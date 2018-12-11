@@ -35,4 +35,7 @@ bool FUNCTION_contactIsGroup(NSString* contactJID);
 // Function to get the view at the top.
 UIView * FUNCTION_getTopView();
 
+// Function that tries to remove a file, ignoring in error case.
+void FUNCTION_tryDeleteFile(NSString* filePath);
+
 #endif
