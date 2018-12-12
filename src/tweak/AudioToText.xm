@@ -8,7 +8,7 @@
 #import <Speech/Speech.h>
 
 
-NSString* GLOBAL_LOCALE = @"en_US";
+NSLocale* GLOBAL_LOCALE;
 
 bool GLOBAL_IS_PROCESSING = false;
 
@@ -74,8 +74,7 @@ bool GLOBAL_IS_PROCESSING = false;
 	}
 
 	-(void)transcribeWavFile:(NSString *)filePath {
-		NSLocale* local = [NSLocale localeWithLocaleIdentifier:GLOBAL_LOCALE];
-		SFSpeechRecognizer* speechRecognizer = [[SFSpeechRecognizer alloc] initWithLocale:local];
+		SFSpeechRecognizer* speechRecognizer = [[SFSpeechRecognizer alloc] initWithLocale:GLOBAL_LOCALE];
 		[speechRecognizer autorelease];
 
 		NSURL* url = [NSURL fileURLWithPath:filePath];
@@ -177,7 +176,7 @@ bool GLOBAL_IS_PROCESSING = false;
 
 	if (FUNCTION_prefGetBool(@"pref_audio_to_text")) {
 		FUNCTION_logEnabling(@"Audio To Text");
-		GLOBAL_LOCALE = FUNCTION_prefGet(@"pref_audio_to_text_locale");
+		GLOBAL_LOCALE = [NSLocale localeWithLocaleIdentifier:FUNCTION_prefGet(@"pref_audio_to_text_locale")];
 		%init(GROUP_AUDIO_TO_TEXT);
 	}
 
