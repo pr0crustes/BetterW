@@ -84,26 +84,26 @@ bool GLOBAL_IS_PROCESSING = false;
 		[urlRequest autorelease];
 		urlRequest.shouldReportPartialResults = true;  // Report only when done.
 
-		[speechRecognizer recognitionTaskWithRequest:urlRequest resultHandler:
-			^(SFSpeechRecognitionResult* result, NSError* error) {
+		[speechRecognizer recognitionTaskWithRequest:urlRequest resultHandler:^(SFSpeechRecognitionResult* result, NSError* error) {
 
-				[self stopLoadIndicator];
-
+			if (GLOBAL_IS_PROCESSING) {
 				GLOBAL_IS_PROCESSING = false;
-
 				FUNCTION_tryDeleteFile(filePath);
-
-				NSString *message = error ? [NSString stringWithFormat:@"Error processing text -> \n%@\nMay be your connection.", error] : result.bestTranscription.formattedString;
-
-				if (self.alert) {
-					[self.alert dismissViewControllerAnimated:true completion:^() {
-						[self transcriberCallback:message];
-					}];
-				} else {
-					[self transcriberCallback:message];
-				}
 			}
-		];
+
+			[self stopLoadIndicator];
+
+			NSString *message = error ? [NSString stringWithFormat:@"Error processing text -> \n%@\nMay be your connection.", error] : result.bestTranscription.formattedString;
+
+			if (self.alert) {
+				[self.alert dismissViewControllerAnimated:true completion:^{
+					[self transcriberCallback:message];
+				}];
+			} else {
+				[self transcriberCallback:message];
+			}
+
+		}];
 	}
 
 	-(void)transcriberCallback:(NSString *)message {
