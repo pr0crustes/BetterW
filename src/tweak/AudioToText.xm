@@ -17,9 +17,14 @@ bool GLOBAL_IS_PROCESSING = false;
 @interface Pr0crustes_Transcriber : NSObject
 	+(id)createInstance;
 	-(void)transcribeFile:(NSString *)filePath;
+	-(void)transcribeWavFile:(NSString *)filePath;
 	-(void)transcriberCallback:(NSString *)message;
 
+	-(void)startLoadIndicator;
+	-(void)stopLoadIndicator;
+
 	@property (strong, nonatomic) UIAlertController* alert;
+	@property (strong, nonatomic) UIActivityIndicatorView* loadIndicator;
 @end
 
 
@@ -31,63 +36,74 @@ bool GLOBAL_IS_PROCESSING = false;
 		return instance;
 	}
 
-	-(void)transcribeFile:(NSString*)fileIn {
-		NSString* outFile = [fileIn stringByAppendingString:@".wav"];
-
-		__block UIActivityIndicatorView* activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-		[activityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
-		[activityIndicator setColor:[UIColor redColor]];
+	-(void)startLoadIndicator {
+		self.loadIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+		[self.loadIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
+		[self.loadIndicator setColor:[UIColor redColor]];
 
 		UIView* topView = FUNCTION_getTopView();
 
-		activityIndicator.center = topView.center;
-		[topView addSubview:activityIndicator];
+		self.loadIndicator.center = topView.center;
+		[topView addSubview:self.loadIndicator];
 
-		[activityIndicator startAnimating];
+		[self.loadIndicator startAnimating];
+	}
+
+	-(void)stopLoadIndicator {
+		if (self.loadIndicator) {
+			[self.loadIndicator stopAnimating];
+			[self.loadIndicator release];
+			self.loadIndicator = nil;
+		}
+	}
+
+	-(void)transcribeFile:(NSString*)fileIn {
+		NSString* outFile = [fileIn stringByAppendingString:@".wav"];
+
+		[self startLoadIndicator];
 
 		int result = pr0crustes_opusToWav([fileIn UTF8String], [outFile UTF8String]);
 
 		if (result == PR0CRUSTES_OK) {
-			NSLocale* local = [NSLocale localeWithLocaleIdentifier:GLOBAL_LOCALE];
-			SFSpeechRecognizer* speechRecognizer = [[SFSpeechRecognizer alloc] initWithLocale:local];
-			[speechRecognizer autorelease];
-
-			NSURL* url = [NSURL fileURLWithPath:outFile];
-
-			SFSpeechURLRecognitionRequest* urlRequest = [[SFSpeechURLRecognitionRequest alloc] initWithURL:url];
-			[urlRequest autorelease];
-			urlRequest.shouldReportPartialResults = true;  // Report only when done.
-
-			[speechRecognizer recognitionTaskWithRequest:urlRequest resultHandler:
-				^(SFSpeechRecognitionResult* result, NSError* error) {
-
-					if (activityIndicator) {
-						[activityIndicator stopAnimating];
-						[activityIndicator release];
-						activityIndicator = nil;
-					}
-
-					GLOBAL_IS_PROCESSING = false;
-
-					FUNCTION_tryDeleteFile(outFile);
-
-					NSString *message = error ? [NSString stringWithFormat:@"Error processing text -> \n%@\nMay be your connection.", error] : result.bestTranscription.formattedString;
-
-					if (self.alert) {
-						[self.alert dismissViewControllerAnimated:true completion:^() {
-							[self transcriberCallback:message];
-						}];
-					} else {
-						[self transcriberCallback:message];
-					}
-				}
-			];
-			
+			[self transcribeWavFile:outFile];
 		} else {
 			FUNCTION_tryDeleteFile(outFile);
 			FUNCTION_simpleAlert(@"AudioToText Error:\n", [NSString stringWithFormat:@"Code: %i", result]);
 			GLOBAL_IS_PROCESSING = false;
 		}
+	}
+
+	-(void)transcribeWavFile:(NSString *)filePath {
+		NSLocale* local = [NSLocale localeWithLocaleIdentifier:GLOBAL_LOCALE];
+		SFSpeechRecognizer* speechRecognizer = [[SFSpeechRecognizer alloc] initWithLocale:local];
+		[speechRecognizer autorelease];
+
+		NSURL* url = [NSURL fileURLWithPath:filePath];
+
+		SFSpeechURLRecognitionRequest* urlRequest = [[SFSpeechURLRecognitionRequest alloc] initWithURL:url];
+		[urlRequest autorelease];
+		urlRequest.shouldReportPartialResults = true;  // Report only when done.
+
+		[speechRecognizer recognitionTaskWithRequest:urlRequest resultHandler:
+			^(SFSpeechRecognitionResult* result, NSError* error) {
+
+				[self stopLoadIndicator];
+
+				GLOBAL_IS_PROCESSING = false;
+
+				FUNCTION_tryDeleteFile(filePath);
+
+				NSString *message = error ? [NSString stringWithFormat:@"Error processing text -> \n%@\nMay be your connection.", error] : result.bestTranscription.formattedString;
+
+				if (self.alert) {
+					[self.alert dismissViewControllerAnimated:true completion:^() {
+						[self transcriberCallback:message];
+					}];
+				} else {
+					[self transcriberCallback:message];
+				}
+			}
+		];
 	}
 
 	-(void)transcriberCallback:(NSString *)message {
