@@ -8,18 +8,30 @@
 #import <Speech/Speech.h>
 
 
-NSLocale* GLOBAL_LOCALE;
+NSLocale* GLOBAL_LOCALE;  // This will be the language locale. Will be loaded from prefs.
 
-bool GLOBAL_IS_PROCESSING = false;
+bool GLOBAL_IS_PROCESSING = false;  // Just a lock so only one audio is processed simultaneously.
 
 
 
+/**
+ * Class that does all the audio processing.
+ */
 @interface Pr0crustes_Transcriber : NSObject
+
+	// Create an autorelease instance.
 	+(id)createInstance;
+
+	// Main interface method, transcribes an Opus file.
 	-(void)transcribeFile:(NSString *)filePath;
+
+	// Method used to process a .wav file.
 	-(void)transcribeWavFile:(NSString *)filePath;
+
+	// Method that will be called as a callback for the recognizer.
 	-(void)transcriberCallback:(NSString *)message;
 
+	// Methods to start and stop the loading indicator.
 	-(void)startLoadIndicator;
 	-(void)stopLoadIndicator;
 
@@ -94,7 +106,8 @@ bool GLOBAL_IS_PROCESSING = false;
 
 			NSString *message = error ? [NSString stringWithFormat:@"Error processing text -> \n%@\nMay be your connection.", error] : result.bestTranscription.formattedString;
 
-			if (self.alert) {
+			if (self.alert) {  
+				// If an alert is present, first destroy it, calling the callback in the completion.
 				[self.alert dismissViewControllerAnimated:true completion:^{
 					[self transcriberCallback:message];
 				}];
