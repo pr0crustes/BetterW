@@ -1,9 +1,10 @@
 @interface WAContactTableViewCell : UITableViewCell {
-        // The contact JID.
-        NSString *_jid;
         // The contact imageView.
         WAProfilePictureDynamicThumbnailView *_imageViewContact;
     }
+
+    // The contact JID.
+    @property(copy, nonatomic) NSString *jid;
 
     // Method from UIView, almost a viewDidLoad.
     -(void)layoutSubviews;

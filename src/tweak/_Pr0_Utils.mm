@@ -37,7 +37,7 @@ void FUNCTION_logEnabling(NSString* message) {
 }
 
 
-bool FUNCTION_contactIsGroup(NSString* contactJID) {
+bool FUNCTION_JIDIsGroup(NSString* contactJID) {
     return [contactJID rangeOfString:@"-"].location != NSNotFound;
 }
 
@@ -49,4 +49,12 @@ UIView * FUNCTION_getTopView() {
 
 void FUNCTION_tryDeleteFile(NSString* filePath) {
     [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+}
+
+
+WAUserJID* FUNCTION_userJIDFromString(NSString* jidString) {
+    NSString* number = [jidString componentsSeparatedByString:@"@"][0];
+    WAUserJID* userJID = [[NSClassFromString(@"WAUserJID") alloc] initWithUser:number domain:1];
+    [userJID autorelease];
+    return userJID;
 }

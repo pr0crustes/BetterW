@@ -2,6 +2,8 @@
 #define _PR0_UTILS_H
 
 #import <UIKit/UIKit.h>
+
+#import "headers/WAUserJID.h"
 /**
     File that aggregate macros and functions.
     Macros are your friend, no need to hate them, but never overuse.
@@ -30,12 +32,15 @@ void FUNCTION_simpleAlert(NSString* title, NSString* message);
 void FUNCTION_logEnabling(NSString* message);
 
 // Function to check if given contactJID is a group
-bool FUNCTION_contactIsGroup(NSString* contactJID);
+bool FUNCTION_JIDIsGroup(NSString* JIDJID);
 
 // Function to get the view at the top.
 UIView * FUNCTION_getTopView();
 
 // Function that tries to remove a file, ignoring in error case.
 void FUNCTION_tryDeleteFile(NSString* filePath);
+
+// Create a WAUserJID from a NSString.
+WAUserJID* FUNCTION_userJIDFromString(NSString* jidString);
 
 #endif

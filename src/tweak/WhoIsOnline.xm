@@ -3,6 +3,7 @@
 #import "headers/WAChatSessionCell.h"
 #import "headers/WAContactTableViewCell.h"
 #import "headers/WAProfilePictureDynamicThumbnailView.h"
+#import "headers/WAUserJID.h"
 
 #import "_Pr0_Utils.h"
 
@@ -10,7 +11,7 @@
 #define MACRO_onlineColor(isOnline) (isOnline ? [UIColor greenColor] : [UIColor redColor]).CGColor
 
 
-bool GLOBAL_as_dot = false;
+bool GLOBAL_AS_DOT = false;
 
 // Function that creates a circular CAShapeLayer at desired pos.
 CAShapeLayer* pr0crustes_createDotIndicator(UIView* view, CGFloat pos) {
@@ -34,11 +35,14 @@ void pr0crustes_colorDot(CAShapeLayer* circle, _Bool isOnline) {
 
 #define MACRO_Who_Is_Online(stringImageIvar, floatSize) \
 { \
-	NSString* contactJID = MSHookIvar<NSString *>(self, "_jid"); \
-	_Bool isOnline = [[[%c(WAContextMain) sharedContext] xmppConnectionMain] isOnline:contactJID]; \
-	if (!FUNCTION_contactIsGroup(contactJID)) { \
+	NSString* stringJID = [self jid]; \
+	if (!FUNCTION_JIDIsGroup(stringJID)) { \
+		WAUserJID* jid = FUNCTION_userJIDFromString(stringJID); \
+		XMPPConnectionMain* connection = [[%c(WAContextMain) sharedContext] xmppConnectionMain]; \
+		[connection presenceSubscribeToJIDIfNecessary:jid]; \
+		_Bool isOnline = [connection isOnline:jid]; \
 		UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, stringImageIvar); \
-		if (GLOBAL_as_dot) { \
+		if (GLOBAL_AS_DOT) { \
 			if (self.pr0crustes_circleLayer == nil) { \
 				self.pr0crustes_circleLayer = pr0crustes_createDotIndicator(imageView, floatSize); \
 			} \
@@ -57,8 +61,8 @@ void pr0crustes_colorDot(CAShapeLayer* circle, _Bool isOnline) {
 		%property (nonatomic, retain) CAShapeLayer* pr0crustes_circleLayer;
 
 		-(void)layoutSubviews {
+			%orig;
 			MACRO_Who_Is_Online("_imageViewContactPicture", 35);
-			return %orig;
 		}
 
 	%end
@@ -69,8 +73,8 @@ void pr0crustes_colorDot(CAShapeLayer* circle, _Bool isOnline) {
 		%property (nonatomic, retain) CAShapeLayer* pr0crustes_circleLayer;
 
 		-(void)layoutSubviews {
+			%orig;
 			MACRO_Who_Is_Online("_imageViewContact", 25);
-			return %orig;
 		}
 
 	%end
@@ -86,7 +90,7 @@ void pr0crustes_colorDot(CAShapeLayer* circle, _Bool isOnline) {
 
 		if (FUNCTION_prefGetBool(@"pref_as_dot")) {
 			FUNCTION_logEnabling(@"... As Dot");
-			GLOBAL_as_dot = true;
+			GLOBAL_AS_DOT = true;
 		}
 
 		%init(GROUP_WHO_IS_ONLINE);
