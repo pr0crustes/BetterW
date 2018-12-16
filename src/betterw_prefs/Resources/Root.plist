@@ -8,8 +8,12 @@
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
+
 			<key>label</key>
 			<string>Settings</string>
+
+			<key>footerText</key>
+			<string>Disables only yours read receipt.</string>
 		</dict>
 
 		<dict>
@@ -29,6 +33,15 @@
 			<string>pref_receipt</string>
 		</dict>
 
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>Draws online indicators around profile pictures.</string>
+		</dict>
+
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
@@ -44,6 +57,15 @@
 			
 			<key>key</key>
 			<string>pref_online</string>
+		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>The online indicator turns into a dot. Requires `Who Is Online` to be on.</string>
 		</dict>
 
 		<dict>
@@ -63,6 +85,15 @@
 			<string>pref_as_dot</string>
 		</dict>
 
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>Asks for a confirmation before making any voice or video call. You also have the option to call the person by phone.</string>
+		</dict>
+
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
@@ -78,6 +109,15 @@
 			
 			<key>key</key>
 			<string>pref_confirm_call</string>
+		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>Messages are not deleted from your phone, an indicator apears.</string>
 		</dict>
 
 		<dict>
@@ -97,6 +137,15 @@
 			<string>pref_no_delete</string>
 		</dict>
 
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>Removes the time limit for message deletion.</string>
+		</dict>
+
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
@@ -112,6 +161,15 @@
 			
 			<key>key</key>
 			<string>pref_no_delete_limit</string>
+		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>You will never apear online, but will be unable to see when others are.</string>
 		</dict>
 
 		<dict>
@@ -131,6 +189,15 @@
 			<string>pref_no_online</string>
 		</dict>
 
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>Others will not be able to see when you are typing.</string>
+		</dict>
+
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
@@ -146,6 +213,15 @@
 			
 			<key>key</key>
 			<string>pref_no_typing</string>
+		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>When seeing a status, it will stop the timer.</string>
 		</dict>
 
 		<dict>
@@ -165,6 +241,15 @@
 			<string>pref_no_status_timer</string>
 		</dict>
 
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>Allows you to download status. Click on the three dots and select `save`.</string>
+		</dict>
+
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
@@ -180,6 +265,15 @@
 			
 			<key>key</key>
 			<string>pref_status_downloader</string>
+		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>Will lie about compatibility, making whatsapp open in unsupported devices.</string>
 		</dict>
 
 		<dict>
@@ -199,6 +293,15 @@
 			<string>pref_global_support</string>
 		</dict>
 
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>Adds audio transcription, just hold the play button of any audio to see the magic. This uses SFSpeechRecognizer and, as Apple states, should not be used for personal information, such as passwords and credit cards. Requires internet.</string>
+		</dict>
+
 		<dict>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
@@ -215,6 +318,15 @@
 			<key>key</key>
 			<string>pref_audio_to_text</string>
 		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>The locale (language) to be used when transcribing audios. </string>
+		</dict>		
 
 		<dict>
 			<key>cell</key>
