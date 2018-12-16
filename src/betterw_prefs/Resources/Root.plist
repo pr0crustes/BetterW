@@ -337,7 +337,7 @@
 
             <key>validTitles</key>
             <array>
-				<string>es-US</string>
+				<string>en-US</string>
 				<string>ar-SA</string>
 				<string>ca-ES</string>
 				<string>cs-CZ</string>
@@ -357,12 +357,12 @@
 				<string>en-PH</string>
 				<string>en-SA</string>
 				<string>en-SG</string>
-				<string>en-US</string>
 				<string>en-ZA</string>
 				<string>es-CL</string>
 				<string>es-CO</string>
 				<string>es-ES</string>
 				<string>es-MX</string>
+				<string>es-US</string>
 				<string>fi-FI</string>
 				<string>fr-BE</string>
 				<string>fr-CA</string>
@@ -401,7 +401,7 @@
 
             <key>validValues</key>
             <array>
-				<string>es-US</string>
+				<string>en-US</string>
 				<string>ar-SA</string>
 				<string>ca-ES</string>
 				<string>cs-CZ</string>
@@ -421,12 +421,12 @@
 				<string>en-PH</string>
 				<string>en-SA</string>
 				<string>en-SG</string>
-				<string>en-US</string>
 				<string>en-ZA</string>
 				<string>es-CL</string>
 				<string>es-CO</string>
 				<string>es-ES</string>
 				<string>es-MX</string>
+				<string>es-US</string>
 				<string>fi-FI</string>
 				<string>fr-BE</string>
 				<string>fr-CA</string>
