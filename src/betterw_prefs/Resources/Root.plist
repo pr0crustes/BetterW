@@ -273,7 +273,7 @@
 			<string>PSGroupCell</string>
 
 			<key>footerText</key>
-			<string>Will lie about compatibility, making whatsapp open in unsupported devices.</string>
+			<string>Will lie about compatibility, making the app work in unsupported devices.</string>
 		</dict>
 
 		<dict>
@@ -299,7 +299,7 @@
 			<string>PSGroupCell</string>
 
 			<key>footerText</key>
-			<string>Adds audio transcription, just hold the play button of any audio to see the magic. This uses SFSpeechRecognizer and, as Apple states, should not be used for personal information, such as passwords and credit cards. Requires internet.</string>
+			<string>Adds audio transcription, just hold the play button of any audio to see the magic. This uses SFSpeechRecognizer and, as Apple states, should not be used for personal information, such as passwords and credit cards. Requires internet. Select the language to be used.</string>
 		</dict>
 
 		<dict>
@@ -319,36 +319,157 @@
 			<string>pref_audio_to_text</string>
 		</dict>
 
+		<dict>
+            <key>cell</key>
+            <string>PSLinkListCell</string>
+
+            <key>defaults</key>
+            <string>me.pr0crustes.betterw_prefs</string>
+			
+            <key>detail</key>
+            <string>PSListItemsController</string>
+
+            <key>key</key>
+            <string>pref_audio_to_text_locale</string>
+
+            <key>label</key>
+            <string>Language</string>
+
+            <key>validTitles</key>
+            <array>
+				<string>es-US</string>
+				<string>ar-SA</string>
+				<string>ca-ES</string>
+				<string>cs-CZ</string>
+				<string>da-DK</string>
+				<string>de-AT</string>
+				<string>de-CH</string>
+				<string>de-DE</string>
+				<string>el-GR</string>
+				<string>en-AE</string>
+				<string>en-AU</string>
+				<string>en-CA</string>
+				<string>en-GB</string>
+				<string>en-ID</string>
+				<string>en-IE</string>
+				<string>en-IN</string>
+				<string>en-NZ</string>
+				<string>en-PH</string>
+				<string>en-SA</string>
+				<string>en-SG</string>
+				<string>en-US</string>
+				<string>en-ZA</string>
+				<string>es-CL</string>
+				<string>es-CO</string>
+				<string>es-ES</string>
+				<string>es-MX</string>
+				<string>fi-FI</string>
+				<string>fr-BE</string>
+				<string>fr-CA</string>
+				<string>fr-CH</string>
+				<string>fr-FR</string>
+				<string>he-IL</string>
+				<string>hi-IN</string>
+				<string>hr-HR</string>
+				<string>hu-HU</string>
+				<string>id-ID</string>
+				<string>it-CH</string>
+				<string>it-IT</string>
+				<string>ja-JP</string>
+				<string>ko-KR</string>
+				<string>ms-MY</string>
+				<string>nb-NO</string>
+				<string>nl-BE</string>
+				<string>nl-NL</string>
+				<string>pl-PL</string>
+				<string>pt-BR</string>
+				<string>pt-PT</string>
+				<string>ro-RO</string>
+				<string>ru-RU</string>
+				<string>sk-SK</string>
+				<string>sv-SE</string>
+				<string>th-TH</string>
+				<string>tr-TR</string>
+				<string>uk-UA</string>
+				<string>vi-VN</string>
+				<string>wuu-CN</string>
+				<string>yue-CN</string>
+				<string>zh-CN</string>
+				<string>zh-HK</string>
+				<string>zh-TW</string>
+            </array>
+
+            <key>validValues</key>
+            <array>
+				<string>es-US</string>
+				<string>ar-SA</string>
+				<string>ca-ES</string>
+				<string>cs-CZ</string>
+				<string>da-DK</string>
+				<string>de-AT</string>
+				<string>de-CH</string>
+				<string>de-DE</string>
+				<string>el-GR</string>
+				<string>en-AE</string>
+				<string>en-AU</string>
+				<string>en-CA</string>
+				<string>en-GB</string>
+				<string>en-ID</string>
+				<string>en-IE</string>
+				<string>en-IN</string>
+				<string>en-NZ</string>
+				<string>en-PH</string>
+				<string>en-SA</string>
+				<string>en-SG</string>
+				<string>en-US</string>
+				<string>en-ZA</string>
+				<string>es-CL</string>
+				<string>es-CO</string>
+				<string>es-ES</string>
+				<string>es-MX</string>
+				<string>fi-FI</string>
+				<string>fr-BE</string>
+				<string>fr-CA</string>
+				<string>fr-CH</string>
+				<string>fr-FR</string>
+				<string>he-IL</string>
+				<string>hi-IN</string>
+				<string>hr-HR</string>
+				<string>hu-HU</string>
+				<string>id-ID</string>
+				<string>it-CH</string>
+				<string>it-IT</string>
+				<string>ja-JP</string>
+				<string>ko-KR</string>
+				<string>ms-MY</string>
+				<string>nb-NO</string>
+				<string>nl-BE</string>
+				<string>nl-NL</string>
+				<string>pl-PL</string>
+				<string>pt-BR</string>
+				<string>pt-PT</string>
+				<string>ro-RO</string>
+				<string>ru-RU</string>
+				<string>sk-SK</string>
+				<string>sv-SE</string>
+				<string>th-TH</string>
+				<string>tr-TR</string>
+				<string>uk-UA</string>
+				<string>vi-VN</string>
+				<string>wuu-CN</string>
+				<string>yue-CN</string>
+				<string>zh-CN</string>
+				<string>zh-HK</string>
+				<string>zh-TW</string>
+            </array>
+        </dict>
 
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
 
 			<key>footerText</key>
-			<string>The locale (language) to be used when transcribing audios. </string>
-		</dict>		
-
-		<dict>
-			<key>cell</key>
-			<string>PSEditTextCell</string>
-
-			<key>defaults</key>
-			<string>me.pr0crustes.betterw_prefs</string>
-
-			<key>detail</key>
-			<string>PSDetailController</string>
-
-			<key>label</key>
-			<string>Audio To Text Location:</string>
-
-			<key>placeholder</key>
-			<string>en_US</string>
-
-			<key>default</key>
-			<string>en_US</string>
-
-			<key>key</key>
-			<string>pref_audio_to_text_locale</string>
+			<string>Enables a true dark mode interface, OLED friendly.</string>
 		</dict>
 
 		<dict>
@@ -371,8 +492,9 @@
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
-			<key>label</key>
-			<string></string>
+
+			<key>footerText</key>
+			<string>Respring is not necessary to apply the changes, unless when restarting the app is not appling the settings.</string>
 		</dict>
 
 		<dict>
@@ -410,29 +532,20 @@
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
+
 			<key>label</key>
-			<string>Credits:</string>
+			<string>Info:</string>
+
+			<key>footerText</key>
+			<string>Made by @pr0crustes and distributed by free at my only repo `pr0crustes.github.io/repo/`.</string>
 		</dict>
 
 		<dict>
 			<key>cell</key>
-			<string>PSStaticTextCell</string>
-			<key>label</key>
-			<string>Made By: pr0crustes</string>
-		</dict>
+			<string>PSGroupCell</string>
 
-		<dict>
-			<key>cell</key>
-			<string>PSStaticTextCell</string>
-			<key>label</key>
-			<string>Official cydia repo: </string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSStaticTextCell</string>
-			<key>label</key>
-			<string>pr0crustes.github.io/repo/</string>
+			<key>footerText</key>
+			<string>BetterW includes code from `libopus`, `libogg` and `libopusfile`, all from `xiph.org`, respecting the licenses.</string>
 		</dict>
 
 	</array>
