@@ -1,14 +1,14 @@
-#import "headers/XMPPPresenceStanza.h"
+#import "headers/WhatsAppAppDelegate.h"
 
 #import "_Pr0_Utils.h"
 
 
 %group GROUP_NO_ONLINE
 
-	%hook XMPPPresenceStanza
+	%hook WhatsAppAppDelegate
 
-		+(id)stanzaWithPresence:(unsigned long long)arg1 nickname:(id)arg2 {
-			return %orig(3, arg2);
+		- (_Bool)isUserAvailable {
+			return false;
 		}
 
 	%end
