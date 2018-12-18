@@ -58,3 +58,15 @@ WAUserJID* FUNCTION_userJIDFromString(NSString* jidString) {
     [userJID autorelease];
     return userJID;
 }
+
+
+bool FUNCTION_isJidOnline(WAUserJID* jid) {
+    XMPPConnectionMain* connection = [[NSClassFromString(@"WAContextMain") sharedContext] xmppConnectionMain];
+	[connection presenceSubscribeToJIDIfNecessary:jid];
+	return [connection isOnline:jid];
+}
+
+
+bool FUNCTION_isJidOnline(NSString* stringJid) {
+    return FUNCTION_isJidOnline(FUNCTION_userJIDFromString(stringJid));
+}

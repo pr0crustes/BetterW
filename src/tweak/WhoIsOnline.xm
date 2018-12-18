@@ -1,17 +1,12 @@
-#import "headers/WAContextMain.h"
-#import "headers/XMPPConnectionMain.h"
 #import "headers/WAChatSessionCell.h"
 #import "headers/WAContactTableViewCell.h"
 #import "headers/WAProfilePictureDynamicThumbnailView.h"
-#import "headers/WAUserJID.h"
 
 #import "_Pr0_Utils.h"
 
-// A simple macro to find the correct color, based on a boolean isOnline,
-#define MACRO_onlineColor(isOnline) (isOnline ? [UIColor greenColor] : [UIColor redColor]).CGColor
-
 
 bool GLOBAL_AS_DOT = false;
+
 
 // Function that creates a circular CAShapeLayer at desired pos.
 CAShapeLayer* pr0crustes_createDotIndicator(UIView* view, CGFloat pos) {
@@ -21,35 +16,30 @@ CAShapeLayer* pr0crustes_createDotIndicator(UIView* view, CGFloat pos) {
 	return circle;
 }
 
-// Function that adds a border to an ImageView, coloring based in isOnline.
-void pr0crustes_colorBorder(UIImageView* imageView, _Bool isOnline) {
-	imageView.layer.borderColor = MACRO_onlineColor(isOnline);
-	imageView.layer.borderWidth = 2.0f;
-}
 
-// Function that changes the color of a CAShapeLayer, based in isOnline.
-void pr0crustes_colorDot(CAShapeLayer* circle, _Bool isOnline) {
-	circle.fillColor = MACRO_onlineColor(isOnline);
+CGColor* pr0crustes_indicatorColor(NSString* jid) {
+	if (FUNCTION_JIDIsGroup(jid)) {
+		return [UIColor clearColor].CGColor;
+	}
+	if (FUNCTION_isJidOnline(jid)) {
+		return [UIColor greenColor].CGColor;
+	}
+	return [UIColor redColor].CGColor;
 }
 
 
 #define MACRO_Who_Is_Online(stringImageIvar, floatSize) \
 { \
 	NSString* stringJID = [self jid]; \
-	if (!FUNCTION_JIDIsGroup(stringJID)) { \
-		WAUserJID* jid = FUNCTION_userJIDFromString(stringJID); \
-		XMPPConnectionMain* connection = [[%c(WAContextMain) sharedContext] xmppConnectionMain]; \
-		[connection presenceSubscribeToJIDIfNecessary:jid]; \
-		_Bool isOnline = [connection isOnline:jid]; \
-		UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, stringImageIvar); \
-		if (GLOBAL_AS_DOT) { \
-			if (self.pr0crustes_circleLayer == nil) { \
-				self.pr0crustes_circleLayer = pr0crustes_createDotIndicator(imageView, floatSize); \
-			} \
-			pr0crustes_colorDot(self.pr0crustes_circleLayer, isOnline); \
-		} else { \
-			pr0crustes_colorBorder(imageView, isOnline); \
+	UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, stringImageIvar); \
+	if (GLOBAL_AS_DOT) { \
+		if (self.pr0crustes_circleLayer == nil) { \
+			self.pr0crustes_circleLayer = pr0crustes_createDotIndicator(imageView, floatSize); \
 		} \
+		self.pr0crustes_circleLayer.fillColor = pr0crustes_indicatorColor(stringJID); \
+	} else { \
+		imageView.layer.borderColor = pr0crustes_indicatorColor(stringJID); \
+		imageView.layer.borderWidth = 2.0f; \
 	} \
 }
 

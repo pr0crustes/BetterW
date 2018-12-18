@@ -4,6 +4,8 @@
 #import <UIKit/UIKit.h>
 
 #import "headers/WAUserJID.h"
+#import "headers/WAContextMain.h"
+#import "headers/XMPPConnectionMain.h"
 /**
     File that aggregate macros and functions.
     Macros are your friend, no need to hate them, but never overuse.
@@ -42,5 +44,9 @@ void FUNCTION_tryDeleteFile(NSString* filePath);
 
 // Create a WAUserJID from a NSString.
 WAUserJID* FUNCTION_userJIDFromString(NSString* jidString);
+
+// Returns if user JID is online. Overloaded.
+bool FUNCTION_isJidOnline(WAUserJID* jid);
+bool FUNCTION_isJidOnline(NSString* stringJid);
 
 #endif
