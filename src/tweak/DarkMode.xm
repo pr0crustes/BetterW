@@ -128,6 +128,19 @@
 %end
 
 
+@interface WAContactNameLabel
+- (void)setColor:(id)arg1;
+@end
+
+%hook WAContactNameLabel
+- (void)setColor:(id)arg1 {
+    return %orig([UIColor whiteColor]);
+}
+%end
+
+
+
+
 @interface UILabel (pr0crustes)
     // these 2 methods are from https://gist.github.com/snikch/3661188 .
     - (UIViewController *)pr0crustes_topViewController;
