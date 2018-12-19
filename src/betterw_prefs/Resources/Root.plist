@@ -169,7 +169,7 @@
 			<string>PSGroupCell</string>
 
 			<key>footerText</key>
-			<string>You will never apear online, also freezes your last seen.</string>
+			<string>You will never apear online, but will not be able to see when others are online.</string>
 		</dict>
 
 		<dict>
