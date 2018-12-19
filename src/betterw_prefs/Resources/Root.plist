@@ -53,7 +53,7 @@
 			<string>me.pr0crustes.betterw_prefs</string>
 
 			<key>label</key>
-			<string>Who Is Online (BETA)</string>
+			<string>Who Is Online</string>
 			
 			<key>key</key>
 			<string>pref_online</string>
@@ -131,7 +131,7 @@
 			<string>me.pr0crustes.betterw_prefs</string>
 
 			<key>label</key>
-			<string>Don't Delete (BETA)</string>
+			<string>Don't Delete</string>
 			
 			<key>key</key>
 			<string>pref_no_delete</string>
@@ -183,7 +183,7 @@
 			<string>me.pr0crustes.betterw_prefs</string>
 
 			<key>label</key>
-			<string>Never Online</string>
+			<string>Never Online (BETA)</string>
 			
 			<key>key</key>
 			<string>pref_no_online</string>
@@ -483,7 +483,7 @@
 			<string>me.pr0crustes.betterw_prefs</string>
 
 			<key>label</key>
-			<string>Dark Mode (ALFA)</string>
+			<string>Dark Mode</string>
 			
 			<key>key</key>
 			<string>pref_dark_mode</string>
