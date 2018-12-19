@@ -13,292 +13,6 @@
 			<string>Settings</string>
 
 			<key>footerText</key>
-			<string>Disables only yours read receipt.</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-
-			<key>default</key>
-			<false/>
-
-			<key>defaults</key>
-			<string>me.pr0crustes.betterw_prefs</string>
-
-			<key>label</key>
-			<string>No Read Receipt</string>
-
-			<key>key</key>
-			<string>pref_receipt</string>
-		</dict>
-
-
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-
-			<key>footerText</key>
-			<string>Draws online indicators around profile pictures.</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-
-			<key>default</key>
-			<false/>
-
-			<key>defaults</key>
-			<string>me.pr0crustes.betterw_prefs</string>
-
-			<key>label</key>
-			<string>Who Is Online</string>
-			
-			<key>key</key>
-			<string>pref_online</string>
-		</dict>
-
-
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-
-			<key>footerText</key>
-			<string>The online indicator turns into a dot. Requires `Who Is Online` to be on.</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-
-			<key>default</key>
-			<false/>
-
-			<key>defaults</key>
-			<string>me.pr0crustes.betterw_prefs</string>
-
-			<key>label</key>
-			<string>Online As Dot</string>
-			
-			<key>key</key>
-			<string>pref_as_dot</string>
-		</dict>
-
-
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-
-			<key>footerText</key>
-			<string>Asks for a confirmation before making any voice or video call. You also have the option to call the person by phone.</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-
-			<key>default</key>
-			<false/>
-
-			<key>defaults</key>
-			<string>me.pr0crustes.betterw_prefs</string>
-
-			<key>label</key>
-			<string>Confirm Calls</string>
-			
-			<key>key</key>
-			<string>pref_confirm_call</string>
-		</dict>
-
-
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-
-			<key>footerText</key>
-			<string>Messages are not deleted from your phone, an indicator apears.</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-
-			<key>default</key>
-			<false/>
-
-			<key>defaults</key>
-			<string>me.pr0crustes.betterw_prefs</string>
-
-			<key>label</key>
-			<string>Don't Delete</string>
-			
-			<key>key</key>
-			<string>pref_no_delete</string>
-		</dict>
-
-
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-
-			<key>footerText</key>
-			<string>Removes the time limit for message deletion.</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-
-			<key>default</key>
-			<false/>
-
-			<key>defaults</key>
-			<string>me.pr0crustes.betterw_prefs</string>
-
-			<key>label</key>
-			<string>No Delete Limit</string>
-			
-			<key>key</key>
-			<string>pref_no_delete_limit</string>
-		</dict>
-
-
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-
-			<key>footerText</key>
-			<string>You will never apear online, but will not be able to see when others are online.</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-
-			<key>default</key>
-			<false/>
-
-			<key>defaults</key>
-			<string>me.pr0crustes.betterw_prefs</string>
-
-			<key>label</key>
-			<string>Never Online (BETA)</string>
-			
-			<key>key</key>
-			<string>pref_no_online</string>
-		</dict>
-
-
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-
-			<key>footerText</key>
-			<string>Others will not be able to see when you are typing.</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-
-			<key>default</key>
-			<false/>
-
-			<key>defaults</key>
-			<string>me.pr0crustes.betterw_prefs</string>
-
-			<key>label</key>
-			<string>Never Typing</string>
-			
-			<key>key</key>
-			<string>pref_no_typing</string>
-		</dict>
-
-
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-
-			<key>footerText</key>
-			<string>When seeing a status, it will stop the timer.</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-
-			<key>default</key>
-			<false/>
-
-			<key>defaults</key>
-			<string>me.pr0crustes.betterw_prefs</string>
-
-			<key>label</key>
-			<string>No Status Timer</string>
-			
-			<key>key</key>
-			<string>pref_no_status_timer</string>
-		</dict>
-
-
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-
-			<key>footerText</key>
-			<string>Allows you to download status. Click on the three dots and select `save`.</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-
-			<key>default</key>
-			<false/>
-
-			<key>defaults</key>
-			<string>me.pr0crustes.betterw_prefs</string>
-
-			<key>label</key>
-			<string>Status Downloader</string>
-			
-			<key>key</key>
-			<string>pref_status_downloader</string>
-		</dict>
-
-
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-
-			<key>footerText</key>
-			<string>Will lie about compatibility, making the app work in unsupported devices.</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-
-			<key>default</key>
-			<false/>
-
-			<key>defaults</key>
-			<string>me.pr0crustes.betterw_prefs</string>
-
-			<key>label</key>
-			<string>Global Support</string>
-			
-			<key>key</key>
-			<string>pref_global_support</string>
-		</dict>
-
-
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-
-			<key>footerText</key>
 			<string>Adds audio transcription, just hold the play button of any audio to see the magic. This uses SFSpeechRecognizer and, as Apple states, should not be used for personal information, such as passwords and credit cards. Requires internet. Select the language to be used.</string>
 		</dict>
 
@@ -464,6 +178,33 @@
             </array>
         </dict>
 
+
+        <dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>Asks for a confirmation before making any voice or video call. You also have the option to call the person by phone.</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+
+			<key>default</key>
+			<false/>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>label</key>
+			<string>Confirm Calls</string>
+			
+			<key>key</key>
+			<string>pref_confirm_call</string>
+		</dict>
+
+
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -488,6 +229,268 @@
 			<key>key</key>
 			<string>pref_dark_mode</string>
 		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>Messages are not deleted from your phone, an indicator apears.</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+
+			<key>default</key>
+			<false/>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>label</key>
+			<string>Don't Delete</string>
+			
+			<key>key</key>
+			<string>pref_no_delete</string>
+		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>Will lie about compatibility, making the app work in unsupported devices.</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+
+			<key>default</key>
+			<false/>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>label</key>
+			<string>Global Support</string>
+			
+			<key>key</key>
+			<string>pref_global_support</string>
+		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>You will never apear online, but will not be able to see when others are online.</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+
+			<key>default</key>
+			<false/>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>label</key>
+			<string>Never Online (BETA)</string>
+			
+			<key>key</key>
+			<string>pref_no_online</string>
+		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>Others will not be able to see when you are typing.</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+
+			<key>default</key>
+			<false/>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>label</key>
+			<string>Never Typing</string>
+			
+			<key>key</key>
+			<string>pref_no_typing</string>
+		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>Removes the time limit for message deletion.</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+
+			<key>default</key>
+			<false/>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>label</key>
+			<string>No Delete Limit</string>
+			
+			<key>key</key>
+			<string>pref_no_delete_limit</string>
+		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>Disables only yours read receipt.</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+
+			<key>default</key>
+			<false/>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>label</key>
+			<string>No Read Receipt</string>
+
+			<key>key</key>
+			<string>pref_receipt</string>
+		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>When seeing a status, it will stop the timer.</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+
+			<key>default</key>
+			<false/>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>label</key>
+			<string>No Status Timer</string>
+			
+			<key>key</key>
+			<string>pref_no_status_timer</string>
+		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>Allows you to download status. Click on the three dots and select `save`.</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+
+			<key>default</key>
+			<false/>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>label</key>
+			<string>Status Downloader</string>
+			
+			<key>key</key>
+			<string>pref_status_downloader</string>
+		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>Draws online indicators around profile pictures.</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+
+			<key>default</key>
+			<false/>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>label</key>
+			<string>Who Is Online</string>
+			
+			<key>key</key>
+			<string>pref_online</string>
+		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>The online indicator turns into a dot. Requires `Who Is Online` to be on.</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+
+			<key>default</key>
+			<false/>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>label</key>
+			<string>... Online As Dot</string>
+			
+			<key>key</key>
+			<string>pref_as_dot</string>
+		</dict>
+
+
 
 		<dict>
 			<key>cell</key>
