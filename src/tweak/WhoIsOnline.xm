@@ -8,7 +8,7 @@
 bool GLOBAL_AS_DOT = false;
 
 
-// Function that creates a circular CAShapeLayer at desired pos.
+// Function that creates a circular CAShapeLayer at desired pos, the dot indicator.
 CAShapeLayer* pr0crustes_createDotIndicator(UIView* view, CGFloat pos) {
 	CAShapeLayer* circle = [CAShapeLayer layer];
 	circle.path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(pos, pos, 10, 10)].CGPath;
@@ -28,19 +28,16 @@ CGColor* pr0crustes_indicatorColor(NSString* jid) {
 }
 
 
-#define MACRO_Who_Is_Online(stringImageIvar, floatSize) \
-{ \
-	NSString* stringJID = [self jid]; \
-	UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, stringImageIvar); \
-	if (GLOBAL_AS_DOT) { \
-		if (self.pr0crustes_circleLayer == nil) { \
-			self.pr0crustes_circleLayer = pr0crustes_createDotIndicator(imageView, floatSize); \
-		} \
-		self.pr0crustes_circleLayer.fillColor = pr0crustes_indicatorColor(stringJID); \
-	} else { \
-		imageView.layer.borderColor = pr0crustes_indicatorColor(stringJID); \
-		imageView.layer.borderWidth = 2.0f; \
-	} \
+void pr0crustes_whoIsOnline(NSString* stringJID, UIImageView* imageView, CAShapeLayer* layer, CGFloat size) {
+	if (GLOBAL_AS_DOT) {
+		if (layer == nil) {
+			layer = pr0crustes_createDotIndicator(imageView, size);
+		}
+		layer.fillColor = pr0crustes_indicatorColor(stringJID);
+	} else {
+		imageView.layer.borderColor = pr0crustes_indicatorColor(stringJID);
+		imageView.layer.borderWidth = 2.0f;
+	}
 }
 
 
@@ -52,7 +49,8 @@ CGColor* pr0crustes_indicatorColor(NSString* jid) {
 
 		-(void)layoutSubviews {
 			%orig;
-			MACRO_Who_Is_Online("_imageViewContactPicture", 35);
+			UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContactPicture");
+			pr0crustes_whoIsOnline([self jid], imageView, self.pr0crustes_circleLayer, 35);
 		}
 
 	%end
@@ -64,7 +62,8 @@ CGColor* pr0crustes_indicatorColor(NSString* jid) {
 
 		-(void)layoutSubviews {
 			%orig;
-			MACRO_Who_Is_Online("_imageViewContact", 25);
+			UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContact");
+			pr0crustes_whoIsOnline([self jid], imageView, self.pr0crustes_circleLayer, 25);
 		}
 
 	%end
