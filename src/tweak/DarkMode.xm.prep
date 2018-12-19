@@ -9,115 +9,50 @@
 */
 
 
-
-
-
-
-
-
-
-
-@interface _UIBarBackground : UIView 
+$def pp_class(a, b): \
+@interface !a : !b \
 @end
-%hook _UIBarBackground 
--(void)setBackgroundColor:(id)arg1 { 
-    return %orig([UIColor colorWithWhite:0.10 alpha:1.0]); 
-} 
--(id)backgroundColor { 
-    return [UIColor colorWithWhite:0.10 alpha:1.0]; 
+
+$def pp_classView(a): $use pp_class(!a, UIView)
+
+$def pp_hookBackgroundColor(a): \
+-(void)setBackgroundColor:(id)arg1 { \
+    return %orig(!a); \
+} \
+-(id)backgroundColor { \
+    return !a; \
 }
-%end
-@interface _WADividerCellBackground : UIView 
-@end
-%hook _WADividerCellBackground 
--(void)setBackgroundColor:(id)arg1 { 
-    return %orig([UIColor grayColor]); 
-} 
--(id)backgroundColor { 
-    return [UIColor grayColor]; 
-}
-%end
-@interface WABadgedLabel : UIView 
-@end
-%hook WABadgedLabel 
--(void)setBackgroundColor:(id)arg1 { 
-    return %orig([UIColor clearColor]); 
-} 
--(id)backgroundColor { 
-    return [UIColor clearColor]; 
-}
+
+$def pp_hookViewColor(a, b): \
+%hook !a \
+    $use pp_hookBackgroundColor(!b) \
 %end
 
-@interface _WACustomBehaviorsTableView : UIView 
-@end
-%hook _WACustomBehaviorsTableView 
--(void)setBackgroundColor:(id)arg1 { 
-    return %orig([UIColor blackColor]); 
-} 
--(id)backgroundColor { 
-    return [UIColor blackColor]; 
-}
-%end
-@interface _WADraggableInputContainerView : UIView 
-@end
-%hook _WADraggableInputContainerView 
--(void)setBackgroundColor:(id)arg1 { 
-    return %orig([UIColor blackColor]); 
-} 
--(id)backgroundColor { 
-    return [UIColor blackColor]; 
-}
-%end
-@interface WAMessageBubbleForwardButton : UIView 
-@end
-%hook WAMessageBubbleForwardButton 
--(void)setBackgroundColor:(id)arg1 { 
-    return %orig([UIColor blackColor]); 
-} 
--(id)backgroundColor { 
-    return [UIColor blackColor]; 
-}
-%end
-@interface WATabBar : UIView 
-@end
-%hook WATabBar 
--(void)setBackgroundColor:(id)arg1 { 
-    return %orig([UIColor blackColor]); 
-} 
--(id)backgroundColor { 
-    return [UIColor blackColor]; 
-}
-%end
+$def pp_hookView(a): $use pp_hookViewColor(!a, [UIColor blackColor])
 
-%hook UISearchBar 
--(void)setBackgroundColor:(id)arg1 { 
-    return %orig([UIColor blackColor]); 
-} 
--(id)backgroundColor { 
-    return [UIColor blackColor]; 
-}
-%end
-%hook UITableView 
--(void)setBackgroundColor:(id)arg1 { 
-    return %orig([UIColor blackColor]); 
-} 
--(id)backgroundColor { 
-    return [UIColor blackColor]; 
-}
-%end
-%hook UITableViewCell 
--(void)setBackgroundColor:(id)arg1 { 
-    return %orig([UIColor blackColor]); 
-} 
--(id)backgroundColor { 
-    return [UIColor blackColor]; 
-}
-%end
+$def pp_defAndHookColor(a, b): \
+$use pp_classView(!a) \
+$use pp_hookViewColor(!a, !b)
+
+$def pp_defAndHook(a): $use pp_defAndHookColor(!a, [UIColor blackColor])
+
+
+$use pp_defAndHookColor(_UIBarBackground, [UIColor colorWithWhite:0.10 alpha:1.0])
+$use pp_defAndHookColor(_WADividerCellBackground, [UIColor grayColor])
+$use pp_defAndHookColor(WABadgedLabel, [UIColor clearColor])
+
+$use pp_defAndHook(_WACustomBehaviorsTableView)
+$use pp_defAndHook(_WADraggableInputContainerView)
+$use pp_defAndHook(WAMessageBubbleForwardButton)
+$use pp_defAndHook(WATabBar)
+
+$use pp_hookView(UISearchBar)
+$use pp_hookView(UITableView)
+$use pp_hookView(UITableViewCell)
 
 
 
-@interface _UINavigationBarLargeTitleView : UIView 
-@end
+$use pp_classView(_UINavigationBarLargeTitleView)
 %hook _UINavigationBarLargeTitleView
     -(void)layoutSubviews {
         %orig;
@@ -151,12 +86,7 @@
 
 
 %hook UILabel
--(void)setBackgroundColor:(id)arg1 { 
-    return %orig([UIColor clearColor]); 
-} 
--(id)backgroundColor { 
-    return [UIColor clearColor]; 
-}
+    $use pp_hookBackgroundColor([UIColor clearColor])
 
     %new   // This method is from https://gist.github.com/snikch/3661188 .
     - (UIViewController *)pr0crustes_topViewController{
