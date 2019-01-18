@@ -53,9 +53,7 @@ void FUNCTION_tryDeleteFile(NSString* filePath) {
 
 
 WAUserJID* FUNCTION_userJIDFromString(NSString* jidString) {
-    NSString* number = [jidString componentsSeparatedByString:@"@"][0];
-    WAUserJID* userJID = [[NSClassFromString(@"WAUserJID") alloc] initWithUser:number domain:1];
-    [userJID autorelease];
+    WAUserJID* userJID = [NSClassFromString(@"WAUserJID") withStringRepresentation:jidString];
     return userJID;
 }
 
