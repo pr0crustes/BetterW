@@ -1,6 +1,7 @@
 #import "headers/WAChatSessionCell.h"
 #import "headers/WAContactTableViewCell.h"
 #import "headers/WAProfilePictureDynamicThumbnailView.h"
+#import "headers/WAJID.h"
 
 #import "_Pr0_Utils.h"
 
@@ -63,7 +64,9 @@ void pr0crustes_whoIsOnline(NSString* stringJID, UIImageView* imageView, CAShape
 		-(void)layoutSubviews {
 			%orig;
 			UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContact");
-			pr0crustes_whoIsOnline([self jid], imageView, self.pr0crustes_circleLayer, 25);
+			WAJID* jid = [self profilePictureJID];
+			NSString* stringJid = [jid stringRepresentation];
+			pr0crustes_whoIsOnline(stringJid, imageView, self.pr0crustes_circleLayer, 25);
 		}
 
 	%end

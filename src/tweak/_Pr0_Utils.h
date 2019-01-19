@@ -34,7 +34,7 @@ void FUNCTION_simpleAlert(NSString* title, NSString* message);
 void FUNCTION_logEnabling(NSString* message);
 
 // Function to check if given contactJID is a group
-bool FUNCTION_JIDIsGroup(NSString* JIDJID);
+bool FUNCTION_JIDIsGroup(NSString* jid);
 
 // Function to get the view at the top.
 UIView * FUNCTION_getTopView();
