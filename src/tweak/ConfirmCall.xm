@@ -22,7 +22,7 @@
 				
 				if (!isVideo && size == 1) { 
 					UIAlertAction* phoneCallAction = [UIAlertAction actionWithTitle:@"Phone Call" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) { 
-						NSString *phoneNumber = [contactJIDs[0] componentsSeparatedByString:@"@"][0];
+						NSString *phoneNumber = [[contactJIDs[0] stringRepresentation] componentsSeparatedByString:@"@"][0];
 						NSURL* url = [NSURL URLWithString:[@"telprompt://+" stringByAppendingString:phoneNumber]];
 						[[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
 					}];
