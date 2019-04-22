@@ -1,2 +1,0 @@
-libOpusStatic is a static library (.a) compiled by me, pr0crustes, that combines `libopus` (opus), `libogg` (ogg) and `libopusfile` (opusfile), all from https://xiph.org/. 
-The licenses for these libs can be found at `libOpusStatic.LICENSES`.

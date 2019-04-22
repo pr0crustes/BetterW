@@ -19,9 +19,6 @@ include $(THEOS)/makefiles/common.mk
 TWEAK_NAME = betterW
 betterW_FILES = $(wildcard tweak/*.mm tweak/*.xm)
 
-betterW_OBJ_FILES = libOpusStatic.a
-betterW_LDFLAGS = -lOpusStatic
-
 include $(THEOS_MAKE_PATH)/tweak.mk
 SUBPROJECTS += betterw_prefs
 include $(THEOS_MAKE_PATH)/aggregate.mk
@@ -29,5 +26,4 @@ include $(THEOS_MAKE_PATH)/aggregate.mk
 # Just to quick delete files
 remove::
 	@rm -r .theos
-	@rm -r obj
 	@rm -r packages

@@ -15,7 +15,6 @@ Currently, BetterW provides 11 options of additional features to use:
 8 - Status Downloader, allowing you to donwload status - just click the ... button when seeing one.   
 9 - Dark Mode, a well made dark mode. Has a few bugs.  
 10 - Global Support, adds whatsapp support to ipad | ipod. Should be enabled in settings.  
-11 - Audio To Text (needs internet), enable it, set the language to a valid IOS Locale (you can find lists on google) and hold the play button on an audio to see the transcription!  
 
 ### License
 BetterW's files, unless stated otherwise, are under Apache 2.0, see LICENSE.  
