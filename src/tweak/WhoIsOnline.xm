@@ -18,25 +18,28 @@ CAShapeLayer* pr0crustes_createDotIndicator(UIView* view, CGFloat pos) {
 }
 
 
-CGColor* pr0crustes_indicatorColor(NSString* jid) {
-	if (FUNCTION_JIDIsGroup(jid)) {
+CGColor* pr0crustes_indicatorColor(WAJID* jid) {
+	NSString* stringJID = [jid stringRepresentation];
+	if (FUNCTION_JIDIsGroup(stringJID)) {
 		return [UIColor clearColor].CGColor;
 	}
-	if (FUNCTION_isJidOnline(jid)) {
+	NSLog(@"i4");
+	if (FUNCTION_isJidOnline(stringJID)) {
+		NSLog(@"i5");
 		return [UIColor greenColor].CGColor;
 	}
 	return [UIColor redColor].CGColor;
 }
 
 
-void pr0crustes_whoIsOnline(NSString* stringJID, UIImageView* imageView, CAShapeLayer* layer, CGFloat size) {
+void pr0crustes_whoIsOnline(WAJID* jid, UIImageView* imageView, CAShapeLayer* layer, CGFloat size) {
 	if (GLOBAL_AS_DOT) {
 		if (layer == nil) {
 			layer = pr0crustes_createDotIndicator(imageView, size);
 		}
-		layer.fillColor = pr0crustes_indicatorColor(stringJID);
+		layer.fillColor = pr0crustes_indicatorColor(jid);
 	} else {
-		imageView.layer.borderColor = pr0crustes_indicatorColor(stringJID);
+		imageView.layer.borderColor = pr0crustes_indicatorColor(jid);
 		imageView.layer.borderWidth = 2.0f;
 	}
 }
@@ -50,8 +53,13 @@ void pr0crustes_whoIsOnline(NSString* stringJID, UIImageView* imageView, CAShape
 
 		-(void)layoutSubviews {
 			%orig;
+			NSLog(@"1");
 			UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContactPicture");
-			pr0crustes_whoIsOnline([self jid], imageView, self.pr0crustes_circleLayer, 35);
+			NSLog(@"2");
+			WAJID* jid = [[self chatSession] chatJID];
+			NSLog(@"3");
+			pr0crustes_whoIsOnline(jid, imageView, self.pr0crustes_circleLayer, 35);
+			NSLog(@"4");
 		}
 
 	%end
@@ -63,10 +71,13 @@ void pr0crustes_whoIsOnline(NSString* stringJID, UIImageView* imageView, CAShape
 
 		-(void)layoutSubviews {
 			%orig;
+			NSLog(@"A");
 			UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContact");
+			NSLog(@"B");
 			WAJID* jid = [self profilePictureJID];
-			NSString* stringJid = [jid stringRepresentation];
-			pr0crustes_whoIsOnline(stringJid, imageView, self.pr0crustes_circleLayer, 25);
+			NSLog(@"C");
+			pr0crustes_whoIsOnline(jid, imageView, self.pr0crustes_circleLayer, 25);
+			NSLog(@"D");
 		}
 
 	%end

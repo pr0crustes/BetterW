@@ -6,6 +6,7 @@
 #import "headers/WAUserJID.h"
 #import "headers/WAContextMain.h"
 #import "headers/XMPPConnectionMain.h"
+#import "headers/XMPPPresenceController.h"
 /**
     File that aggregate macros and functions.
     Macros are your friend, no need to hate them, but never overuse.
