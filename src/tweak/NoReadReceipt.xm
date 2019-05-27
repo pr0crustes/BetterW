@@ -11,6 +11,10 @@
 			return;
 		}
 
+		-(void)sendPlayedReceiptForMessage:(id)arg1 {
+			return;
+		}
+
 	%end
 
 %end

@@ -3,7 +3,7 @@
 BetterW is a Mobile Substrate Tweak made with Theos (see https://github.com/theos/theos) that provides a few utilities to whatsapp, improving the user experience.  
 
 ## Currently Available Features
-Currently, BetterW provides 11 options of additional features to use:  
+Currently, BetterW provides 10 options of additional features to use:  
 1 - No Read Receipt, that prevents others from seeing when you read a message, but still allowing you to see when others read yours.  
 2 - Who Is Online, that allows you to see who is online, drawing a green or red circle around their profile picture.  
 2.1 - As Dot, replaces the Who Is Online indicator with a dot. Who Is Online needs to be enabled.  
@@ -15,7 +15,6 @@ Currently, BetterW provides 11 options of additional features to use:
 8 - Status Downloader, allowing you to donwload status - just click the ... button when seeing one.   
 9 - Dark Mode, a well made dark mode. Has a few bugs.  
 10 - Global Support, adds whatsapp support to ipad | ipod. Should be enabled in settings.  
-11 - Audio To Text (needs internet), enable it, set the language to a valid IOS Locale (you can find lists on google) and hold the play button on an audio to see the transcription!  
 
 ### License
 BetterW's files, unless stated otherwise, are under Apache 2.0, see LICENSE.  

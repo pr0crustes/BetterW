@@ -59,9 +59,12 @@ WAUserJID* FUNCTION_userJIDFromString(NSString* jidString) {
 
 
 bool FUNCTION_isJidOnline(WAUserJID* jid) {
-    XMPPConnectionMain* connection = [[NSClassFromString(@"WAContextMain") sharedContext] xmppConnectionMain];
-	[connection presenceSubscribeToJIDIfNecessary:jid];
-	return [connection isOnline:jid];
+    WAContextMain* context = [NSClassFromString(@"WAContextMain") sharedContext];
+    XMPPConnectionMain* connection = [context xmppConnectionMain];
+	XMPPPresenceController* presence = [connection presenceController];
+
+    [presence subscribeToJIDIfNecessary:jid];
+	return [presence isUserOnline:jid];
 }
 
 
