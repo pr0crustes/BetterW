@@ -85,7 +85,7 @@
 
 
 %ctor {
-	if (true/*FUNCTION_prefGetBool(@"pref_delete_subsequent")*/) {
+	if (FUNCTION_prefGetBool(@"pref_delete_subsequent")) {
 		FUNCTION_logEnabling(@"Delete Subsequent");
 		%init(GROUP_DELETE_SUBSEQUENT);
 	}
