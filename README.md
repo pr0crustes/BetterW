@@ -15,6 +15,7 @@ Currently, BetterW provides 10 options of additional features to use:
 8 - Status Downloader, allowing you to donwload status - just click the ... button when seeing one.   
 9 - Dark Mode, a well made dark mode. Has a few bugs.  
 10 - Global Support, adds whatsapp support to ipad | ipod. Should be enabled in settings.  
+11 - Delete Subsequents, allowing you to easily revoke a bunch of messages.  
 
 ### License
 BetterW's files, unless stated otherwise, are under Apache 2.0, see LICENSE.  
