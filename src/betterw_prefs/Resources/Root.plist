@@ -392,7 +392,7 @@
 			<string>Info:</string>
 
 			<key>footerText</key>
-			<string>Made by @pr0crustes and distributed by free at my only repo `pr0crustes.github.io/repo/`.</string>
+			<string>Made by @pr0crustes and distributed for free at my official repo `pr0crustes.github.io/repo/`.</string>
 		</dict>
 
 		<dict>
@@ -400,7 +400,7 @@
 			<string>PSGroupCell</string>
 
 			<key>footerText</key>
-			<string>BetterW includes code from `libopus`, `libogg` and `libopusfile`, all from `xiph.org`, respecting the licenses.</string>
+			<string>You can support my work by donating any amount of bitcoin to the address "1CvcFZAMpzWzhPQzQ6vZdejSwTNuwWrPy5" (without quotes).</string>
 		</dict>
 
 	</array>
