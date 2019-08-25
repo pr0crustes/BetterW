@@ -7,6 +7,7 @@ FINALPACKAGE = 1
 # For simulator
 # TARGET = simulator:clang::7.0
 # ARCHS = x86_64
+ARCHS = arm64 arm64e
 # end simulator
 
 # GO_EASY_ON_ME=1
