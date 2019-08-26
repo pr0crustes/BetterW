@@ -2,12 +2,12 @@
 # TARGET = iphone:clang
 TARGET = iphone:11.2:10.0
 FINALPACKAGE = 1
+ARCHS = arm64 arm64e
 # end deploy
 
 # For simulator
 # TARGET = simulator:clang::7.0
 # ARCHS = x86_64
-ARCHS = arm64 arm64e
 # end simulator
 
 # GO_EASY_ON_ME=1
