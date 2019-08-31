@@ -6,7 +6,58 @@
 #import "_Pr0_Utils.h"
 
 
+UIColor* color_from_pref(NSString* key) {
+	NSString* value = FUNCTION_prefGet(key);
+
+	if ([value isEqualToString:@"Black"]) {
+		return [UIColor blackColor];
+	}
+	if ([value isEqualToString:@"Blue"]) {
+		return [UIColor blueColor];
+	}
+	if ([value isEqualToString:@"Brown"]) {
+		return [UIColor brownColor];
+	}
+	if ([value isEqualToString:@"Cyan"]) {
+		return [UIColor cyanColor];
+	}
+	if ([value isEqualToString:@"DarkGray"]) {
+		return [UIColor darkGrayColor];
+	}
+	if ([value isEqualToString:@"Gray"]) {
+		return [UIColor grayColor];
+	}
+	if ([value isEqualToString:@"Green"]) {
+		return [UIColor greenColor];
+	}
+	if ([value isEqualToString:@"LightGray"]) {
+		return [UIColor lightGrayColor];
+	}
+	if ([value isEqualToString:@"Magenta"]) {
+		return [UIColor magentaColor];
+	}
+	if ([value isEqualToString:@"Orange"]) {
+		return [UIColor orangeColor];
+	}
+	if ([value isEqualToString:@"Purple"]) {
+		return [UIColor purpleColor];
+	}
+	if ([value isEqualToString:@"Red"]) {
+		return [UIColor redColor];
+	}
+	if ([value isEqualToString:@"White"]) {
+		return [UIColor whiteColor];
+	}
+	if ([value isEqualToString:@"Yellow"]) {
+		return [UIColor yellowColor];
+	}
+	return [UIColor clearColor];
+}
+
+
 bool GLOBAL_AS_DOT = false;
+UIColor* GLOBAL_COLOR_ONLINE = color_from_pref(@"pref_woi_color_online");
+UIColor* GLOBAL_COLOR_OFFLINE = color_from_pref(@"pref_woi_color_offline");
 
 
 // Function that creates a circular CAShapeLayer at desired pos, the dot indicator.
@@ -24,9 +75,9 @@ CGColor* pr0crustes_indicatorColor(WAJID* jid) {
 		return [UIColor clearColor].CGColor;
 	}
 	if (FUNCTION_isJidOnline(stringJID)) {
-		return [UIColor greenColor].CGColor;
+		return GLOBAL_COLOR_ONLINE.CGColor;
 	}
-	return [UIColor redColor].CGColor;
+	return GLOBAL_COLOR_OFFLINE.CGColor;
 }
 
 
