@@ -71,3 +71,27 @@ bool FUNCTION_isJidOnline(WAUserJID* jid) {
 bool FUNCTION_isJidOnline(NSString* stringJid) {
     return FUNCTION_isJidOnline(FUNCTION_userJIDFromString(stringJid));
 }
+
+
+UIColor* FUNCTION_UIColorFromNSString(NSString* asString) {
+    // Keep the keys lowercase.
+    NSDictionary* stringColor = @{
+        @"black": [UIColor blackColor],
+        @"blue": [UIColor blueColor],
+        @"brown": [UIColor brownColor],
+        @"clear": [UIColor clearColor],
+        @"cyan": [UIColor cyanColor],
+        @"darkgray": [UIColor darkGrayColor],
+        @"gray": [UIColor grayColor],
+        @"green": [UIColor greenColor],
+        @"lightgray": [UIColor lightGrayColor],
+        @"magenta": [UIColor magentaColor],
+        @"orange": [UIColor orangeColor],
+        @"purple": [UIColor purpleColor],
+        @"red": [UIColor redColor],
+        @"white": [UIColor whiteColor],
+        @"yellow": [UIColor yellowColor],
+    };
+    // May return null.
+    return [stringColor objectForKey:[asString lowercaseString]];
+}

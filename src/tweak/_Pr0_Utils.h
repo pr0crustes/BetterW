@@ -50,4 +50,9 @@ WAUserJID* FUNCTION_userJIDFromString(NSString* jidString);
 bool FUNCTION_isJidOnline(WAUserJID* jid);
 bool FUNCTION_isJidOnline(NSString* stringJid);
 
+
+// Converts a NSString to an UIColor. May return null if argument is invalid.
+// Accepted values are: black, blue, brown, clear, cyan, darkgray, gray, green, lightgray, magenta, orange, purple, red, white, yellow.
+UIColor* FUNCTION_UIColorFromNSString(NSString* asString);
+
 #endif
