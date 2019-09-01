@@ -25,8 +25,8 @@
 
 %ctor {
 
-	if (FUNCTION_prefGetBool(@"pref_no_delete")) {
-		FUNCTION_logEnabling(@"No Delete");
+	if (F_prefGetBool(@"pref_no_delete")) {
+		F_logEnabling(@"No Delete");
 		%init(GROUP_NO_DELETE);
 	}
 

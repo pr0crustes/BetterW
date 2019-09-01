@@ -19,8 +19,8 @@
 
 %ctor {
 
-	if (FUNCTION_prefGetBool(@"pref_no_typing")) {
-		FUNCTION_logEnabling(@"No Typing");
+	if (F_prefGetBool(@"pref_no_typing")) {
+		F_logEnabling(@"No Typing");
 		%init(GROUP_NO_TYPING);
 	}
 

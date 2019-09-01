@@ -31,7 +31,7 @@
 				UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil];
 				[alert addAction:cancelAction];
 
-				FUNCTION_presentAlert(alert, true);
+				F_presentAlert(alert, true);
 			} else {
 				%orig;
 			}
@@ -54,7 +54,7 @@
 			UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil];
 			[alert addAction:cancelAction];
 
-			FUNCTION_presentAlert(alert, true);
+			F_presentAlert(alert, true);
 		}
 
 		%new
@@ -85,8 +85,8 @@
 
 
 %ctor {
-	if (FUNCTION_prefGetBool(@"pref_delete_subsequent")) {
-		FUNCTION_logEnabling(@"Delete Subsequent");
+	if (F_prefGetBool(@"pref_delete_subsequent")) {
+		F_logEnabling(@"Delete Subsequent");
 		%init(GROUP_DELETE_SUBSEQUENT);
 	}
 }

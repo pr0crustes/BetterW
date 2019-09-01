@@ -212,8 +212,8 @@
 
 
 %ctor {
-    if (FUNCTION_prefGetBool(@"pref_dark_mode")) {
-        FUNCTION_logEnabling(@"Dark Mode");
+    if (F_prefGetBool(@"pref_dark_mode")) {
+        F_logEnabling(@"Dark Mode");
         %init(_ungrouped);
     }
 }

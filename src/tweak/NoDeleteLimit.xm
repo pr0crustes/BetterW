@@ -19,8 +19,8 @@
 
 %ctor {
 
-	if (FUNCTION_prefGetBool(@"pref_no_delete_limit")) {
-		FUNCTION_logEnabling(@"No Delete Limit");
+	if (F_prefGetBool(@"pref_no_delete_limit")) {
+		F_logEnabling(@"No Delete Limit");
 		%init(GROUP_NO_DELETE_LIMIT);
 	} 
 

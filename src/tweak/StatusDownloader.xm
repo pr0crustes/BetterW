@@ -36,8 +36,8 @@
 
 %ctor {
 
-	if (FUNCTION_prefGetBool(@"pref_status_downloader")) {
-		FUNCTION_logEnabling(@"Status Downloader");
+	if (F_prefGetBool(@"pref_status_downloader")) {
+		F_logEnabling(@"Status Downloader");
 		%init(GROUP_STATUS_DOWNLOADER);
 	}
 

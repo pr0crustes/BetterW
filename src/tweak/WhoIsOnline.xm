@@ -7,8 +7,8 @@
 
 
 bool GLOBAL_AS_DOT = false;
-UIColor* GLOBAL_COLOR_ONLINE = FUNCTION_UIColorFromNSString(FUNCTION_prefGet(@"pref_woi_color_online"));
-UIColor* GLOBAL_COLOR_OFFLINE = FUNCTION_UIColorFromNSString(FUNCTION_prefGet(@"pref_woi_color_offline"));
+UIColor* GLOBAL_COLOR_ONLINE = F_UIColorFromNSString(F_prefGet(@"pref_woi_color_online"));
+UIColor* GLOBAL_COLOR_OFFLINE = F_UIColorFromNSString(F_prefGet(@"pref_woi_color_offline"));
 
 
 // Function that creates a circular CAShapeLayer at desired pos, the dot indicator.
@@ -22,10 +22,10 @@ CAShapeLayer* pr0crustes_createDotIndicator(UIView* view, CGFloat pos) {
 
 CGColor* pr0crustes_indicatorColor(WAJID* jid) {
 	NSString* stringJID = [jid stringRepresentation];
-	if (FUNCTION_JIDIsGroup(stringJID)) {
+	if (F_JIDIsGroup(stringJID)) {
 		return [UIColor clearColor].CGColor;
 	}
-	if (FUNCTION_isJidOnline(stringJID)) {
+	if (F_isJidOnline(stringJID)) {
 		return GLOBAL_COLOR_ONLINE.CGColor;
 	}
 	return GLOBAL_COLOR_OFFLINE.CGColor;
@@ -80,11 +80,11 @@ void pr0crustes_whoIsOnline(WAJID* jid, UIImageView* imageView, CAShapeLayer* la
 
 %ctor {
 
-	if (FUNCTION_prefGetBool(@"pref_online")) {
-		FUNCTION_logEnabling(@"Who Is Online");
+	if (F_prefGetBool(@"pref_online")) {
+		F_logEnabling(@"Who Is Online");
 
-		if (FUNCTION_prefGetBool(@"pref_as_dot")) {
-			FUNCTION_logEnabling(@"... As Dot");
+		if (F_prefGetBool(@"pref_as_dot")) {
+			F_logEnabling(@"... As Dot");
 			GLOBAL_AS_DOT = true;
 		}
 

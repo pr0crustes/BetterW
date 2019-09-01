@@ -19,8 +19,8 @@
 
 %ctor {
 
-	if (FUNCTION_prefGetBool(@"pref_no_online")) {
-		FUNCTION_logEnabling(@"No Online");
+	if (F_prefGetBool(@"pref_no_online")) {
+		F_logEnabling(@"No Online");
 		%init(GROUP_NO_ONLINE);
 	} 
 

@@ -23,8 +23,8 @@
 
 %ctor {
 
-	if (FUNCTION_prefGetBool(@"pref_receipt")) {
-		FUNCTION_logEnabling(@"No Read Receipt");
+	if (F_prefGetBool(@"pref_receipt")) {
+		F_logEnabling(@"No Read Receipt");
 		%init(GROUP_NO_READ_RECEIPT);
 	} 
 

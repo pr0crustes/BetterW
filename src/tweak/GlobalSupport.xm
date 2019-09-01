@@ -19,8 +19,8 @@
 
 %ctor {
 
-	if (FUNCTION_prefGetBool(@"pref_global_support")) {
-		FUNCTION_logEnabling(@"Global Support");
+	if (F_prefGetBool(@"pref_global_support")) {
+		F_logEnabling(@"Global Support");
 		%init(GROUP_GLOBAL_SUPPORT);
 	}
 
