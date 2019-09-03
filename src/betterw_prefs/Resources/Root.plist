@@ -25,7 +25,7 @@
 
 			<key>label</key>
 			<string>Confirm Calls</string>
-			
+
 			<key>key</key>
 			<string>pref_confirm_call</string>
 		</dict>
@@ -51,7 +51,7 @@
 
 			<key>label</key>
 			<string>Dark Mode</string>
-			
+
 			<key>key</key>
 			<string>pref_dark_mode</string>
 		</dict>
@@ -77,7 +77,7 @@
 
 			<key>label</key>
 			<string>Delete Subsequent</string>
-			
+
 			<key>key</key>
 			<string>pref_delete_subsequent</string>
 		</dict>
@@ -103,7 +103,7 @@
 
 			<key>label</key>
 			<string>Don't Delete</string>
-			
+
 			<key>key</key>
 			<string>pref_no_delete</string>
 		</dict>
@@ -129,7 +129,7 @@
 
 			<key>label</key>
 			<string>Global Support</string>
-			
+
 			<key>key</key>
 			<string>pref_global_support</string>
 		</dict>
@@ -155,7 +155,7 @@
 
 			<key>label</key>
 			<string>Never Online (BETA)</string>
-			
+
 			<key>key</key>
 			<string>pref_no_online</string>
 		</dict>
@@ -181,7 +181,7 @@
 
 			<key>label</key>
 			<string>Never Typing</string>
-			
+
 			<key>key</key>
 			<string>pref_no_typing</string>
 		</dict>
@@ -207,7 +207,7 @@
 
 			<key>label</key>
 			<string>No Delete Limit</string>
-			
+
 			<key>key</key>
 			<string>pref_no_delete_limit</string>
 		</dict>
@@ -259,7 +259,7 @@
 
 			<key>label</key>
 			<string>No Status Timer</string>
-			
+
 			<key>key</key>
 			<string>pref_no_status_timer</string>
 		</dict>
@@ -285,7 +285,7 @@
 
 			<key>label</key>
 			<string>Profile Image Saver</string>
-			
+
 			<key>key</key>
 			<string>pref_profile_image_saver</string>
 		</dict>
@@ -311,7 +311,7 @@
 
 			<key>label</key>
 			<string>Status Downloader</string>
-			
+
 			<key>key</key>
 			<string>pref_status_downloader</string>
 		</dict>
@@ -337,7 +337,7 @@
 
 			<key>label</key>
 			<string>Who Is Online</string>
-			
+
 			<key>key</key>
 			<string>pref_online</string>
 		</dict>
@@ -363,7 +363,7 @@
 
 			<key>label</key>
 			<string>... Online As Dot</string>
-			
+
 			<key>key</key>
 			<string>pref_as_dot</string>
 		</dict>
@@ -515,7 +515,7 @@
 
 			<key>action</key>
 			<string>respring:</string>
-		</dict>		
+		</dict>
 
 		<dict>
 			<key>cell</key>
