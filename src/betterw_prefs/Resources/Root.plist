@@ -270,6 +270,32 @@
 			<string>PSGroupCell</string>
 
 			<key>footerText</key>
+			<string>Tap and hold on a full-size profile picture to save it.</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+
+			<key>default</key>
+			<false/>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>label</key>
+			<string>Profile Image Saver</string>
+			
+			<key>key</key>
+			<string>pref_profile_image_saver</string>
+		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
 			<string>Allows you to download status. Click on the three dots and select `save`.</string>
 		</dict>
 
