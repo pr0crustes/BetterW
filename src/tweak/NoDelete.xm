@@ -8,8 +8,12 @@
 
 	%hook WAChatStorage
 
-		- (void)revokeIncomingMessage:(WAMessage *)message updatedStanzaID:(id)arg2 outOfOrder:(_Bool)arg3 revokeDate:(id)arg4 deferAction:(id)arg5 {
-			[message setText:[NSString stringWithFormat:@"◉【 Deleted Message 】◉ \n\n %@", [message text]]];
+		- (void)revokeIncomingMessage:(WAMessage *)message updatedStanzaID:(id)arg2 outOfOrder:(_Bool)arg3 revokeDate:(NSDate *)date deferAction:(id)arg5 {
+			NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+			[dateFormatter setLocale:[NSLocale currentLocale]];
+			[dateFormatter setDateFormat:@"dd-MM-YYYY HH:mm:ss"];
+			NSString *formattedDate = date ? [dateFormatter stringFromDate:date] : @"Unable to determine date.";
+			[message setText:[NSString stringWithFormat:@"◉【 Deleted Message 】◉\n◉【 %@ 】◉\n\n %@", formattedDate, [message text]]];
 			return;
 		}
 
@@ -21,8 +25,8 @@
 
 %ctor {
 
-	if (FUNCTION_prefGetBool(@"pref_no_delete")) {
-		FUNCTION_logEnabling(@"No Delete");
+	if (F_prefGetBool(@"pref_no_delete")) {
+		F_logEnabling(@"No Delete");
 		%init(GROUP_NO_DELETE);
 	}
 

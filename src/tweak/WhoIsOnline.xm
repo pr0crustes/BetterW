@@ -1,4 +1,4 @@
-#import "headers/WAChatSessionCell.h"
+#import "headers/WAChatSessionCellOld.h"
 #import "headers/WAContactTableViewCell.h"
 #import "headers/WAProfilePictureDynamicThumbnailView.h"
 #import "headers/WAJID.h"
@@ -7,6 +7,8 @@
 
 
 bool GLOBAL_AS_DOT = false;
+UIColor* GLOBAL_COLOR_ONLINE = F_UIColorFromNSString(F_prefGet(@"pref_woi_color_online"));
+UIColor* GLOBAL_COLOR_OFFLINE = F_UIColorFromNSString(F_prefGet(@"pref_woi_color_offline"));
 
 
 // Function that creates a circular CAShapeLayer at desired pos, the dot indicator.
@@ -20,15 +22,13 @@ CAShapeLayer* pr0crustes_createDotIndicator(UIView* view, CGFloat pos) {
 
 CGColor* pr0crustes_indicatorColor(WAJID* jid) {
 	NSString* stringJID = [jid stringRepresentation];
-	if (FUNCTION_JIDIsGroup(stringJID)) {
+	if (F_JIDIsGroup(stringJID)) {
 		return [UIColor clearColor].CGColor;
 	}
-	NSLog(@"i4");
-	if (FUNCTION_isJidOnline(stringJID)) {
-		NSLog(@"i5");
-		return [UIColor greenColor].CGColor;
+	if (F_isJidOnline(stringJID)) {
+		return GLOBAL_COLOR_ONLINE.CGColor;
 	}
-	return [UIColor redColor].CGColor;
+	return GLOBAL_COLOR_OFFLINE.CGColor;
 }
 
 
@@ -47,19 +47,15 @@ void pr0crustes_whoIsOnline(WAJID* jid, UIImageView* imageView, CAShapeLayer* la
 
 %group GROUP_WHO_IS_ONLINE
 
-	%hook WAChatSessionCell
+	%hook WAChatSessionCellOld
 
 		%property (nonatomic, retain) CAShapeLayer* pr0crustes_circleLayer;
 
 		-(void)layoutSubviews {
 			%orig;
-			NSLog(@"1");
 			UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContactPicture");
-			NSLog(@"2");
 			WAJID* jid = [[self chatSession] chatJID];
-			NSLog(@"3");
 			pr0crustes_whoIsOnline(jid, imageView, self.pr0crustes_circleLayer, 35);
-			NSLog(@"4");
 		}
 
 	%end
@@ -71,13 +67,9 @@ void pr0crustes_whoIsOnline(WAJID* jid, UIImageView* imageView, CAShapeLayer* la
 
 		-(void)layoutSubviews {
 			%orig;
-			NSLog(@"A");
 			UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContact");
-			NSLog(@"B");
 			WAJID* jid = [self profilePictureJID];
-			NSLog(@"C");
 			pr0crustes_whoIsOnline(jid, imageView, self.pr0crustes_circleLayer, 25);
-			NSLog(@"D");
 		}
 
 	%end
@@ -88,11 +80,11 @@ void pr0crustes_whoIsOnline(WAJID* jid, UIImageView* imageView, CAShapeLayer* la
 
 %ctor {
 
-	if (FUNCTION_prefGetBool(@"pref_online")) {
-		FUNCTION_logEnabling(@"Who Is Online");
+	if (F_prefGetBool(@"pref_online")) {
+		F_logEnabling(@"Who Is Online");
 
-		if (FUNCTION_prefGetBool(@"pref_as_dot")) {
-			FUNCTION_logEnabling(@"... As Dot");
+		if (F_prefGetBool(@"pref_as_dot")) {
+			F_logEnabling(@"... As Dot");
 			GLOBAL_AS_DOT = true;
 		}
 

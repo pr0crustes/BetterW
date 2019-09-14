@@ -25,7 +25,7 @@
 
 			<key>label</key>
 			<string>Confirm Calls</string>
-			
+
 			<key>key</key>
 			<string>pref_confirm_call</string>
 		</dict>
@@ -51,9 +51,35 @@
 
 			<key>label</key>
 			<string>Dark Mode</string>
-			
+
 			<key>key</key>
 			<string>pref_dark_mode</string>
+		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>Allows you to delete all messages sent by you in a chat after the selected one. To use it, select only one message sent by you and delete it for all users, A popup will ask if you want to delete all subsequents too. This feature requires No Delete Limit to be enabled.</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+
+			<key>default</key>
+			<false/>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>label</key>
+			<string>Delete Subsequent</string>
+
+			<key>key</key>
+			<string>pref_delete_subsequent</string>
 		</dict>
 
 
@@ -77,7 +103,7 @@
 
 			<key>label</key>
 			<string>Don't Delete</string>
-			
+
 			<key>key</key>
 			<string>pref_no_delete</string>
 		</dict>
@@ -103,7 +129,7 @@
 
 			<key>label</key>
 			<string>Global Support</string>
-			
+
 			<key>key</key>
 			<string>pref_global_support</string>
 		</dict>
@@ -129,7 +155,7 @@
 
 			<key>label</key>
 			<string>Never Online (BETA)</string>
-			
+
 			<key>key</key>
 			<string>pref_no_online</string>
 		</dict>
@@ -155,7 +181,7 @@
 
 			<key>label</key>
 			<string>Never Typing</string>
-			
+
 			<key>key</key>
 			<string>pref_no_typing</string>
 		</dict>
@@ -181,7 +207,7 @@
 
 			<key>label</key>
 			<string>No Delete Limit</string>
-			
+
 			<key>key</key>
 			<string>pref_no_delete_limit</string>
 		</dict>
@@ -233,9 +259,35 @@
 
 			<key>label</key>
 			<string>No Status Timer</string>
-			
+
 			<key>key</key>
 			<string>pref_no_status_timer</string>
+		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>Tap and hold on a full-size profile picture to save it.</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+
+			<key>default</key>
+			<false/>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>label</key>
+			<string>Profile Image Saver</string>
+
+			<key>key</key>
+			<string>pref_profile_image_saver</string>
 		</dict>
 
 
@@ -259,7 +311,7 @@
 
 			<key>label</key>
 			<string>Status Downloader</string>
-			
+
 			<key>key</key>
 			<string>pref_status_downloader</string>
 		</dict>
@@ -285,7 +337,7 @@
 
 			<key>label</key>
 			<string>Who Is Online</string>
-			
+
 			<key>key</key>
 			<string>pref_online</string>
 		</dict>
@@ -311,12 +363,140 @@
 
 			<key>label</key>
 			<string>... Online As Dot</string>
-			
+
 			<key>key</key>
 			<string>pref_as_dot</string>
 		</dict>
 
 
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>The color for when the contact is online. Default is Green.</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+
+			<key>default</key>
+			<string>Green</string>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>key</key>
+			<string>pref_woi_color_online</string>
+
+			<key>label</key>
+			<string>... Online Color</string>
+
+			<key>detail</key>
+			<string>PSListItemsController</string>
+
+			<key>validValues</key>
+			<array>
+				<string>Black</string>
+				<string>Blue</string>
+				<string>Brown</string>
+				<string>Cyan</string>
+				<string>DarkGray</string>
+				<string>Gray</string>
+				<string>Green</string>
+				<string>LightGray</string>
+				<string>Magenta</string>
+				<string>Orange</string>
+				<string>Purple</string>
+				<string>Red</string>
+				<string>White</string>
+				<string>Yellow</string>
+			</array>
+
+			<key>validTitles</key>
+			<array>
+				<string>Black</string>
+				<string>Blue</string>
+				<string>Brown</string>
+				<string>Cyan</string>
+				<string>DarkGray</string>
+				<string>Gray</string>
+				<string>Green</string>
+				<string>LightGray</string>
+				<string>Magenta</string>
+				<string>Orange</string>
+				<string>Purple</string>
+				<string>Red</string>
+				<string>White</string>
+				<string>Yellow</string>
+			</array>
+		</dict>
+
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+
+			<key>footerText</key>
+			<string>The color for when the contact is offline. Default is Red.</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+
+			<key>default</key>
+			<string>Red</string>
+
+			<key>defaults</key>
+			<string>me.pr0crustes.betterw_prefs</string>
+
+			<key>key</key>
+			<string>pref_woi_color_offline</string>
+
+			<key>label</key>
+			<string>... Offline Color</string>
+
+			<key>detail</key>
+			<string>PSListItemsController</string>
+
+			<key>validValues</key>
+			<array>
+				<string>Black</string>
+				<string>Blue</string>
+				<string>Brown</string>
+				<string>Cyan</string>
+				<string>DarkGray</string>
+				<string>Gray</string>
+				<string>Green</string>
+				<string>LightGray</string>
+				<string>Magenta</string>
+				<string>Orange</string>
+				<string>Purple</string>
+				<string>Red</string>
+				<string>White</string>
+				<string>Yellow</string>
+			</array>
+
+			<key>validTitles</key>
+			<array>
+				<string>Black</string>
+				<string>Blue</string>
+				<string>Brown</string>
+				<string>Cyan</string>
+				<string>DarkGray</string>
+				<string>Gray</string>
+				<string>Green</string>
+				<string>LightGray</string>
+				<string>Magenta</string>
+				<string>Orange</string>
+				<string>Purple</string>
+				<string>Red</string>
+				<string>White</string>
+				<string>Yellow</string>
+			</array>
+		</dict>
 
 		<dict>
 			<key>cell</key>
@@ -335,7 +515,7 @@
 
 			<key>action</key>
 			<string>respring:</string>
-		</dict>		
+		</dict>
 
 		<dict>
 			<key>cell</key>
@@ -366,7 +546,7 @@
 			<string>Info:</string>
 
 			<key>footerText</key>
-			<string>Made by @pr0crustes and distributed by free at my only repo `pr0crustes.github.io/repo/`.</string>
+			<string>Made by @pr0crustes and distributed for free at my official repo `pr0crustes.github.io/repo/`.</string>
 		</dict>
 
 		<dict>
@@ -374,7 +554,7 @@
 			<string>PSGroupCell</string>
 
 			<key>footerText</key>
-			<string>BetterW includes code from `libopus`, `libogg` and `libopusfile`, all from `xiph.org`, respecting the licenses.</string>
+			<string>You can support my work by donating any amount of bitcoin to the address "1CvcFZAMpzWzhPQzQ6vZdejSwTNuwWrPy5" (without quotes).</string>
 		</dict>
 
 	</array>

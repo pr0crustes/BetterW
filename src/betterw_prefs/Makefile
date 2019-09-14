@@ -1,5 +1,7 @@
 include $(THEOS)/makefiles/common.mk
 
+ARCHS = arm64 arm64e
+
 BUNDLE_NAME = betterw_prefs
 betterw_prefs_FILES = betterw_prefs_RootListController.m
 betterw_prefs_INSTALL_PATH = /Library/PreferenceBundles

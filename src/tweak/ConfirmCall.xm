@@ -32,7 +32,7 @@
 				UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil];
 				[alert addAction:cancelAction];
 
-				FUNCTION_presentAlert(alert, true);
+				F_presentAlert(alert, true);
 			}
 		}
 
@@ -44,8 +44,8 @@
 
 %ctor {
 
-	if (FUNCTION_prefGetBool(@"pref_confirm_call")) {
-		FUNCTION_logEnabling(@"Confirm Call");
+	if (F_prefGetBool(@"pref_confirm_call")) {
+		F_logEnabling(@"Confirm Call");
 		%init(GROUP_CONFIRM_CALL);
 	}
 

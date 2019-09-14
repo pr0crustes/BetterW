@@ -24,30 +24,35 @@
 
 
 // Functions to load preferences
-NSString* FUNCTION_prefGet(NSString *key);
-bool FUNCTION_prefGetBool(NSString *key);
+NSString* F_prefGet(NSString *key);
+bool F_prefGetBool(NSString *key);
 
 // Function to present an alert from anywhere
-void FUNCTION_presentAlert(UIAlertController* alert, BOOL animated);
-void FUNCTION_simpleAlert(NSString* title, NSString* message);
+void F_presentAlert(UIAlertController* alert, BOOL animated);
+void F_simpleAlert(NSString* title, NSString* message);
 
 // Function to log the hooks
-void FUNCTION_logEnabling(NSString* message);
+void F_logEnabling(NSString* message);
 
 // Function to check if given contactJID is a group
-bool FUNCTION_JIDIsGroup(NSString* jid);
+bool F_JIDIsGroup(NSString* jid);
 
 // Function to get the view at the top.
-UIView * FUNCTION_getTopView();
+UIView * F_getTopView();
 
 // Function that tries to remove a file, ignoring in error case.
-void FUNCTION_tryDeleteFile(NSString* filePath);
+void F_tryDeleteFile(NSString* filePath);
 
 // Create a WAUserJID from a NSString.
-WAUserJID* FUNCTION_userJIDFromString(NSString* jidString);
+WAUserJID* F_userJIDFromString(NSString* jidString);
 
 // Returns if user JID is online. Overloaded.
-bool FUNCTION_isJidOnline(WAUserJID* jid);
-bool FUNCTION_isJidOnline(NSString* stringJid);
+bool F_isJidOnline(WAUserJID* jid);
+bool F_isJidOnline(NSString* stringJid);
+
+
+// Converts a NSString to an UIColor. May return null if argument is invalid.
+// Accepted values are: black, blue, brown, clear, cyan, darkgray, gray, green, lightgray, magenta, orange, purple, red, white, yellow.
+UIColor* F_UIColorFromNSString(NSString* asString);
 
 #endif

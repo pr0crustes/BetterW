@@ -19,8 +19,8 @@
 
 %ctor {
 
-	if (FUNCTION_prefGetBool(@"pref_no_status_timer")) {
-		FUNCTION_logEnabling(@"No Status Timer");
+	if (F_prefGetBool(@"pref_no_status_timer")) {
+		F_logEnabling(@"No Status Timer");
 		%init(GROUP_NO_STATUS_TIMER);
 	}
 

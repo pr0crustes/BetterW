@@ -199,10 +199,21 @@
 %end
 
 
+%hook UINavigationController
+    -(void)viewDidLoad {
+        %orig;
+        NSDictionary *attributes = @{
+            NSForegroundColorAttributeName: [UIColor whiteColor]
+        };
+        [self.navigationBar setTitleTextAttributes:attributes];
+    }
+%end
+
+
 
 %ctor {
-    if (FUNCTION_prefGetBool(@"pref_dark_mode")) {
-        FUNCTION_logEnabling(@"Dark Mode");
+    if (F_prefGetBool(@"pref_dark_mode")) {
+        F_logEnabling(@"Dark Mode");
         %init(_ungrouped);
     }
 }
