@@ -37,6 +37,16 @@
     return [UIColor grayColor]; 
 }
 %end
+@interface WAStatusChatSessionCell : UIView 
+@end
+%hook WAStatusChatSessionCell 
+-(void)setBackgroundColor:(id)arg1 { 
+    return %orig([UIColor grayColor]); 
+} 
+-(id)backgroundColor { 
+    return [UIColor grayColor]; 
+}
+%end
 @interface WABadgedLabel : UIView 
 @end
 %hook WABadgedLabel 
