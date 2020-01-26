@@ -3,6 +3,7 @@
 
 @interface WAChatMessagesViewController : UIViewController {
         WAChatMessagesController *_messagesController;
+        // id <WAChatMessagesControllerProtocol> _messagesController;
     }
 
     -(id)allSelectedMessages;

@@ -3,7 +3,7 @@
 
 @interface WAContactTableViewCell : UITableViewCell {
         // The contact imageView.
-        WAProfilePictureDynamicThumbnailView *_imageViewContact;
+        WAProfilePictureDynamicThumbnailView *_profilePictureView;
     }
 
     // The contact JID.
