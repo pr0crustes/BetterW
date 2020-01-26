@@ -1,4 +1,4 @@
-#import "headers/WAChatSessionCellOld.h"
+#import "headers/WAChatSessionCellNew.h"
 #import "headers/WAContactTableViewCell.h"
 #import "headers/WAProfilePictureDynamicThumbnailView.h"
 #import "headers/WAJID.h"
@@ -47,7 +47,7 @@ void pr0crustes_whoIsOnline(WAJID* jid, UIImageView* imageView, CAShapeLayer* la
 
 %group GROUP_WHO_IS_ONLINE
 
-	%hook WAChatSessionCellOld
+	%hook WAChatSessionCellNew
 
 		%property (nonatomic, retain) CAShapeLayer* pr0crustes_circleLayer;
 
@@ -67,7 +67,7 @@ void pr0crustes_whoIsOnline(WAJID* jid, UIImageView* imageView, CAShapeLayer* la
 
 		-(void)layoutSubviews {
 			%orig;
-			UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_imageViewContact");
+			UIImageView* imageView = MSHookIvar<WAProfilePictureDynamicThumbnailView *>(self, "_profilePictureView");
 			WAJID* jid = [self profilePictureJID];
 			pr0crustes_whoIsOnline(jid, imageView, self.pr0crustes_circleLayer, 25);
 		}

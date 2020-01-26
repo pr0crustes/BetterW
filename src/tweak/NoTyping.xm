@@ -11,6 +11,10 @@
 			return %orig(0, arg2);
 		}
 
+		-(void)changeOutgoingChatState:(unsigned long long)arg1 forChatJID:(id)arg2 {
+			return %orig(0, arg2);
+		}
+
 	%end
 
 %end

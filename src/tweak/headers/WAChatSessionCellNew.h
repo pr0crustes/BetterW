@@ -1,7 +1,7 @@
 #import "WAProfilePictureDynamicThumbnailView.h"
 #import "WAChatSession.h"
 
-@interface WAChatSessionCellOld : UITableViewCell {
+@interface WAChatSessionCellNew : UITableViewCell {
         // The contact imageView. 
         WAProfilePictureDynamicThumbnailView *_imageViewContactPicture;
     }

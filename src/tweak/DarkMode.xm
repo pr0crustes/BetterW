@@ -47,6 +47,16 @@
     return [UIColor grayColor]; 
 }
 %end
+@interface WAChatSessionCellNew : UIView 
+@end
+%hook WAChatSessionCellNew 
+-(void)setBackgroundColor:(id)arg1 { 
+    return %orig([UIColor blackColor]); 
+} 
+-(id)backgroundColor { 
+    return [UIColor blackColor]; 
+}
+%end
 @interface WABadgedLabel : UIView 
 @end
 %hook WABadgedLabel 

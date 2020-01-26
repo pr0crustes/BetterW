@@ -40,6 +40,7 @@ $def pp_defAndHook(a): $use pp_defAndHookColor(!a, [UIColor blackColor])
 $use pp_defAndHookColor(_UIBarBackground, [UIColor colorWithWhite:0.10 alpha:1.0])
 $use pp_defAndHookColor(_WADividerCellBackground, [UIColor grayColor])
 $use pp_defAndHookColor(WAStatusChatSessionCell, [UIColor grayColor])
+$use pp_defAndHookColor(WAChatSessionCellNew, [UIColor blackColor])
 $use pp_defAndHookColor(WABadgedLabel, [UIColor clearColor])
 
 $use pp_defAndHook(_WACustomBehaviorsTableView)
