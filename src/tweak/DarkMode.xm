@@ -89,9 +89,9 @@
     return [UIColor blackColor]; 
 }
 %end
-@interface WAChatSessionCellNew : UIView 
+@interface WAChatSessionCell : UIView 
 @end
-%hook WAChatSessionCellNew 
+%hook WAChatSessionCell 
 -(void)setBackgroundColor:(id)arg1 { 
     return %orig([UIColor blackColor]); 
 } 

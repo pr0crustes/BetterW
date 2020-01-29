@@ -46,7 +46,7 @@ $use pp_defAndHook(_WACustomBehaviorsTableView)
 $use pp_defAndHook(_WADraggableInputContainerView)
 $use pp_defAndHook(WAMessageBubbleForwardButton)
 $use pp_defAndHook(WATabBar)
-$use pp_defAndHook(WAChatSessionCellNew)
+$use pp_defAndHook(WAChatSessionCell)
 $use pp_defAndHook(_WANoBlurNavigationBar)
 $use pp_defAndHook(_UINavigationBarContentView)
 
