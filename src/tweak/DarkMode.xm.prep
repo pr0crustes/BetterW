@@ -8,6 +8,7 @@
 * Maybe it's too late for my soul.
 */
 
+UIColor* GRAY_TONE = [UIColor colorWithWhite:0.10 alpha:1.0];
 
 $def pp_class(a, b): \
 @interface !a : !b \
@@ -37,44 +38,24 @@ $use pp_hookViewColor(!a, !b)
 $def pp_defAndHook(a): $use pp_defAndHookColor(!a, [UIColor blackColor])
 
 
-// $use pp_defAndHookColor(_UIBarBackground, [UIColor colorWithWhite:0.10 alpha:1.0])
+$use pp_defAndHookColor(_UIBarBackground, GRAY_TONE)
 $use pp_defAndHookColor(_WADividerCellBackground, [UIColor grayColor])
 $use pp_defAndHookColor(WAStatusChatSessionCell, [UIColor grayColor])
 $use pp_defAndHookColor(WABadgedLabel, [UIColor clearColor])
-
-$use pp_defAndHook(_WACustomBehaviorsTableView)
-$use pp_defAndHook(_WADraggableInputContainerView)
-$use pp_defAndHook(WAMessageBubbleForwardButton)
-$use pp_defAndHook(WATabBar)
 $use pp_defAndHook(WAChatSessionCell)
-$use pp_defAndHook(_WANoBlurNavigationBar)
-$use pp_defAndHook(_UINavigationBarContentView)
+
+$use pp_defAndHookColor(_WACustomBehaviorsTableView, GRAY_TONE)
+$use pp_defAndHookColor(_WADraggableInputContainerView, GRAY_TONE)
+$use pp_defAndHookColor(WAMessageBubbleForwardButton, GRAY_TONE)
+$use pp_defAndHookColor(WATabBar, GRAY_TONE)
+$use pp_defAndHookColor(_WANoBlurNavigationBar, GRAY_TONE)
+$use pp_defAndHookColor(_UINavigationBarContentView, GRAY_TONE)
 
 $use pp_hookView(UISearchBar)
 $use pp_hookView(UITableView)
 $use pp_hookView(UITableViewCell)
 
-@interface _UIBarBackground : UIView {
-	UIImageView* _backgroundImageView;
-}
-@end
 
-%hook _UIBarBackground
-    -(void)layoutSubviews {
-        %orig;
-        if (self.subviews.count > 0) {
-            for (UIView *subview in self.subviews) {
-                [subview setBackgroundColor:[UIColor clearColor]];
-            }
-        }
-    }
-    -(void)setBackgroundColor:(id)arg1 { 
-        return %orig([UIColor colorWithWhite:0.10 alpha:1.0]); 
-    } 
-    -(id)backgroundColor { 
-        return [UIColor colorWithWhite:0.10 alpha:1.0]; 
-    }
-%end
 
 $use pp_classView(_UINavigationBarLargeTitleView)
 %hook _UINavigationBarLargeTitleView
@@ -98,6 +79,17 @@ $use pp_classView(_UINavigationBarLargeTitleView)
 %end
 
 
+@interface WAColor : NSObject
++ (id)textColor;
+@end
+
+%hook WAColor
+// + (id)textColor {
+//     id color = %orig;
+//     NSLog(@"color %@", color);
+//     return [UIColor whiteColor];
+// }
+%end
 
 
 @interface UILabel (pr0crustes)

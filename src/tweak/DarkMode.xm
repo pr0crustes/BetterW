@@ -8,6 +8,7 @@
 * Maybe it's too late for my soul.
 */
 
+UIColor* GRAY_TONE = [UIColor colorWithWhite:0.10 alpha:1.0];
 
 
 
@@ -17,7 +18,16 @@
 
 
 
-// $use pp_defAndHookColor(_UIBarBackground, [UIColor colorWithWhite:0.10 alpha:1.0])
+@interface _UIBarBackground : UIView 
+@end
+%hook _UIBarBackground 
+-(void)setBackgroundColor:(id)arg1 { 
+    return %orig(GRAY_TONE); 
+} 
+-(id)backgroundColor { 
+    return GRAY_TONE; 
+}
+%end
 @interface _WADividerCellBackground : UIView 
 @end
 %hook _WADividerCellBackground 
@@ -48,47 +58,6 @@
     return [UIColor clearColor]; 
 }
 %end
-
-@interface _WACustomBehaviorsTableView : UIView 
-@end
-%hook _WACustomBehaviorsTableView 
--(void)setBackgroundColor:(id)arg1 { 
-    return %orig([UIColor blackColor]); 
-} 
--(id)backgroundColor { 
-    return [UIColor blackColor]; 
-}
-%end
-@interface _WADraggableInputContainerView : UIView 
-@end
-%hook _WADraggableInputContainerView 
--(void)setBackgroundColor:(id)arg1 { 
-    return %orig([UIColor blackColor]); 
-} 
--(id)backgroundColor { 
-    return [UIColor blackColor]; 
-}
-%end
-@interface WAMessageBubbleForwardButton : UIView 
-@end
-%hook WAMessageBubbleForwardButton 
--(void)setBackgroundColor:(id)arg1 { 
-    return %orig([UIColor blackColor]); 
-} 
--(id)backgroundColor { 
-    return [UIColor blackColor]; 
-}
-%end
-@interface WATabBar : UIView 
-@end
-%hook WATabBar 
--(void)setBackgroundColor:(id)arg1 { 
-    return %orig([UIColor blackColor]); 
-} 
--(id)backgroundColor { 
-    return [UIColor blackColor]; 
-}
-%end
 @interface WAChatSessionCell : UIView 
 @end
 %hook WAChatSessionCell 
@@ -99,24 +68,65 @@
     return [UIColor blackColor]; 
 }
 %end
+
+@interface _WACustomBehaviorsTableView : UIView 
+@end
+%hook _WACustomBehaviorsTableView 
+-(void)setBackgroundColor:(id)arg1 { 
+    return %orig(GRAY_TONE); 
+} 
+-(id)backgroundColor { 
+    return GRAY_TONE; 
+}
+%end
+@interface _WADraggableInputContainerView : UIView 
+@end
+%hook _WADraggableInputContainerView 
+-(void)setBackgroundColor:(id)arg1 { 
+    return %orig(GRAY_TONE); 
+} 
+-(id)backgroundColor { 
+    return GRAY_TONE; 
+}
+%end
+@interface WAMessageBubbleForwardButton : UIView 
+@end
+%hook WAMessageBubbleForwardButton 
+-(void)setBackgroundColor:(id)arg1 { 
+    return %orig(GRAY_TONE); 
+} 
+-(id)backgroundColor { 
+    return GRAY_TONE; 
+}
+%end
+@interface WATabBar : UIView 
+@end
+%hook WATabBar 
+-(void)setBackgroundColor:(id)arg1 { 
+    return %orig(GRAY_TONE); 
+} 
+-(id)backgroundColor { 
+    return GRAY_TONE; 
+}
+%end
 @interface _WANoBlurNavigationBar : UIView 
 @end
 %hook _WANoBlurNavigationBar 
 -(void)setBackgroundColor:(id)arg1 { 
-    return %orig([UIColor blackColor]); 
+    return %orig(GRAY_TONE); 
 } 
 -(id)backgroundColor { 
-    return [UIColor blackColor]; 
+    return GRAY_TONE; 
 }
 %end
 @interface _UINavigationBarContentView : UIView 
 @end
 %hook _UINavigationBarContentView 
 -(void)setBackgroundColor:(id)arg1 { 
-    return %orig([UIColor blackColor]); 
+    return %orig(GRAY_TONE); 
 } 
 -(id)backgroundColor { 
-    return [UIColor blackColor]; 
+    return GRAY_TONE; 
 }
 %end
 
@@ -145,27 +155,7 @@
 }
 %end
 
-@interface _UIBarBackground : UIView {
-	UIImageView* _backgroundImageView;
-}
-@end
 
-%hook _UIBarBackground
-    -(void)layoutSubviews {
-        %orig;
-        if (self.subviews.count > 0) {
-            for (UIView *subview in self.subviews) {
-                [subview setBackgroundColor:[UIColor clearColor]];
-            }
-        }
-    }
-    -(void)setBackgroundColor:(id)arg1 { 
-        return %orig([UIColor colorWithWhite:0.10 alpha:1.0]); 
-    } 
-    -(id)backgroundColor { 
-        return [UIColor colorWithWhite:0.10 alpha:1.0]; 
-    }
-%end
 
 @interface _UINavigationBarLargeTitleView : UIView 
 @end
@@ -190,6 +180,17 @@
 %end
 
 
+@interface WAColor : NSObject
++ (id)textColor;
+@end
+
+%hook WAColor
+// + (id)textColor {
+//     id color = %orig;
+//     NSLog(@"color %@", color);
+//     return [UIColor whiteColor];
+// }
+%end
 
 
 @interface UILabel (pr0crustes)
