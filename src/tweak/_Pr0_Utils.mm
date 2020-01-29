@@ -12,13 +12,16 @@ bool F_prefGetBool(NSString *key) {
 
 
 void F_presentAlert(UIAlertController* alert, BOOL animated) {
-    UIWindow* topWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    topWindow.rootViewController = [UIViewController new];
-    topWindow.windowLevel = UIWindowLevelAlert + 1;
-    [topWindow makeKeyAndVisible];
-    [topWindow.rootViewController presentViewController:alert animated:animated completion:^{
-        [topWindow release]; 
-    }];
+    UIWindow* keyWindow = [[UIApplication sharedApplication] keyWindow];
+    if (keyWindow) {
+        UIViewController* rootViewController = [keyWindow rootViewController];
+        if (rootViewController) {
+            UIViewController* lastViewController = F_lastViewController(rootViewController);
+            if (lastViewController) {
+                [lastViewController presentViewController:alert animated:animated completion:nil];
+            }
+        }
+    }
 }
 
 
@@ -29,6 +32,19 @@ void F_simpleAlert(NSString* title, NSString* message) {
     [alert addAction:closeAction];
     
     F_presentAlert(alert, true);
+}
+
+
+UIViewController* F_lastViewController(UIViewController* viewController) {
+    UIViewController* last = viewController;
+    while (true) {
+        UIViewController* iteration = [last presentedViewController];
+        if (iteration) {
+            last = iteration;
+        } else {
+            return last;
+        }
+    }
 }
 
 
