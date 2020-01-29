@@ -17,16 +17,7 @@
 
 
 
-@interface _UIBarBackground : UIView 
-@end
-%hook _UIBarBackground 
--(void)setBackgroundColor:(id)arg1 { 
-    return %orig([UIColor colorWithWhite:0.10 alpha:1.0]); 
-} 
--(id)backgroundColor { 
-    return [UIColor colorWithWhite:0.10 alpha:1.0]; 
-}
-%end
+// $use pp_defAndHookColor(_UIBarBackground, [UIColor colorWithWhite:0.10 alpha:1.0])
 @interface _WADividerCellBackground : UIView 
 @end
 %hook _WADividerCellBackground 
@@ -45,16 +36,6 @@
 } 
 -(id)backgroundColor { 
     return [UIColor grayColor]; 
-}
-%end
-@interface WAChatSessionCellNew : UIView 
-@end
-%hook WAChatSessionCellNew 
--(void)setBackgroundColor:(id)arg1 { 
-    return %orig([UIColor blackColor]); 
-} 
--(id)backgroundColor { 
-    return [UIColor blackColor]; 
 }
 %end
 @interface WABadgedLabel : UIView 
@@ -108,6 +89,36 @@
     return [UIColor blackColor]; 
 }
 %end
+@interface WAChatSessionCellNew : UIView 
+@end
+%hook WAChatSessionCellNew 
+-(void)setBackgroundColor:(id)arg1 { 
+    return %orig([UIColor blackColor]); 
+} 
+-(id)backgroundColor { 
+    return [UIColor blackColor]; 
+}
+%end
+@interface _WANoBlurNavigationBar : UIView 
+@end
+%hook _WANoBlurNavigationBar 
+-(void)setBackgroundColor:(id)arg1 { 
+    return %orig([UIColor blackColor]); 
+} 
+-(id)backgroundColor { 
+    return [UIColor blackColor]; 
+}
+%end
+@interface _UINavigationBarContentView : UIView 
+@end
+%hook _UINavigationBarContentView 
+-(void)setBackgroundColor:(id)arg1 { 
+    return %orig([UIColor blackColor]); 
+} 
+-(id)backgroundColor { 
+    return [UIColor blackColor]; 
+}
+%end
 
 %hook UISearchBar 
 -(void)setBackgroundColor:(id)arg1 { 
@@ -134,7 +145,27 @@
 }
 %end
 
+@interface _UIBarBackground : UIView {
+	UIImageView* _backgroundImageView;
+}
+@end
 
+%hook _UIBarBackground
+    -(void)layoutSubviews {
+        %orig;
+        if (self.subviews.count > 0) {
+            for (UIView *subview in self.subviews) {
+                [subview setBackgroundColor:[UIColor clearColor]];
+            }
+        }
+    }
+    -(void)setBackgroundColor:(id)arg1 { 
+        return %orig([UIColor colorWithWhite:0.10 alpha:1.0]); 
+    } 
+    -(id)backgroundColor { 
+        return [UIColor colorWithWhite:0.10 alpha:1.0]; 
+    }
+%end
 
 @interface _UINavigationBarLargeTitleView : UIView 
 @end
