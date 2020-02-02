@@ -31,6 +31,9 @@ bool F_prefGetBool(NSString *key);
 void F_presentAlert(UIAlertController* alert, BOOL animated);
 void F_simpleAlert(NSString* title, NSString* message);
 
+// Get the last view controller (presented)
+UIViewController* F_lastViewController(UIViewController* viewController);
+
 // Function to log the hooks
 void F_logEnabling(NSString* message);
 
