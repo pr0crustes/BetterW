@@ -7,7 +7,7 @@
 
 	%hook WACallManager
 
-		-(void)internalAttemptOutgoingVoiceCallWithJIDs:(id)contactJIDs callUISource:(int)arg2 withVideo:(_Bool)isVideo {
+		-(void)internalAttemptOutgoingVoiceCallWithJIDs:(id)contactJIDs callUISource:(int)arg2 withVideo:(_Bool)isVideo groupJID:(id)arg4 {
 			int size = [contactJIDs count];
 			if (size > 0) {
 
