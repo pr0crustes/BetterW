@@ -36,32 +36,6 @@
 			<string>PSGroupCell</string>
 
 			<key>footerText</key>
-			<string>Enables a true dark mode interface, OLED friendly.</string>
-		</dict>
-
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-
-			<key>default</key>
-			<false/>
-
-			<key>defaults</key>
-			<string>me.pr0crustes.betterw_prefs</string>
-
-			<key>label</key>
-			<string>Dark Mode</string>
-
-			<key>key</key>
-			<string>pref_dark_mode</string>
-		</dict>
-
-
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-
-			<key>footerText</key>
 			<string>Allows you to delete all messages sent by you in a chat after the selected one. To use it, select only one message sent by you and delete it for all users, A popup will ask if you want to delete all subsequents too. This feature requires No Delete Limit to be enabled.</string>
 		</dict>
 
